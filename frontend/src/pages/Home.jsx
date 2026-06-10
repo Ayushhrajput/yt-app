@@ -65,7 +65,7 @@ function Home(props) {
                     <h1 className='font-["pacifico"] text-lg '>Videotube</h1>
                 </div>
             </div>
-            <div className={` flex-1 ${darkTheme? "bg-black/90 text-white": "bg-white"}  rounded-lg  mx-4 m-4  overflow-hidden`}>
+            <div className={` flex-1 ${darkTheme? "bg-black/90 text-white": "bg-white"}  rounded-lg  m-4  overflow-hidden`}>
                 <div className='flex flex-col  items-start gap-4'>
                         {user.coverImage?<div className='w-full  h-25 overflow-hidden  '>
                         <img src={user.coverImage} alt=""  className='w-sm h-full object-cover '/>
