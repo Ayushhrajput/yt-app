@@ -64,6 +64,7 @@ const registerUser = asyncHandler( async (req, res) => {
         avatar: avatar.url,
         avatarPublicId: avatar.public_id,
         coverImage: coverImage?.url || "",
+        coverImagePublicId: coverImage?.public_id || "",
         email,
         password,
         username: username.toLowerCase()
@@ -273,13 +274,20 @@ const updateUsercoverImage = asyncHandler(async (req, res) => {
     
     if(!coverImageLocalPath) throw new ApiError(400, "coverImage   file is not found")
     
+    const user = await User.findById(req.user._id)
+    
+    if(user.coverImagePublicId){
+        await cloudinary.uploader.destroy(user.coverImagePublicId)
+    }
+
     const coverImage = await uploadOnCloudinary(coverImageLocalPath)
 
     if(!coverImage.url) throw new ApiError(400, "error while coverImag upload")
     
-    const user = await User.findByIdAndUpdate(req.user._id, {
+    const updatedUser = await User.findByIdAndUpdate(req.user._id, {
         $set: {
-            coverImage: coverImage.url
+            coverImage: coverImage.url,
+            coverImagePublicId: coverImage.public_id
         }
     }, {
         new: true
@@ -316,7 +324,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
                 from: "subscriptions",
                 localField: "_id",
                 foreignField: "subscriber",
-                as: "subcribedTo"
+                as: "subscribedTo"
             }
         },
         {
@@ -325,7 +333,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
                     $size: "$subscribers"
                 },
                 subscribedToCount: {
-                    $size: "$subcribedTo"
+                    $size: "$subscribedTo"
                 },
                 isSubscribed: {
                     $cond: {
@@ -340,17 +348,20 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
             $project: {
                 username: 1,
                 fullname: 1,
+                subscribers: 1,
+                subscribedTo: 1,
                 subscribersCount: 1,
                 subscribedToCount: 1,
                 isSubscribed: 1,
                 avatar: 1,
                 coverImage: 1,
-                email: 1
+                email: 1,
+                
             }
         }
     ])
     if(!channel?.length) throw new ApiError(404, "channel not found")
-
+    console.log(JSON.stringify(channel, null, 2))
     return res.json(
         new ApiResponse(
             200,

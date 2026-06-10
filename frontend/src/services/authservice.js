@@ -104,10 +104,22 @@ const getCurrUser = async () => {
         throw new Error(e.response?.data?.message || e.message || "something went wrong")
     }
 }
+const getUserChannel = async (username) => {
+    try {
+        const response = await api.get(
+            `/api/v1/users/c/${username}`
+        )
+        console.log(JSON.stringify(response.data, null, 2))
+        return response.data
+    } catch (e) {
+        throw new Error(e.response?.data?.message || e.message || "something went wrong")
+    }
+}
 export {
     registerUser,
     loginUser,
     logout,
     getCurrUser,
-    refreshToken
+    refreshToken,
+    getUserChannel
 }

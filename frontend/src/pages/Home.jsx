@@ -1,20 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAuth } from '../context/AuthContext.jsx';
-import {logout} from "../services/authservice.js"
+import {getUserChannel, logout} from "../services/authservice.js"
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext.jsx';
 
 function Home(props) {
     const {user, setUser} = useAuth()
     const {darkTheme, setDarkTheme} = useTheme()
-    console.log(darkTheme)
+    
     const navigate = useNavigate()
+    
+    useEffect(() => {
+        const fetchUserChannel = async () => {
+            try {
+                const response = await getUserChannel(user.username)
+                console.log(response)
+            } catch (e) {
+                console.log("err", e)
+            }
+        }
+        fetchUserChannel()
+    }, [user])
     
     const handleLogout = async () => {
         try {
             const response = await logout()
 
-            console.log(response.message)
+            
             setUser(null)
             navigate("/login")
 
@@ -23,7 +35,7 @@ function Home(props) {
         }
         
     }
-    console.log(user)
+    
     if(!user) {
         return (
             <div>Fething user details</div>
