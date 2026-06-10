@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext.jsx';
 import {getUserChannel, logout} from "../services/authservice.js"
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext.jsx';
+import { getAllVideos } from '../services/videoService.js';
 
 function Home(props) {
     const {user, setUser} = useAuth()
@@ -14,12 +15,27 @@ function Home(props) {
         const fetchUserChannel = async () => {
             try {
                 const response = await getUserChannel(user.username)
-                console.log(response)
+                
             } catch (e) {
                 console.log("err", e)
             }
         }
         fetchUserChannel()
+        const fetchAllVideos = async () => {
+            try {
+                const options = {
+                    page: 1,
+                    limit: 10
+                }
+                const response = await getAllVideos(
+                    options
+                )
+                console.log(response)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        fetchAllVideos()
     }, [user])
     
     const handleLogout = async () => {

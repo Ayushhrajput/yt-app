@@ -1,4 +1,5 @@
 import axios from "axios"
+import { useParams } from "react-router-dom"
 const API_URL = import.meta.env.VITE_API_URL
 
 const api = axios.create({
@@ -9,7 +10,7 @@ const api = axios.create({
 const publishVideo = async (formdata) => {
     try {
         const response = api.post(
-            "/api/v1/video/publish-video",
+            "/api/v1/videos/publish-video",
             formdata,
     
         )
@@ -24,14 +25,38 @@ const publishVideo = async (formdata) => {
 const getVideoById = async (videoId) => {
     try {
         const response = await api.get(
-            `/api/v1/video/${videoId}`
+            `/api/v1/videos/${videoId}`
         )
         return response.data
     } catch (e) {
         throw new Error(e.response?.data?.message || e.message || "something went wrong")
     }
 }
-
+const getAllVideos = async ({
+    page = 1,
+    limit = 10,
+    query = "",
+    sortBy = "createdAt",
+    sortType = "desc",
+    userId = "",
+} = {}) => {
+        const response = await api.get(
+            `/api/v1/videos/`,
+            {
+                params: {
+                    page,
+                    limit,
+                    query,
+                    sortBy,
+                    sortType,
+                    userId,
+                }
+            }
+        )
+        return response.data
+}
 export {
-    publishVideo
+    publishVideo,
+    getVideoById,
+    getAllVideos
 }

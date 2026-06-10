@@ -109,7 +109,7 @@ const getUserChannel = async (username) => {
         const response = await api.get(
             `/api/v1/users/c/${username}`
         )
-        console.log(JSON.stringify(response.data, null, 2))
+        
         return response.data
     } catch (e) {
         throw new Error(e.response?.data?.message || e.message || "something went wrong")
