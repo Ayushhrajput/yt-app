@@ -1,42 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext.jsx';
 import {getUserChannel, logout} from "../services/authservice.js"
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext.jsx';
 import { getAllVideos } from '../services/videoService.js';
 
+
 function Home(props) {
     const {user, setUser} = useAuth()
     const {darkTheme, setDarkTheme} = useTheme()
-    
     const navigate = useNavigate()
     
-    useEffect(() => {
-        const fetchUserChannel = async () => {
-            try {
-                const response = await getUserChannel(user.username)
-                
-            } catch (e) {
-                console.log("err", e)
-            }
-        }
-        fetchUserChannel()
-        const fetchAllVideos = async () => {
-            try {
-                const options = {
-                    page: 1,
-                    limit: 10
-                }
-                const response = await getAllVideos(
-                    options
-                )
-                console.log(response)
-            } catch (e) {
-                console.log(e)
-            }
-        }
-        fetchAllVideos()
-    }, [user])
     
     const handleLogout = async () => {
         try {
@@ -52,6 +26,7 @@ function Home(props) {
         
     }
     
+    
     if(!user) {
         return (
             <div>Fething user details</div>
@@ -60,11 +35,8 @@ function Home(props) {
     
     return (
         <div className='w-full  flex flex-col items-center justify-center bg-linear-to-br from-gray-50 to-gray-100 '>
-            <div className='h-14  w-full'>
-                <div className='flex justify-between items-center h-full bg-white px-4'>
-                    <h1 className='font-["pacifico"] text-lg '>Videotube</h1>
-                </div>
-            </div>
+             
+            
             <div className={` flex-1 ${darkTheme? "bg-black/90 text-white": "bg-white"}  rounded-lg  m-4  overflow-hidden`}>
                 <div className='flex flex-col  items-start gap-4'>
                         {user.coverImage?<div className='w-full  h-25 overflow-hidden  '>
@@ -81,7 +53,7 @@ function Home(props) {
                     </div>
                     <button
                         onClick={handleLogout}
-                        className='px-8 py-3  max-w-sm rounded-lg   bg-linear-to-tl from-red-500 to-red-400 text-white text-bold  mx-4 my-2'
+                        className='px-8 py-3  max-w-sm rounded-lg   bg-linear-to-tl from-red-600 to-red-500 text-white text-bold  mx-4 my-2'
                     >
                         Logout
                     </button>
@@ -97,6 +69,7 @@ function Home(props) {
                 
 
             </div>
+            
         </div>
     );
 }
