@@ -4,8 +4,9 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import RegisterUser from './pages/RegisterUser.jsx'
 import Login from './pages/Login.jsx'
 import Home from './pages/Home.jsx'
-import Layout from './components/layout/Layout.jsx'
+import AuthLayout from './components/layout/AuthLayout.jsx'
 import { useAuth } from './context/AuthContext.jsx'
+import Layout from './components/layout/Layout.jsx'
 
 function App() {
   
@@ -21,7 +22,7 @@ function App() {
       
       <Routes>
         
-        <Route element={<Layout/>}>
+        <Route element={<AuthLayout/>}>
           <Route path='/' element={
             user? <Navigate to="/home" /> : <Navigate to="/login"/>
             
@@ -29,9 +30,11 @@ function App() {
           <Route path='/register' element={<RegisterUser/>}/>
           <Route path='/login' element={<Login/>}/>
         </Route>
-        <Route path='/home' element={
-          user? <Home/>: <Navigate to="/login"/>
-        }/>
+        <Route element={
+          user? <Layout/> : <Navigate to="/login"/>
+        }>
+          <Route path='/home' element={<Home/>}/>
+        </Route>
       </Routes>
   )
 }
