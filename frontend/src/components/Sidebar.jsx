@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext';
 
 
 function Sidebar({className}) {
+    const {darkTheme} = useTheme()
     const [showSideBar, setShowSideBar] = useState(false)
     const navItems = [
         {
@@ -37,7 +39,7 @@ function Sidebar({className}) {
         console.log(showSideBar)
     }
     return (
-        <div className={`${className} ${showSideBar? "w-56": "w-14"} flex flex-col items-center h-full bg-white  transition-all duration-200`}>
+        <div className={`${className} ${showSideBar? "w-56": "w-14"} flex flex-col items-center h-full ${darkTheme? "bg-gray-900 text-white shadow-gray-800": "bg-white shadow-gray-200"} shadow-lg transition-all duration-200`}>
             <div className='w-full h-14 flex items-center px-4 ' onClick={handleSidebar}>
                 <i class="fa-solid fa-bars"></i>
             </div>
@@ -47,7 +49,7 @@ function Sidebar({className}) {
                         <NavLink
                             key={item.path}
                             to={item.path}
-                            className={({isActive}) => `h-6 flex items-center gap-4 ${isActive? "text-gray-900": "text-gray-600"}`}
+                            className={({isActive}) => `h-6 flex items-center gap-4 ${isActive? `${darkTheme? "text-white": "text-gray-900"}`: `${darkTheme? "text-gray-200": "text-gray-600"}`}`}
                         >
                             {item.icon}
                             

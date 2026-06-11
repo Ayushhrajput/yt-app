@@ -7,7 +7,7 @@ import { useTheme } from '../context/ThemeContext.jsx';
 
 function Login(props) {
     const {user, setUser} = useAuth()
-    const {darkTheme, setDarkTheme} = useTheme()
+    const {darkTheme} = useTheme()
     const navigate = useNavigate()
     
 
@@ -43,13 +43,13 @@ function Login(props) {
     }
 
     return (
-        <div className='min-h-screen w-full flex justify-center items-center px-4'>
-            <div className='w-full max-w-md h-min shadow-2xl rounded-2xl bg-white p-8'>
-                <h1 className="text-3xl font-bold text-center text-gray-800 mb-2">
+        <div className={`min-h-screen w-full flex justify-center items-center px-4 ${darkTheme? "bg-gray-900 text-white": "bg-white"}`}>
+            <div className='w-full max-w-md h-min shadow-2xl shadow-gray-800 rounded-2xl  p-8'>
+                <h1 className="text-3xl font-bold text-center  mb-2">
                     Login
                 </h1>
 
-                <p className="text-gray-500 text-center mb-8">
+                <p className=" text-center mb-8">
                     Login to continue
                 </p>
                 
@@ -60,7 +60,7 @@ function Login(props) {
                         name='email'
                         placeholder='Email'
                         onChange={handleChange}
-                        className="w-full bg-gray-100   rounded-xl px-4 py-3 outline-none  "
+                        className={`w-full  ${darkTheme? "bg-gray-800 text-white": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `}
                     />
                     <input 
                         type="text" 
@@ -68,7 +68,7 @@ function Login(props) {
                         name='password'
                         placeholder='Password'
                         onChange={handleChange}
-                        className="w-full bg-gray-100   rounded-xl px-4 py-3 outline-none  "
+                        className={`w-full  ${darkTheme? "bg-gray-800 text-white": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `}
                     />
                     <button 
                         className="
@@ -105,7 +105,7 @@ function Login(props) {
                     <p className=''>Don't have an account</p>
                     <Link
                         to="/register"
-                        className='italic hover:underline text-gray-600'
+                        className='italic hover:underline '
                     >
                         Register
                     </Link>

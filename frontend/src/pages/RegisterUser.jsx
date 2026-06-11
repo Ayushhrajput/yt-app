@@ -7,6 +7,7 @@ import { useTheme } from '../context/ThemeContext.jsx';
 function RegisterUser() {
     const navigate = useNavigate()
     const {setUser} = useAuth()
+    const {darkTheme} = useTheme()
     
 
     const [error, setError] = useState("");
@@ -49,44 +50,44 @@ function RegisterUser() {
     }
 
     return (
-        <div className="min-h-screen w-full bg-gradient-to-br from-gray-50 to-gray-100 flex justify-center items-center px-4">
+        <div className={`min-h-screen w-full ${darkTheme? "bg-gray-900 text-white": "bg-white"} flex justify-center items-center px-4`}>
 
-            <div className="w-full max-w-md h-min shadow-2xl rounded-2xl bg-white p-8">
-                <h1 className="text-3xl font-bold text-center text-gray-800 mb-2">
+            <div className="w-full max-w-md h-min shadow-2xl shadow-gray-800 rounded-2xl  p-8">
+                <h1 className="text-3xl font-bold text-center  mb-2">
                     Create Account
                 </h1>
 
-                <p className="text-gray-500 text-center mb-8">
+                <p className=" text-center mb-8">
                     Register to continue
                 </p>
                 <form className="flex flex-col gap-4 " onSubmit={handleSubmit}>
                     <input 
-                        className="w-full bg-gray-100   rounded-xl px-4 py-3 outline-none  "
+                        className={`w-full  ${darkTheme? "bg-gray-800 text-white": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `}
                         type="text"
                         name='fullName'
                         placeholder='Full Name'
                         onChange={handleChange}/>
                     <input 
-                        className="w-full bg-gray-100   rounded-xl px-4 py-3 outline-none "
+                        className={`w-full  ${darkTheme? "bg-gray-800 text-white": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `}
                         type="text" 
                         name='username' 
                         placeholder='Username'
                         onChange={handleChange}/>
                     <input 
-                        className="w-full bg-gray-100   rounded-xl px-4 py-3 outline-none " 
+                        className={`w-full  ${darkTheme? "bg-gray-800 text-white": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `} 
                         type="text" 
                         name='email' 
                         placeholder='Email'
                         onChange={handleChange}/>
                     <input 
-                        className="w-full bg-gray-100   rounded-xl px-4 py-3 outline-none " 
+                        className={`w-full  ${darkTheme? "bg-gray-800 text-white": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `} 
                         type="text" 
                         name='password'
                         placeholder='Password' 
                         onChange={handleChange}/>
                     <div className='flex justify-between'>
                         <div className="flex flex-col ">
-                            <label className="text-sm font-medium text-gray-700">
+                            <label className="text-sm font-medium ">
                                 Avatar
                             </label>
                             <label 
@@ -105,7 +106,7 @@ function RegisterUser() {
                             />
                         </div>
                         <div className="flex flex-col">
-                            <label className="text-sm font-medium text-gray-700">
+                            <label className="text-sm font-medium ">
                                 Cover Image (optional)
                             </label>
                             <label 
@@ -155,7 +156,7 @@ function RegisterUser() {
                     <p className=''>Have an account</p>
                     <Link
                         to="/login"
-                        className='italic hover:underline text-gray-600'
+                        className='italic hover:underline '
                     >
                         Login
                     </Link>

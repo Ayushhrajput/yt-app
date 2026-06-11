@@ -3,9 +3,11 @@ import { Outlet } from 'react-router-dom';
 import BottomBar from '../BottomBar';
 import Navbar from '../Navbar.jsx';
 import Sidebar from '../Sidebar.jsx';
+import { useTheme } from '../../context/ThemeContext.jsx'; 
+
 function Layout(props) {
     const [showNav, setShowNav] = useState(true)
-    
+    const {darkTheme} = useTheme()
 
     useEffect(() => {
         let lastScrollY = window.scrollY
@@ -28,12 +30,12 @@ function Layout(props) {
     return (
         
         <div className='flex'>
-            <aside className='hidden md:block sticky top-0  h-screen  shadow-lg shadow-gray-200'>
+            <aside className='hidden md:block sticky top-0  h-screen  '>
                 <Sidebar/>
             </aside>
-            <div className='flex-1'>
-                <Navbar className={`sticky top-0 w-full h-14 transition-transform duration-200  ${showNav? "translate-y-0": "-translate-y-full"}`}/>
-                <main className=''>
+            <div className={`flex-1 ${darkTheme? "bg-gray-900 ": "bg-white "}`}>
+                <Navbar className={`fixed top-0 w-full h-14 transition-transform duration-200  ${showNav? "translate-y-0": "-translate-y-full"}`}/>
+                <main className='pt-14'>
                     <Outlet/>
                 </main>
             </div>

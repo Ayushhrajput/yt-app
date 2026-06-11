@@ -34,7 +34,7 @@ function BottomBar(props) {
     ]
 
     return (
-        <nav className={`fixed bottom-0 left-0 right-0 ${darkTheme? "bg-gray-900": "bg-white"}  shadow-2xl shadow-black  `}>
+        <nav className={`fixed bottom-0 left-0 right-0 ${darkTheme? "bg-gray-900 shadow-gray-100 ": "bg-white shadow-gray-900 "}  shadow-lg  `}>
             <div className='h-14 flex justify-around items-center'>
                 {navItems.map((item) => (
                     <NavLink

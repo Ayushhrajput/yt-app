@@ -34,7 +34,7 @@ function Home(props) {
     }
     
     return (
-        <div className='w-full h-screen flex flex-col items-center justify-center bg-linear-to-br from-gray-50 to-gray-100 '>
+        <div className={`w-full h-screen flex flex-col items-center justify-center ${darkTheme? "bg-gray-900": "bg-white"}`}>
              
             
             <div className={` ${darkTheme? "bg-black/90 text-white": "bg-white"}  rounded-lg  m-4  overflow-hidden`}>
