@@ -52,7 +52,7 @@ function RegisterUser() {
     return (
         <div className={`min-h-screen w-full ${darkTheme? "bg-gray-900 text-white": "bg-white"} flex justify-center items-center px-4`}>
 
-            <div className="w-full max-w-md h-min shadow-2xl shadow-gray-800 rounded-2xl  p-8">
+            <div className="w-full max-w-md h-min shadow-lg shadow-gray-800 rounded-2xl  p-8">
                 <h1 className="text-3xl font-bold text-center  mb-2">
                     Create Account
                 </h1>
