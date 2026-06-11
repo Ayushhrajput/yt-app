@@ -43,7 +43,7 @@ function Profile(props) {
             <div className='flex-1 flex flex-col justify-center items-center'>
 
                 <div className='flex items-center '>
-                    <label htmlFor='theme' className={`${darkTheme? "text-white": " items-baseline-last"} flex justify-center h-10 w-10`}>
+                    <label htmlFor='theme' className={`${darkTheme? "": " items-baseline-last"} flex justify-center h-10 w-10`}>
                         {!darkTheme?
                             <span className={`material-symbols-outlined -translate-y-2  transition duration-200`}>light_mode</span>: 
                             <span className={`material-symbols-outlined translate-y-2  transition duration-200`}>dark_mode</span>}
