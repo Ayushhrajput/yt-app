@@ -57,16 +57,7 @@ function Profile(props) {
             }   
             <div  className=' w-full h-full overflow-y-auto scrollbar-hide'>
                 <div className='grid grid-cols-3'>
-                    <div className=" h-40 bg-teal-400"></div>
-                    <div className=" h-40 bg-blue-400"></div>
-                    <div className=" h-40 bg-red-400"></div>
-                    <div className=" h-40 bg-blue-400"></div>
-                    <div className=" h-40 bg-blue-400"></div>
-                    <div className=" h-40 bg-blue-400"></div>
-                    <div className=" h-40 bg-blue-400"></div>
-                    <div className=" h-40 bg-blue-400"></div>
-                    <div className=" h-40 bg-blue-400"></div>
-                    <div className=" h-40 bg-blue-400"></div>
+                    
                 </div>
                     
             </div>
