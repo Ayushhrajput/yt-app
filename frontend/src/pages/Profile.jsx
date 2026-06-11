@@ -32,7 +32,7 @@ function Profile(props) {
                     onClick={(e) => {
                         e.stopPropagation()
                     }}
-                    className={`fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 ${darkTheme? " bg-black/10 border-black/10": "bg-white/10 border-white/20"} backdrop-blur-2xl shadow-xl border  flex flex-col justify-center items-center w-max  px-2 rounded-xl`}
+                    className={`fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 ${darkTheme? " bg-black/10 border-black/10": "bg-white/10 border-white/20 shadow-white/10"} backdrop-blur-2xl shadow-xl border  flex flex-col justify-center items-center w-max  px-2 rounded-xl`}
                 >
 
                     <div className={`flex items-center ${darkTheme? "  border-b-black/20": " border-b-white/20"} border-b border-white px-8 py-2 h-12`}>
