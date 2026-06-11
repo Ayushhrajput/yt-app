@@ -4,9 +4,10 @@ const SettingContext = createContext()
 
 export const SettingProvider = ({children}) => {
 
-    const [setting, setSetting] = useState()
+    const [setting, setSetting] = useState(false)
+    const [items, setItems] = useState(false)
     return (
-        <SettingContext.Provider value={{setting, setSetting}}>
+        <SettingContext.Provider value={{setting, setSetting, items, setItems}}>
             {children}
         </SettingContext.Provider>
     )
