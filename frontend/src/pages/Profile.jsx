@@ -23,12 +23,22 @@ function Profile(props) {
     }
 
     return (
-        <div className={`flex flex-col min-h-screen ${darkTheme? "text-white": ""}`}>
-            <div>
-
-            </div>
-            <div  className=' w-full'>
-
+        <div className={` flex flex-col h-screen ${darkTheme? "text-white": ""}`}>
+            
+            <div  className='h-2/3 w-full  overflow-y-auto scrollbar-hide'>
+                <div className='grid grid-cols-3'>
+                    <div className=" h-40 bg-teal-400"></div>
+                    <div className=" h-40 bg-blue-400"></div>
+                    <div className=" h-40 bg-red-400"></div>
+                    <div className=" h-40 bg-blue-400"></div>
+                    <div className=" h-40 bg-blue-400"></div>
+                    <div className=" h-40 bg-blue-400"></div>
+                    <div className=" h-40 bg-blue-400"></div>
+                    <div className=" h-40 bg-blue-400"></div>
+                    <div className=" h-40 bg-blue-400"></div>
+                    <div className=" h-40 bg-blue-400"></div>
+                </div>
+                    
             </div>
             <div className='flex-1 flex flex-col justify-center items-center'>
 
@@ -46,7 +56,7 @@ function Profile(props) {
                 </div>
                 <button
                     onClick={handleLogout}
-                    className='font-semibold text-red-500'
+                    className=' text-red-500'
                 >
                     Logout
                 </button>
