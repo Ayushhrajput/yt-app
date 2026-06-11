@@ -128,7 +128,7 @@ function RegisterUser() {
                     <button 
                         className="
                             w-full
-                            bg-linear-to-tl from-red-500 to-red-400
+                            bg-linear-to-tl from-red-600 to-red-500
                             hover:bg-gray-800
                             text-white
                             font-semibold

@@ -34,10 +34,10 @@ function Home(props) {
     }
     
     return (
-        <div className='w-full  flex flex-col items-center justify-center bg-linear-to-br from-gray-50 to-gray-100 '>
+        <div className='w-full h-screen flex flex-col items-center justify-center bg-linear-to-br from-gray-50 to-gray-100 '>
              
             
-            <div className={` flex-1 ${darkTheme? "bg-black/90 text-white": "bg-white"}  rounded-lg  m-4  overflow-hidden`}>
+            <div className={` ${darkTheme? "bg-black/90 text-white": "bg-white"}  rounded-lg  m-4  overflow-hidden`}>
                 <div className='flex flex-col  items-start gap-4'>
                         {user.coverImage?<div className='w-full  h-25 overflow-hidden  '>
                         <img src={user.coverImage} alt=""  className='w-sm h-full object-cover '/>
