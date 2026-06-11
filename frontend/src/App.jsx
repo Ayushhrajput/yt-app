@@ -7,6 +7,7 @@ import Home from './pages/Home.jsx'
 import AuthLayout from './components/layout/AuthLayout.jsx'
 import { useAuth } from './context/AuthContext.jsx'
 import Layout from './components/layout/Layout.jsx'
+import Profile from './pages/Profile.jsx'
 
 function App() {
   
@@ -34,6 +35,7 @@ function App() {
           user? <Layout/> : <Navigate to="/login"/>
         }>
           <Route path='/home' element={<Home/>}/>
+          <Route path='/profile' element={<Profile/>}/>
         </Route>
       </Routes>
   )

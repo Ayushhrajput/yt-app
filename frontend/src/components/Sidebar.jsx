@@ -36,7 +36,7 @@ function Sidebar({className}) {
 
     const handleSidebar = () => {
         setShowSideBar((prev) => !prev)
-        console.log(showSideBar)
+        
     }
     return (
         <div className={`${className} ${showSideBar? "w-56": "w-14"} flex flex-col items-center h-full ${darkTheme? "bg-gray-900 text-white shadow-gray-800": "bg-white shadow-gray-200"} shadow-lg transition-all duration-200`}>
