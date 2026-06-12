@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import { useSetting } from '../context/SettingContext';
+import { useAuth } from '../context/AuthContext';
 
 
 function Sidebar({className}) {
     const {darkTheme} = useTheme()
+    const {user} = useAuth()
     const {items, setItems} = useSetting()
     const [showSideBar, setShowSideBar] = useState(false)
     const navItems = [
@@ -30,7 +32,7 @@ function Sidebar({className}) {
             label: "Subscriptions"
         },
         {
-            path: "/profile",
+            path: `/profile/${user.username}`,
             icon: <i class="fa-solid fa-user"></i>,
             label: "Profile"
         }
@@ -41,7 +43,7 @@ function Sidebar({className}) {
         
     }
     const handlePathClick = (path) => {
-        setItems(path === "/profile")
+        setItems(path === `/profile/${user.username}`)
     }
     return (
         <div className={`${className} ${showSideBar? "w-56": "w-14"} flex flex-col items-center h-full ${darkTheme? "bg-gray-900 text-white shadow-gray-800": "bg-white shadow-gray-200"} shadow-lg transition-all duration-200`}>

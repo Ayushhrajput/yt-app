@@ -1,14 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import {getUserChannel, logout} from "../services/authservice.js"
+import {getUserChannel, logout, getWatchHistory} from "../services/authservice.js"
 import { useTheme } from '../context/ThemeContext.jsx';
 import { useSetting } from '../context/SettingContext.jsx';
+
 function Profile(props) {
     const {user, setUser} = useAuth()
     const {darkTheme, setDarkTheme} = useTheme()
     const navigate = useNavigate()
     const {setting} = useSetting()
+    
+    const [channel, setChannel] = useState({})
+
+    useEffect(
+        () => {
+            const fetchWatchHistory = async () => {
+                try {
+                    const response = await getWatchHistory()
+                    console.log(response)
+                } catch (e) {
+                    throw new Error(e.message)
+                }
+            }
+            getWatchHistory()
+        }, []
+    )
+    useEffect(
+        () =>  {
+            const getUserChannelInfo = async () => {
+                try {
+                    const response = await getUserChannel(user.username)
+                    setChannel(response.data)
+                    
+                } catch (e) {
+                    throw new Error(e.message)
+                }
+            }
+            getUserChannelInfo()
+        }, 
+    [user])
+    
     
 
     const handleLogout = async () => {
@@ -84,11 +116,11 @@ function Profile(props) {
                     <div className='flex justify-items-start w-full  gap-4 py-6 px-4 font-semibold'>
                         <div className='flex flex-col items-center gap-4'>
                             <p className=''>Subscribers</p>
-                            <span>0</span>
+                            <span>{channel.subscribersCount}</span>
                         </div>
                         <div className='flex flex-col items-center gap-4'>
                             <p>subscribedTo</p> 
-                            <span>0</span>
+                            <span>{channel.subscribedToCount}</span>
                         </div>
                     </div>
                 </div>
@@ -104,14 +136,14 @@ function Profile(props) {
                             
                             <img className='w-full h-full aspect-3/4  object-cover' src='https://images.pexels.com/photos/37927742/pexels-photo-37927742.jpeg' alt="" />
                             
-                            <img className='w-full  h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/38020123/pexels-photo-38020123.jpeg" alt="" />
-                            <img className='w-full h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/37555058/pexels-photo-37555058.jpeg" alt="" />
-                            <img className='w-full  h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/37810264/pexels-photo-37810264.jpeg" alt="" />
-                            <img className='w-full h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/27203455/pexels-photo-27203455.jpeg" alt="" />
-                            <img className='w-full  h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/34914337/pexels-photo-34914337.jpeg" alt="" />
-                            <img className='w-full  h-full aspect-3/4 object-cover ' loading='lazy' src="https://images.pexels.com/photos/37911536/pexels-photo-37911536.jpeg" alt="" />
-                            <img className='w-full  h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/13366067/pexels-photo-13366067.jpeg" alt="" />
-                            <img className='w-full  h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/37555052/pexels-photo-37555052.jpeg" alt="" />
+                            <img className='w-full  h-full aspect-3/4 object-cover ' loading='lazy' src="https://images.pexels.com/photos/38020123/pexels-photo-38020123.jpeg" alt="" />
+                            <img className='w-full h-full aspect-3/4 object-cover ' loading='lazy' src="https://images.pexels.com/photos/37555058/pexels-photo-37555058.jpeg" alt="" />
+                            <img className='w-full  h-full aspect-3/4 object-cover ' loading='lazy' src="https://images.pexels.com/photos/37810264/pexels-photo-37810264.jpeg" alt="" />
+                            <img className='w-full h-full aspect-3/4 object-cover ' loading='lazy' src="https://images.pexels.com/photos/27203455/pexels-photo-27203455.jpeg" alt="" />
+                            <img className='w-full  h-full aspect-3/4 object-cover ' loading='lazy' src="https://images.pexels.com/photos/34914337/pexels-photo-34914337.jpeg" alt="" />
+                            <img className='w-full  h-full aspect-3/4 object-cover '  loading='lazy' src="https://images.pexels.com/photos/37911536/pexels-photo-37911536.jpeg" alt="" />
+                            <img className='w-full  h-full aspect-3/4 object-cover ' loading='lazy' src="https://images.pexels.com/photos/13366067/pexels-photo-13366067.jpeg" alt="" />
+                            <img className='w-full  h-full aspect-3/4 object-cover ' loading='lazy' src="https://images.pexels.com/photos/37555052/pexels-photo-37555052.jpeg" alt="" />
 
                             
                             

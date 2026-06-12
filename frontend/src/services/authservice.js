@@ -115,11 +115,24 @@ const getUserChannel = async (username) => {
         throw new Error(e.response?.data?.message || e.message || "something went wrong")
     }
 }
+const getWatchHistory = async () => {
+    
+    try {
+        const response  = await api.get(
+            "/api/v1/users/watch-history"
+        )
+        
+        return response.data
+    } catch (e) {
+        throw new Error(e.response?.data?.message || e.message || "something went wrong")
+    }
+}
 export {
     registerUser,
     loginUser,
     logout,
     getCurrUser,
     refreshToken,
-    getUserChannel
+    getUserChannel,
+    getWatchHistory
 }

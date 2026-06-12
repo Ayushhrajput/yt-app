@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import { useSetting } from '../context/SettingContext';
+import { useAuth } from '../context/AuthContext';
 
 
 function BottomBar(props) {
-
+    const {user} = useAuth()
     const {darkTheme} = useTheme()
     const {items, setItems} = useSetting()
     
@@ -32,7 +33,7 @@ function BottomBar(props) {
             label: "Subscriptions"
         },
         {
-            path: "/profile",
+            path: `/profile/${user.username}`,
             icon: <i class="fa-solid fa-user"></i>,
             label: "Profile"
         }
