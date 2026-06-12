@@ -30,7 +30,7 @@ function Layout(props) {
     return (
         
         <div className='flex'>
-            <aside className='hidden md:block sticky top-0  h-screen  '>
+            <aside className='hidden md:block sticky top-0  max-h-screen  '>
                 <Sidebar/>
             </aside>
             <div className={`flex-1 ${darkTheme? "bg-gray-900 ": "bg-white "}`}>

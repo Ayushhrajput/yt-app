@@ -56,7 +56,7 @@ function Profile(props) {
                     </button>
                 </div>
             }   
-                <div  className=' w-full flex-1 overflow-y-auto scrollbar-hide  flex flex-col'>
+                <div  className=' w-full flex-1  overflow-y-auto scrollbar-hide  flex flex-col'>
                 {user.coverImage && 
                     <div className='w-full min-h-max aspect-4/1 overflow-hidden'>
                         <img  
@@ -92,12 +92,12 @@ function Profile(props) {
                         </div>
                     </div>
                 </div>
-                    <div className='relative w-full'>
+                    <div className=' w-full'>
 
-                        <div className='sticky  top-0   w-full  '>
-                            <div className={`flex mx-4 max-w-sm w-max absolute   px-2 left-1/2 -translate-x-35 justify-around gap-4  py-2`}>
-                                <h1 className={`px-2 py-1 rounded-full  bg-white/20 border-white/20 shadow-white/10" backdrop-blur shadow-xl border`} >Watch History</h1>
-                                <h1 className={`px-2 py-1 rounded-full  bg-white/20 border-white/20 shadow-white/10" backdrop-blur shadow-xl border text-gray-600`}>Liked Videos</h1>
+                        <div className='sticky  top-0   '>
+                            <div className={`flex mx-4 max-w-sm  gap-2  py-2`}>
+                                <h1 className={`px-2 py-1 rounded-full ${darkTheme? "bg-black/20 border-black/20 shadow-black/10 ": "bg-white/20 border-black/10 shadow-black/10 "}  backdrop-blur shadow-xl border text-blue-500`} >Watch History</h1>
+                                <h1 className={`px-2 py-1 rounded-full ${darkTheme? "bg-black/20 border-black/20 shadow-black/10 text-white": "bg-white/20 border-black/10 shadow-black/10"}  backdrop-blur shadow-xl border `}>Liked Videos</h1>
                             </div>
                         </div>
                         <div className='grid grid-cols-3   mb-14'>
@@ -109,6 +109,10 @@ function Profile(props) {
                             <img className='w-full  h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/37810264/pexels-photo-37810264.jpeg" alt="" />
                             <img className='w-full h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/27203455/pexels-photo-27203455.jpeg" alt="" />
                             <img className='w-full  h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/34914337/pexels-photo-34914337.jpeg" alt="" />
+                            <img className='w-full  h-full aspect-3/4 object-cover ' loading='lazy' src="https://images.pexels.com/photos/37911536/pexels-photo-37911536.jpeg" alt="" />
+                            <img className='w-full  h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/13366067/pexels-photo-13366067.jpeg" alt="" />
+                            <img className='w-full  h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/37555052/pexels-photo-37555052.jpeg" alt="" />
+
                             
                             
                         </div>
