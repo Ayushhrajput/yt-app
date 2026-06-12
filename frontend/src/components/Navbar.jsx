@@ -25,7 +25,7 @@ function Navbar({className}) {
     return (
         
             <div className={className }>
-                <div className={`flex justify-between items-center h-full ${darkTheme? "bg-black/10  text-white border-black/20 ": "bg-white/10 border-black/10"} backdrop-blur border-b px-4`}>
+                <div className={`flex justify-between items-center h-full ${darkTheme? "bg-black/10  text-white border-black/20 ": "bg-white/10 border-black/20"} backdrop-blur border-b px-4`}>
                     <h1 className='font-["pacifico"] text-lg '>Twitchflix</h1>
                     {
                         items &&
