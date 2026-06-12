@@ -33,7 +33,7 @@ function Profile(props) {
                     onClick={(e) => {
                         e.stopPropagation()
                     }}
-                    className={`fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 ${darkTheme? " bg-black/10 border-black/10": "bg-white/10 border-white/20 shadow-white/10"} backdrop-blur shadow-xl border text-blue-600  flex flex-col justify-center items-center w-max  px-2 rounded-xl z-10`}
+                    className={`fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 ${darkTheme? " bg-black/10 border-black/10": "bg-white/10 border-white/20 shadow-white/10"} backdrop-blur shadow-xl border text-blue-500 flex flex-col justify-center items-center w-max  px-2 rounded-xl z-10`}
                 >
 
                     <div className={`flex items-center ${darkTheme? "  border-b-black/20": " border-b-white/20"} border-b border-white px-8 py-2 h-12`}>
@@ -95,9 +95,9 @@ function Profile(props) {
                     <div className='relative w-full'>
 
                         <div className='sticky  top-0   w-full  '>
-                            <div className={`flex mx-4 max-w-sm w-max absolute top-4  px-2 left-1/2 -translate-x-35 justify-around gap-4 ${darkTheme? "text-white bg-black/10 border-black/10": "bg-white/10 border-white/20 shadow-white/10"} backdrop-blur shadow-xl border rounded-full py-2`}>
-                                <h1 className={`px-2 py-1 rounded-full  bg-white/40 border-white/20 shadow-white/10" backdrop-blur shadow-xl border`} >Watch History</h1>
-                                <h1 className='px-2 py-1'>Liked Videos</h1>
+                            <div className={`flex mx-4 max-w-sm w-max absolute   px-2 left-1/2 -translate-x-35 justify-around gap-4  py-2`}>
+                                <h1 className={`px-2 py-1 rounded-full  bg-white/20 border-white/20 shadow-white/10" backdrop-blur shadow-xl border`} >Watch History</h1>
+                                <h1 className={`px-2 py-1 rounded-full  bg-white/20 border-white/20 shadow-white/10" backdrop-blur shadow-xl border text-gray-600`}>Liked Videos</h1>
                             </div>
                         </div>
                         <div className='grid grid-cols-3   mb-14'>
@@ -107,6 +107,8 @@ function Profile(props) {
                             <img className='w-full  h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/38020123/pexels-photo-38020123.jpeg" alt="" />
                             <img className='w-full h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/37555058/pexels-photo-37555058.jpeg" alt="" />
                             <img className='w-full  h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/37810264/pexels-photo-37810264.jpeg" alt="" />
+                            <img className='w-full h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/27203455/pexels-photo-27203455.jpeg" alt="" />
+                            <img className='w-full  h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/34914337/pexels-photo-34914337.jpeg" alt="" />
                             
                             
                         </div>

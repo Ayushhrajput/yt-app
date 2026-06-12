@@ -43,7 +43,7 @@ function BottomBar(props) {
     
 
     return (
-        <nav className={`fixed bottom-0 left-0 right-0 ${darkTheme? "bg-gray-900 shadow-gray-100 ": "bg-white shadow-gray-900 "}  shadow-lg  `}>
+        <nav className={`fixed bottom-0 left-0 right-0 ${darkTheme? "bg-black/10  text-white border-black/20 ": "bg-white/10 border-black/10"} border-t  backdrop-blur  shadow-lg  `}>
             <div className='h-14 flex justify-around items-center'>
                 {navItems.map((item) => 
                     
@@ -53,7 +53,7 @@ function BottomBar(props) {
                         onClick={() => (
                             handlePathClick(item.path)
                         )}
-                        className={({isActive}) => ( isActive? `${darkTheme? "text-white": "text-gray-900"}`: `${darkTheme? "text-gray-200": "text-gray-600"}`)}
+                        className={({isActive}) => `py-2 px-4 rounded-full  ${isActive? 'bg-white/40  border-white/20  backdrop-blur border': ''}`}
                     >
                         {item.icon}
                         

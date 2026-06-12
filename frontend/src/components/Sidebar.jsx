@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
+import { useSetting } from '../context/SettingContext';
 
 
 function Sidebar({className}) {
     const {darkTheme} = useTheme()
+    const {items, setItems} = useSetting()
     const [showSideBar, setShowSideBar] = useState(false)
     const navItems = [
         {
@@ -38,6 +40,9 @@ function Sidebar({className}) {
         setShowSideBar((prev) => !prev)
         
     }
+    const handlePathClick = (path) => {
+        setItems(path === "/profile")
+    }
     return (
         <div className={`${className} ${showSideBar? "w-56": "w-14"} flex flex-col items-center h-full ${darkTheme? "bg-gray-900 text-white shadow-gray-800": "bg-white shadow-gray-200"} shadow-lg transition-all duration-200`}>
             <div className='w-full h-14 flex items-center px-4 ' onClick={handleSidebar}>
@@ -49,6 +54,9 @@ function Sidebar({className}) {
                         <NavLink
                             key={item.path}
                             to={item.path}
+                            onClick={() => (
+                                handlePathClick(item.path)
+                            )}
                             className={({isActive}) => `h-6 flex items-center gap-4 ${isActive? `${darkTheme? "text-white": "text-gray-900"}`: `${darkTheme? "text-gray-200": "text-gray-600"}`}`}
                         >
                             {item.icon}
