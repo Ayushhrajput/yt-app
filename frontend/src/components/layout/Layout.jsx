@@ -34,8 +34,8 @@ function Layout(props) {
                 <Sidebar/>
             </aside>
             <div className={`flex-1 ${darkTheme? "bg-gray-900 ": "bg-white "}`}>
-                <Navbar className={`sticky top-0 w-full h-14 transition-transform duration-200  ${showNav? "translate-y-0": "-translate-y-full"}`}/>
-                <main className='pt-14'>
+                <Navbar className={`fixed top-0 w-full h-14 transition-transform duration-200  ${showNav? "translate-y-0": "-translate-y-full"}`}/>
+                <main className=''>
                     <Outlet/>
                 </main>
             </div>
