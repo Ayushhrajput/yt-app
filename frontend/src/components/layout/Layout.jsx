@@ -33,7 +33,7 @@ function Layout(props) {
             <aside className='hidden md:block sticky top-0  max-h-screen  '>
                 <Sidebar/>
             </aside>
-            <div className={`flex-1 ${darkTheme? "bg-gray-900 ": "bg-white "}`}>
+            <div className={`flex-1 ${darkTheme? "bg-black/90 ": "bg-white "}`}>
                 <Navbar className={`fixed top-0 w-full h-14 transition-transform duration-200  ${showNav? "translate-y-0": "-translate-y-full"}`}/>
                 <main className=''>
                     <Outlet/>

@@ -9,7 +9,7 @@ const api = axios.create({
 
 const publishVideo = async (formdata) => {
     try {
-        const response = api.post(
+        const response = await api.post(
             "/api/v1/videos/publish-video",
             formdata,
     

@@ -417,8 +417,39 @@ const getWatchHistory = asyncHandler(async (req, res) => {
     .json(
         new ApiResponse(
             200, 
-            user[0].WatchHistory,
+            user?.[0]?.WatchHistory,
             "watchHistory fetched successfully"
+        )
+    )
+})
+
+const addToWatchHistory = asyncHandler(async (req, res) => {
+    const {videoId} = req.params
+    await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $pull : {
+                watchHistory: videoId
+            }
+        }
+    )
+    await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $push : {
+                watchHistory: {
+                    $each: [videoId],
+                    $position: 0
+                }
+            }
+        }
+    )
+    return res.status(200)
+    .json(
+        new ApiResponse(
+            200,
+            {},
+            "Added to WatchHistory"
         )
     )
 })
@@ -432,5 +463,6 @@ export {registerUser,
     updateUserAvatar,
     updateUsercoverImage,
     getUserChannelProfile,
-    getWatchHistory
+    getWatchHistory,
+    addToWatchHistory
 }

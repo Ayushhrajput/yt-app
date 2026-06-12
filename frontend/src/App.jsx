@@ -8,6 +8,7 @@ import AuthLayout from './components/layout/AuthLayout.jsx'
 import { useAuth } from './context/AuthContext.jsx'
 import Layout from './components/layout/Layout.jsx'
 import Profile from './pages/Profile.jsx'
+import PostVideo from './pages/PostVideo.jsx'
 
 function App() {
   
@@ -36,6 +37,7 @@ function App() {
         }>
           <Route path='/home' element={<Home/>}/>
           <Route path='/profile/:username' element={<Profile/>}/>
+          <Route path='/postVideo' element={<PostVideo/>}/>
         </Route>
       </Routes>
   )

@@ -23,7 +23,7 @@ function Profile(props) {
                     throw new Error(e.message)
                 }
             }
-            getWatchHistory()
+            fetchWatchHistory()
         }, []
     )
     useEffect(

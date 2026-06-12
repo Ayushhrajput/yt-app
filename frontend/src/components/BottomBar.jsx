@@ -39,7 +39,7 @@ function BottomBar(props) {
         }
     ]
     const handlePathClick = (path) => {
-        setItems(path === "/profile")
+        setItems(path === `/profile/${user.username}`)
     }
     
 
