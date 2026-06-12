@@ -25,14 +25,15 @@ function Profile(props) {
     }
 
     return (
-        <div className={` flex flex-col   h-screen text-blue-600`}>
+        <div className={` flex flex-col   h-screen `}>
+            
             {
                 setting &&
                 <div 
                     onClick={(e) => {
                         e.stopPropagation()
                     }}
-                    className={`fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 ${darkTheme? " bg-black/10 border-black/10": "bg-white/10 border-white/20 shadow-white/10"} backdrop-blur-2xl shadow-xl border  flex flex-col justify-center items-center w-max  px-2 rounded-xl`}
+                    className={`fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 ${darkTheme? " bg-black/10 border-black/10": "bg-white/10 border-white/20 shadow-white/10"} backdrop-blur shadow-xl border text-blue-600  flex flex-col justify-center items-center w-max  px-2 rounded-xl z-10`}
                 >
 
                     <div className={`flex items-center ${darkTheme? "  border-b-black/20": " border-b-white/20"} border-b border-white px-8 py-2 h-12`}>
@@ -55,12 +56,63 @@ function Profile(props) {
                     </button>
                 </div>
             }   
-            <div  className=' w-full h-full overflow-y-auto scrollbar-hide'>
-                <div className='grid grid-cols-3'>
-                    
+                <div  className=' w-full flex-1 overflow-y-auto scrollbar-hide  flex flex-col'>
+                {user.coverImage && 
+                    <div className='w-full min-h-max aspect-4/1 overflow-hidden'>
+                        <img  
+                            className=' object-contain'
+                            src={user.coverImage} 
+                            alt="coverImg" 
+                        />
+                    </div>
+                }
+                <div className={`w-full min-h-40 flex  py-2 ${darkTheme? "text-white": ""}`}>
+                    <div className='flex flex-col w-full md:w-sm  px-4 '> 
+                        <div className='font-semibold italic flex flex-col gap-2'>
+                            <h1 className='px-2'>{user.username}</h1>
+                            <img 
+                                className='rounded-full h-20 min-w-20 max-w-20 object-cover '
+                                src={user.avatar}
+                                alt="avatar" 
+                            />
+                        </div>
+                        <div className='px-2'>
+                            
+                            <h1>{user.fullName}</h1>
+                        </div>
+                    </div>
+                    <div className='flex justify-items-start w-full  gap-4 py-6 px-4 font-semibold'>
+                        <div className='flex flex-col items-center gap-4'>
+                            <p className=''>Subscribers</p>
+                            <span>0</span>
+                        </div>
+                        <div className='flex flex-col items-center gap-4'>
+                            <p>subscribedTo</p> 
+                            <span>0</span>
+                        </div>
+                    </div>
                 </div>
-                    
-            </div>
+                    <div className='relative w-full'>
+
+                        <div className='sticky  top-0   w-full  '>
+                            <div className={`flex mx-4 max-w-sm w-max absolute top-4  px-2 left-1/2 -translate-x-35 justify-around gap-4 ${darkTheme? "text-white bg-black/10 border-black/10": "bg-white/10 border-white/20 shadow-white/10"} backdrop-blur shadow-xl border rounded-full py-2`}>
+                                <h1 className={`px-2 py-1 rounded-full  bg-white/40 border-white/20 shadow-white/10" backdrop-blur shadow-xl border`} >Watch History</h1>
+                                <h1 className='px-2 py-1'>Liked Videos</h1>
+                            </div>
+                        </div>
+                        <div className='grid grid-cols-3   mb-14'>
+                            
+                            <img className='w-full h-full aspect-3/4  object-cover' src='https://images.pexels.com/photos/37927742/pexels-photo-37927742.jpeg' alt="" />
+                            
+                            <img className='w-full  h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/38020123/pexels-photo-38020123.jpeg" alt="" />
+                            <img className='w-full h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/37555058/pexels-photo-37555058.jpeg" alt="" />
+                            <img className='w-full  h-full aspect-3/4 object-cover ' src="https://images.pexels.com/photos/37810264/pexels-photo-37810264.jpeg" alt="" />
+                            
+                            
+                        </div>
+                    </div>
+                        
+                </div>
             
         </div>
     );
