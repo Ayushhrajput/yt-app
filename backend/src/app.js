@@ -6,7 +6,7 @@ app.set("trust proxy", 1)
 
 
 const allowedOrigins = [
-    "https://yt-app-woq1.vercel.app",
+    "https://yt-app-woq.vercel.app",
     "http://localhost:5173"
 ]
 app.use(cors({

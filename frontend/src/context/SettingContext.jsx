@@ -6,8 +6,9 @@ export const SettingProvider = ({children}) => {
 
     const [setting, setSetting] = useState(false)
     const [items, setItems] = useState(false)
+    const [showNav, setShowNav] = useState(true)
     return (
-        <SettingContext.Provider value={{setting, setSetting, items, setItems}}>
+        <SettingContext.Provider value={{setting, setSetting, items, setItems, showNav, setShowNav}}>
             {children}
         </SettingContext.Provider>
     )

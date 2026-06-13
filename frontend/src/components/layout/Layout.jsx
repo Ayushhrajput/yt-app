@@ -4,11 +4,12 @@ import BottomBar from '../BottomBar';
 import Navbar from '../Navbar.jsx';
 import Sidebar from '../Sidebar.jsx';
 import { useTheme } from '../../context/ThemeContext.jsx'; 
+import { useSetting } from '../../context/SettingContext.jsx';
 
 function Layout(props) {
-    const [showNav, setShowNav] = useState(true)
+    const [showNavbar, setShowNav] = useState(true)
     const {darkTheme} = useTheme()
-
+    const {showNav} = useSetting(0)
     useEffect(() => {
         let lastScrollY = window.scrollY
 
@@ -34,7 +35,9 @@ function Layout(props) {
                 <Sidebar/>
             </aside>
             <div className={`flex-1 ${darkTheme? "bg-black/90 ": "bg-white "} overflow-y-auto scrollbar-hide`}>
-                <Navbar className={`fixed top-0 w-full h-14 transition-transform duration-200  ${showNav? "translate-y-0": "-translate-y-full"}`}/>
+                {showNav && 
+                    <Navbar className={`fixed top-0 w-full h-14 transition-transform duration-200  ${showNavbar? "translate-y-0": "-translate-y-full"}`}/>
+                }
                 <main className=''>
                     <Outlet/>
                 </main>

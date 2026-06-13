@@ -16,7 +16,8 @@ function PostVideo(props) {
     const [error, setError] = useState("")
     const [thumbnailPreview, setThumbnailPreview] = useState("")
     const [videoPreview, setVideoPreview] = useState("")
-
+    const [postStatus, setPostStatus] = useState(false)
+    
     const handleChange = (e) => {
         setFromData(
             {
@@ -33,23 +34,29 @@ function PostVideo(props) {
         data.append("thumbnail", thumbnail)
         data.append("videoFile", videoFile)
         data.append("description", formData.description)
-
+        setPostStatus(true)
         try {
             const response = await publishVideo(data)
             console.log(response)
             setStatus(response.message)
+            setError("")
             setVideoFile(null)
             setThumbnail(null)
             setFromData({
                 title: "",
                 description: ""
             })
+            setPostStatus(false)
+            
             
         } catch (e) {
             setStatus(e.message)
             throw new Error(e)
+        } finally {
+            setPostStatus(false)
         }
     }
+    console.log(postStatus)
     return (
         <div className='h-screen w-full '>
             {
@@ -67,6 +74,7 @@ function PostVideo(props) {
                         </label>
                         <input 
                             id='videoFile'
+                            accept='video/*'
                             onChange={(e) => {
                                 const file = e.target.files[0]
                                 setVideoFile(file)
@@ -102,7 +110,7 @@ function PostVideo(props) {
                     <div 
                         className={` ${darkTheme? "text-white": ""} w-full h-screen pt-14 flex flex-col md:flex-row `}
                     >
-                        
+                            
                             <form 
                                 onSubmit={handleSubmit}
                                 action=""
@@ -180,6 +188,7 @@ function PostVideo(props) {
                                     <input 
                                         id='thumbnail'
                                         className='hidden'
+                                        accept='image/*'
                                         onChange={(e) => {
                                             const file = e.target.files[0]
 
@@ -192,11 +201,18 @@ function PostVideo(props) {
                                         }
                                         type="file" 
                                     />
-                                    <button
-                                        className='text-blue-500 w-max pt-4' type="submit"
-                                        >
-                                        Upload
-                                    </button>
+                                    {!postStatus && 
+                                        
+                                        <button
+                                            className='text-blue-500 w-max pt-4' type="submit"
+                                            
+                                            >
+                                            Upload
+                                        </button>
+                                    }
+                                    {postStatus && 
+                                        <div className='text-blue-500 w-max pt-4'>posting</div>
+                                    }
                                 </div>
                                     
                                 
