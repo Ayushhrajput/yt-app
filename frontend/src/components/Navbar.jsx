@@ -29,7 +29,7 @@ function Navbar({className}) {
                     <h1 className='font-["pacifico"] text-lg '>Twitchflix</h1>
                     {
                         items &&
-                        <div className='cursor-pointer md:px-14'  onClick={
+                        <div className='cursor-pointer md:px-14 flex items-center'  onClick={
                         (e) => {
                             
                             e.stopPropagation()

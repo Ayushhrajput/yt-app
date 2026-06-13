@@ -5,7 +5,7 @@ import { useTheme } from '../context/ThemeContext';
 function PostVideo(props) {
 
     const {darkTheme} = useTheme()
-
+    
     const [formData, setFromData] = useState({
         title: "",
         description: ""
@@ -14,6 +14,9 @@ function PostVideo(props) {
     const [thumbnail, setThumbnail] = useState(null)
     const [status, setStatus] = useState("")
     const [error, setError] = useState("")
+    const [thumbnailPreview, setThumbnailPreview] = useState("")
+    const [videoPreview, setVideoPreview] = useState("")
+
     const handleChange = (e) => {
         setFromData(
             {
@@ -35,13 +38,20 @@ function PostVideo(props) {
             const response = await publishVideo(data)
             console.log(response)
             setStatus(response.message)
+            setVideoFile(null)
+            setThumbnail(null)
+            setFromData({
+                title: "",
+                description: ""
+            })
+            
         } catch (e) {
             setStatus(e.message)
             throw new Error(e)
         }
     }
     return (
-        <div className='h-screen w-full'>
+        <div className='h-screen w-full '>
             {
                 !videoFile &&
                 <div className='w-full h-screen flex justify-center items-center'>
@@ -57,7 +67,12 @@ function PostVideo(props) {
                         </label>
                         <input 
                             id='videoFile'
-                            onChange={(e) => (setVideoFile(e.target.files[0]))}
+                            onChange={(e) => {
+                                const file = e.target.files[0]
+                                setVideoFile(file)
+                                setVideoPreview(URL.createObjectURL(file))
+                            }
+                            }
                             type="file" 
                             className='hidden'
                         />
@@ -75,52 +90,135 @@ function PostVideo(props) {
                     <div className={`fixed top-1/4 ${darkTheme? "text-white": ""}`}>
                         {error}
                     </div>
+                    {status && 
+                    <span className={`fixed top-1/4 ${darkTheme? "text-white": ""}`}>
+                        {status}
+                    </span>
+                    }
                 </div>
             }
             {
                 videoFile && (
                     <div 
-                        className=" bg-blue-400 w-full h-screen pt-14"
+                        className={` ${darkTheme? "text-white": ""} w-full h-screen pt-14 flex flex-col md:flex-row `}
                     >
+                        
+                            <form 
+                                onSubmit={handleSubmit}
+                                action=""
+                                className={`flex flex-col px-4 py-2 justify-around h-max w-full ${darkTheme? "border-white/20": "border-black/20"} md:border-r`}
+                            >   
+                                <div className='flex justify-between '>
+                                    <label htmlFor="title" className='mb-2'>Title</label>
+                                    <span>{formData.title.length}/100</span>
+                                </div>
+                                <input 
+                                    id='title'
+                                    name='title'
+                                    value={formData.title}
+                                    className={`${darkTheme? "text-white border-white/20 ": "text-black bg-white/10 border-black/20"} w-full outline-none border-b mb-4 px-2`}
+                                    onChange={handleChange}
+                                    type="text" 
+                                    maxLength={100}
+                                />
+                                <div className='flex justify-between '>
+                                    <label htmlFor="description" className='mb-2'>Description</label>
+                                    <span>{formData.description.length}/100</span>
+                                </div>
+                                <textarea 
+                                    id='description'
+                                    name='description'
+                                    value={formData.description}
+                                    className={`${darkTheme? "text-white border-white/20 bg-black/20": "text-black bg-gray-100 border-black/20"} w-full outline-none border rounded-lg h-40 mb-4 px-2`}
+                                    onChange={handleChange}
+                                    type="text" 
+                                    maxLength={100}
+                                />
+                                
+                                <div className='flex flex-col  w-full items-center '>
+                                    {
+                                        !thumbnail &&
+                                        <div className='w-full flex flex-col'>
 
-                        <form 
-                            onSubmit={handleSubmit}
-                            action=""
-                        >
-                            <input 
-                                onChange={(e) => (setThumbnail(e.target.files[0]))}
-                                type="file" 
-                            />
-                            <input 
-                                name='title'
-                                value={formData.title}
-                                placeholder='title'
-                                onChange={handleChange}
-                                type="text" 
-                            />
-                            <input 
-                                name='Thumbnail'
-                                value={formData.thumbnail}
-                                placeholder='Thumbnail'
-                                onChange={handleChange}
-                                type="text" 
-                            />
-                            {
-                                status && <span>{status}</span>
-                            }
-                            <video 
-                                controls
-                                className='aspect-3/4 w-40'
-                                src={URL.createObjectURL(videoFile)}
-                            ></video>
+                                            <div className='flex flex-col '>
+                                                <label htmlFor="thumbnail">Thumbnail</label>
+                                                <div className='flex justify-center'>
+                                                    <label 
+                                                        className={`${darkTheme? "text-white border-black/20 bg-black/10": "text-black bg-white/10 border-black/10"} border w-20  h-20 shadow-lg rounded-full backdrop-blur flex justify-center items-center `}
+                                                        htmlFor="thumbnail"
+                                                    >
+                                                        <i class="fa-solid fa-file-arrow-up text-2xl md:text-4xl"></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    {thumbnail &&
+                                        <div className='w-full flex flex-col'>
+
+                                            <label htmlFor="thumbnail" className='mb-2'>Thumbnail</label>
+                                            <div className={` flex justify-center `}>
+                                                <div
+                                                    className={`bg-center  bg-contain bg-no-repeat w-40 aspect-9/16 flex justify-center items-center ${darkTheme? "text-white border-white/20 bg-black/20": "text-black bg-white/10 border-black/20"} border rounded-lg`}
+                                                    style={{
+                                                        backgroundImage: `url(${thumbnailPreview})`
+                                                    }}
+                                                >
+                                                    
+                                                    <label 
+                                                        className={`${darkTheme? "text-white border-black/20 ": "text-black  border-black/10"} border w-20  h-20 shadow-lg rounded-full backdrop-blur flex justify-center items-center `}
+                                                        htmlFor="thumbnail"
+                                                    >
+                                                        <i class="fa-solid fa-file-arrow-up text-2xl md:text-4xl"></i>
+                                                    </label>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    } 
+
+                                    <input 
+                                        id='thumbnail'
+                                        className='hidden'
+                                        onChange={(e) => {
+                                            const file = e.target.files[0]
+
+                                            setThumbnail(file)
+                                            if(file) {
+
+                                                setThumbnailPreview(URL.createObjectURL(file))
+                                            }
+                                        }
+                                        }
+                                        type="file" 
+                                    />
+                                    <button
+                                        className='text-blue-500 w-max pt-4' type="submit"
+                                        >
+                                        Upload
+                                    </button>
+                                </div>
+                                    
+                                
+                            </form>
+                        <div className='w-full flex flex-col gap-2 px-4 py-2 pb-16 '>
+                            <div className=''>
+                                Video Preview
+                            </div>
+                            <div className=' flex flex-col items-center justify-center '>
+                                <div className=''>
+                                    <video 
+                                        controls
+                                        className={`aspect-9/16 w-40 md:w-60  ${darkTheme? "text-white border-white/20 bg-black/20": "text-black bg-white/10 border-black/20"} border rounded-lg`}
+                                        src={videoPreview}
+                                    >
+                                    </video>
+                                </div>
+                            </div>
+                            <span className='w-full '>
                             {videoFile.name}
-                            <button
-                                type="submit"
-                            >
-                                Upload
-                            </button>
-                            
-                        </form>
+                            </span>
+                        </div>
                     </div>
 
                 )
