@@ -33,13 +33,13 @@ function Video(props) {
     
     return (
         <div className={`min-h-screen flex justify-center items-center ${darkTheme? "bg-black/90": "bg-white"} `}>
-            <div className='w-max '>
+            <div className='h-screen '>
                 <video  
                     src={video.videoFile}
                     ref={videoRef}
                     loop
                     autoPlay
-                    className="h-screen   max-w-sm aspect-9/16 bg-black"
+                    className="h-full w-full  max-w-sm aspect-9/16 bg-black"
                 >
                     
                     
@@ -58,10 +58,14 @@ function Video(props) {
                             className='flex flex-col items-start'
                             
                         >   
-                            <div className={`w-60 ${showDes? "wrap-break-word": "truncate"} `}>
+                        {   
+                            showDes && 
+
+                            <div className="w-60  wrap-break-word">
                                 {video?.description}
-                            ghsfhsgghsgihsigsngsgnsgosgnsngsogfsfn
+                            
                             </div>
+                        }
                             <button onClick={() => setShowDes(
                                 (prev) => !prev
                             )} className='text-gray-200 text-sm'>{!showDes? <div>show more</div> : <div>show less</div> }</button>

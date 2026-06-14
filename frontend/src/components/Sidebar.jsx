@@ -17,9 +17,9 @@ function Sidebar({className}) {
             label: "Home"
         },
         {
-            path: "/search",
-            icon: <i class="fa-solid fa-magnifying-glass"></i>,
-            label: "Search"
+            path: "/subscriptions",
+            icon: <i class="fa-solid fa-video"></i>,
+            label: "Subscriptions"
         },
         {
             path: "/postVideo",
@@ -27,9 +27,9 @@ function Sidebar({className}) {
             label: "PostVideo"
         },
         {
-            path: "/subscriptions",
-            icon: <i class="fa-solid fa-video"></i>,
-            label: "Subscriptions"
+            path: "/search",
+            icon: <i class="fa-solid fa-magnifying-glass"></i>,
+            label: "Search"
         },
         {
             path: `/profile/${user.username}`,
@@ -51,7 +51,7 @@ function Sidebar({className}) {
                 <i class="fa-solid fa-bars"></i>
             </div>
             <div className='flex-1 w-full flex flex-col items-center '>
-                <div className={`flex flex-col ${showSideBar? "items-start px-4": "items-center"} w-full gap-8 py-4`}>
+                <div className={`flex flex-col ${showSideBar? "items-start px-4": "px-4"} w-full gap-8 py-4`}>
                     {navItems.map((item) => (
                         <NavLink
                             key={item.path}

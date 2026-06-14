@@ -9,7 +9,7 @@ import { useSetting } from '../../context/SettingContext.jsx';
 function Layout(props) {
     const [showNavbar, setShowNav] = useState(true)
     const {darkTheme} = useTheme()
-    const {showNav} = useSetting(0)
+    const {showNav} = useSetting()
     useEffect(() => {
         let lastScrollY = window.scrollY
 
@@ -38,11 +38,11 @@ function Layout(props) {
                 {showNav && 
                     <Navbar className={`fixed top-0 w-full h-14 transition-transform duration-200  ${showNavbar? "translate-y-0": "-translate-y-full"}`}/>
                 }
-                <main className={`${darkTheme? "text-white": ""} pt-14`}>
+                <main className={`${darkTheme? "text-white": ""} ${showNav? "pt-14": ""} `}>
                     <Outlet/>
                 </main>
             </div>
-            <div className='md:hidden'>
+            <div className='md:hidden '>
                 <BottomBar/>
             </div>
         </div>

@@ -111,10 +111,14 @@ function Home(props) {
                             className='flex flex-col items-start'
                             
                         >   
-                            <div className={`w-full ${showDes? "wrap-break-word": "truncate"} `}>
+                        {
+                            showDes && 
+
+                            <div className="w-full wrap-break-word">
                                 {video?.description}
                             
                             </div>
+                        }
                             <button onClick={() => setShowDes(
                                 (prev) => !prev
                             )} className='text-gray-400 text-sm'>{!showDes? <div>show more</div> : <div>show less</div> }</button>
