@@ -66,8 +66,8 @@ function Home(props) {
     }, [hasMore, fetch])
 
     
-    
-       
+
+
     return (
         <div className=' w-full min-h-screen'>
             {videos.map((video) => 
@@ -113,7 +113,7 @@ function Home(props) {
                         >   
                             <div className={`w-full ${showDes? "wrap-break-word": "truncate"} `}>
                                 {video?.description}
-                            ghsfhsgghsgihsigsngsgnsgosgnsngsogfsfn
+                            
                             </div>
                             <button onClick={() => setShowDes(
                                 (prev) => !prev
