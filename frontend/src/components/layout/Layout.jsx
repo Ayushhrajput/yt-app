@@ -31,7 +31,7 @@ function Layout(props) {
     return (
         
         <div className='flex'>
-            <aside className='hidden md:block fixed top-0 '>
+            <aside className='hidden md:block  '>
                 <Sidebar/>
             </aside>
             <div className={`flex-1 ${darkTheme? "bg-black/90 ": "bg-white "} overflow-y-auto scrollbar-hide md:pl-14`}>

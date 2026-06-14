@@ -45,9 +45,11 @@ function Video(props) {
                     
                 </video>
                 
-                <div className=' fixed  bottom-0 pb-14 md:pb-0 px-4 '>
+                <div className=' fixed  bottom-0 pb-14 md:pb-0 px-4 z-10'>
                     <div className='flex items-center text-white gap-2 py-2 '>
-                        <img src={video?.owner?.avatar} alt="" className='rounded-full border border-blue-500 object-cover w-10 h-10'/>
+                        <div className='w-10 h-10 border border-blue-500 rounded-full'>
+                        <img src={video?.owner?.avatar} alt={video.title} className='w-full h-full object-cover rounded-full p-0.5' />
+                        </div>
                         <div className=''>{video?.owner?.username}</div>
                     </div>
                     <div className='flex flex-col  text-white gap-2 pb-4 '>
@@ -68,12 +70,12 @@ function Video(props) {
                         }
                             <button onClick={() => setShowDes(
                                 (prev) => !prev
-                            )} className='text-gray-200 text-sm'>{!showDes? <div>show more</div> : <div>show less</div> }</button>
+                            )} className='text-gray-200 text-sm '>{!showDes? <div>show more</div> : <div>show less</div> }</button>
                         </div>
                     </div>
                 </div>
+                <button onClick={toggleVideoPlay} className='h-full  aspect-9/16   aspect-9/16 fixed left-1/2 -translate-x-1/2 md:-translate-x-35 bottom-0 '></button>
             </div>
-            <button onClick={toggleVideoPlay} className='h-40  aspect-9/16 fixed '></button>
         </div>
     );
 }

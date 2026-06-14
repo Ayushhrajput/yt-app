@@ -18,9 +18,9 @@ function BottomBar(props) {
             label: "Home"
         },
         {
-            path: "/subscriptions",
+            path: "/feed",
             icon: <i class="fa-solid fa-video"></i>,
-            label: "Subscriptions"
+            label: "Twitches"
         },
         {
             path: "/postVideo",

@@ -11,6 +11,7 @@ import Profile from './pages/Profile.jsx'
 import PostVideo from './pages/PostVideo.jsx'
 import Video from './pages/Video.jsx'
 import { useSetting } from './context/SettingContext.jsx'
+import Feed from './pages/Feed.jsx'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
   const location = useLocation()
   const {showNav, setShowNav} = useSetting()
   setShowNav(!location.pathname.startsWith('/home/video/'))
+  setShowNav(!(location.pathname.startsWith("/feed")))
   
   
   
@@ -47,6 +49,7 @@ function App() {
           <Route path='/profile/:username' element={<Profile/>}/>
           <Route path='/postVideo' element={<PostVideo/>}/>
           <Route path='/home/video/:videoId' element={<Video/>}/>
+          <Route path='/feed' element={<Feed/>} />
         </Route>
       </Routes>
   )

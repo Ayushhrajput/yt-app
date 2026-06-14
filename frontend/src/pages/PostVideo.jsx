@@ -48,9 +48,10 @@ function PostVideo(props) {
             })
             setPostStatus(false)
             
+            setStatus(e.message)
             
         } catch (e) {
-            setStatus(e.message)
+            
             throw new Error(e)
         } finally {
             setPostStatus(false)
@@ -58,10 +59,10 @@ function PostVideo(props) {
     }
     console.log(postStatus)
     return (
-        <div className='h-screen w-full '>
+        <div className=' w-full '>
             {
                 !videoFile &&
-                <div className='w-full h-screen flex justify-center items-center'>
+                <div className='w-full  flex justify-center items-center'>
                     <form 
                         className='flex flex-col items-center gap-4'
                         action=""
@@ -108,13 +109,13 @@ function PostVideo(props) {
             {
                 videoFile && (
                     <div 
-                        className={` ${darkTheme? "text-white": ""} w-full h-screen pt-14 flex flex-col md:flex-row `}
+                        className={` ${darkTheme? "text-white": ""} w-full   flex flex-col md:flex-row `}
                     >
                             
                             <form 
                                 onSubmit={handleSubmit}
                                 action=""
-                                className={`flex flex-col px-4 py-2 justify-around h-max w-full ${darkTheme? "border-white/20": "border-black/20"} md:border-r`}
+                                className="flex flex-col px-4 py-2 justify-around h-max w-full "
                             >   
                                 <div className='flex justify-between '>
                                     <label htmlFor="title" className='mb-2'>Title</label>
@@ -137,7 +138,7 @@ function PostVideo(props) {
                                     id='description'
                                     name='description'
                                     value={formData.description}
-                                    className={`${darkTheme? "text-white border-white/20 bg-black/20": "text-black bg-gray-100 border-black/20"} w-full outline-none border rounded-lg h-40 mb-4 px-2`}
+                                    className={`${darkTheme? "text-white border-white/20  from-black/10 to-black/40": "text-black  border-black/20 from-gray-100 to-white "} bg-gradient-to-b w-full outline-none border rounded-lg h-40 mb-4 px-2`}
                                     onChange={handleChange}
                                     type="text" 
                                     maxLength={100}
@@ -217,7 +218,7 @@ function PostVideo(props) {
                                     
                                 
                             </form>
-                        <div className='w-full flex flex-col gap-2 px-4 py-2 pb-16 '>
+                        <div className={`w-full flex flex-col gap-2 px-4 py-2 pb-16 ${darkTheme? "border-white/20": "border-black/20"} md:border-l`}>
                             <div className=''>
                                 Video Preview
                             </div>

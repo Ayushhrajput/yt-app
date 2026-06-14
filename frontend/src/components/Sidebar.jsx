@@ -17,9 +17,9 @@ function Sidebar({className}) {
             label: "Home"
         },
         {
-            path: "/subscriptions",
+            path: "/feed",
             icon: <i class="fa-solid fa-video"></i>,
-            label: "Subscriptions"
+            label: "Twitches"
         },
         {
             path: "/postVideo",
@@ -46,7 +46,7 @@ function Sidebar({className}) {
         setItems(path === `/profile/${user.username}`)
     }
     return (
-        <div className={`${className} ${showSideBar? "w-56": "w-14"} flex flex-col items-center h-full min-h-screen ${darkTheme? "bg-black/90 text-white shadow-black/80": "bg-white shadow-gray-200"} shadow-lg transition-all duration-200`}>
+        <div className={`${className} ${showSideBar? "w-56": "w-14"} flex flex-col items-center h-full min-h-screen fixed top-0 ${darkTheme? "bg-black/90 text-white border-black/20": "bg-white border-black/20"} border-r shadow-lg transition-all duration-200`}>
             <div className='w-full h-14 flex items-center px-4 ' onClick={handleSidebar}>
                 <i class="fa-solid fa-bars"></i>
             </div>

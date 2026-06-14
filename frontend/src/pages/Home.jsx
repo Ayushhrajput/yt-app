@@ -1,10 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useAuth } from '../context/AuthContext.jsx';
-import {getUserChannel, logout} from "../services/authservice.js"
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from '../context/ThemeContext.jsx';
 import { getAllVideos } from '../services/videoService.js';
-import { useSetting } from '../context/SettingContext.jsx';
 
 function Home(props) {
     const [videos, setVideos] = useState([])
@@ -12,17 +8,16 @@ function Home(props) {
     const [page, setPage] = useState(1)
     const [hasMore, setHasMore] = useState(true)
     const [fetch, setFetch] = useState(false)
+
     const videoRef = useRef(null)
 
-    
     const navigate = useNavigate()
     useEffect(() => {
         
         const fetchAllVideos = async() => {
             
             if(fetch) return
-            
-            console.log(page)
+           
             setFetch(true)
 
             try {
@@ -33,7 +28,7 @@ function Home(props) {
                 )
                 const newVideos = response.data.videos
                 setVideos((prev) => [...prev, ...newVideos])
-                console.log(response)
+                
                 if(newVideos.length < 10) {
                     setHasMore(false)
                 }
@@ -88,7 +83,7 @@ function Home(props) {
 
                         <div className='w-full max-w-sm aspect-9/16 overflow-hidden bg-black'>
                         <img 
-                            className='w-full  h-full object-contain'
+                            className='w-full  h-full object-cover'
                             src={video.thumbnail} 
                             alt={video.title} 
                             onClick={() => {
