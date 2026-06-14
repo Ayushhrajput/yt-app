@@ -88,7 +88,7 @@ function Profile(props) {
                     </button>
                 </div>
             }   
-                <div  className=' w-full flex-1  overflow-y-auto scrollbar-hide  flex flex-col pt-14'>
+                <div  className=' w-full flex-1  overflow-y-auto scrollbar-hide  flex flex-col '>
                 {user.coverImage && 
                     <div className='w-full min-h-max aspect-4/1 overflow-hidden'>
                         <img  
@@ -103,12 +103,12 @@ function Profile(props) {
                         <div className='font-semibold italic flex flex-col gap-2'>
                             <h1 className='px-2'>{user.username}</h1>
                             <img 
-                                className='rounded-full h-20 min-w-20 max-w-20 object-cover '
+                                className='rounded-full h-20 min-w-20 max-w-20 object-cover border-blue-500 border-2'
                                 src={user.avatar}
                                 alt="avatar" 
                             />
                         </div>
-                        <div className='px-2'>
+                        <div className='px-2 py-2'>
                             
                             <h1>{user.fullName}</h1>
                         </div>

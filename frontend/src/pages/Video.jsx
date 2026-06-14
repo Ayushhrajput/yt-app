@@ -34,17 +34,17 @@ function Video(props) {
     return (
         <div className={`min-h-screen flex justify-center items-center ${darkTheme? "bg-black/90": "bg-white"} `}>
             <div className='w-max '>
-                <video  src={video.videoFile}
+                <video  
+                    src={video.videoFile}
                     ref={videoRef}
                     loop
                     autoPlay
-                    
-                    
                     className="h-screen   max-w-sm aspect-9/16 bg-black"
                 >
                     
                     
                 </video>
+                
                 <div className=' fixed  bottom-0 pb-14 md:pb-0 px-4 '>
                     <div className='flex items-center text-white gap-2 py-2 '>
                         <img src={video?.owner?.avatar} alt="" className='rounded-full border border-blue-500 object-cover w-10 h-10'/>

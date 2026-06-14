@@ -31,14 +31,14 @@ function Layout(props) {
     return (
         
         <div className='flex'>
-            <aside className='hidden md:block sticky  left-0 '>
+            <aside className='hidden md:block fixed top-0 '>
                 <Sidebar/>
             </aside>
-            <div className={`flex-1 ${darkTheme? "bg-black/90 ": "bg-white "} overflow-y-auto scrollbar-hide`}>
+            <div className={`flex-1 ${darkTheme? "bg-black/90 ": "bg-white "} overflow-y-auto scrollbar-hide md:pl-14`}>
                 {showNav && 
                     <Navbar className={`fixed top-0 w-full h-14 transition-transform duration-200  ${showNavbar? "translate-y-0": "-translate-y-full"}`}/>
                 }
-                <main className=''>
+                <main className={`${darkTheme? "text-white": ""} pt-14`}>
                     <Outlet/>
                 </main>
             </div>
