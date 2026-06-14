@@ -52,7 +52,7 @@ function RegisterUser() {
     return (
         <div className={`min-h-screen w-full ${darkTheme? "bg-black/90 text-white": "bg-gray-100"} flex justify-center items-center px-4`}>
 
-            <div className={`w-full max-w-md h-min shadow-2xl ${darkTheme? "shadow-black/90 bg-black/90": "shadow-gray-200 bg-white"}  rounded-2xl  p-8`}>
+            <div className={`w-full max-w-md h-min shadow-2xl ${darkTheme? "shadow-black/40 bg-black/90": "shadow-gray-200 bg-white"}  rounded-2xl  p-8`}>
                 <h1 className="text-3xl font-bold text-center  mb-2">
                     Create Account
                 </h1>
@@ -62,25 +62,25 @@ function RegisterUser() {
                 </p>
                 <form className="flex flex-col gap-4 " onSubmit={handleSubmit}>
                     <input 
-                        className={`w-full  ${darkTheme? "bg-gray-800 text-white": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `}
+                        className={`w-full  ${darkTheme? "bg-white text-black": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `}
                         type="text"
                         name='fullName'
                         placeholder='Full Name'
                         onChange={handleChange}/>
                     <input 
-                        className={`w-full  ${darkTheme? "bg-gray-800 text-white": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `}
+                        className={`w-full  ${darkTheme? "bg-white text-black": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `}
                         type="text" 
                         name='username' 
                         placeholder='Username'
                         onChange={handleChange}/>
                     <input 
-                        className={`w-full  ${darkTheme? "bg-gray-800 text-white": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `} 
+                        className={`w-full  ${darkTheme? "bg-white text-black": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `} 
                         type="text" 
                         name='email' 
                         placeholder='Email'
                         onChange={handleChange}/>
                     <input 
-                        className={`w-full  ${darkTheme? "bg-gray-800 text-white": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `} 
+                        className={`w-full  ${darkTheme? "bg-white text-black": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `} 
                         type="text" 
                         name='password'
                         placeholder='Password' 

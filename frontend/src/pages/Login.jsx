@@ -44,7 +44,7 @@ function Login(props) {
 
     return (
         <div className={`min-h-screen w-full flex justify-center items-center px-4 ${darkTheme? "bg-black/90 text-white": "bg-gray-100"}`}>
-            <div className={`w-full max-w-md h-min shadow-2xl ${darkTheme? "shadow-black/90 bg-black/90": "shadow-gray-200 bg-white"}  rounded-2xl  p-8`}>
+            <div className={`w-full max-w-md h-min shadow-2xl ${darkTheme? "shadow-black/40 bg-black/90": "shadow-gray-200 bg-white"}  rounded-2xl  p-8`}>
                 <h1 className="text-3xl font-bold text-center  mb-2">
                     Login
                 </h1>
@@ -60,7 +60,7 @@ function Login(props) {
                         name='email'
                         placeholder='Email'
                         onChange={handleChange}
-                        className={`w-full  ${darkTheme? "bg-gray-800 text-white": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `}
+                        className={`w-full  ${darkTheme? "bg-white text-black": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `}
                     />
                     <input 
                         type="text" 
@@ -68,7 +68,7 @@ function Login(props) {
                         name='password'
                         placeholder='Password'
                         onChange={handleChange}
-                        className={`w-full  ${darkTheme? "bg-gray-800 text-white": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `}
+                        className={`w-full  ${darkTheme? "bg-white text-black": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `}
                     />
                     <button 
                         className="
