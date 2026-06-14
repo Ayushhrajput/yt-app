@@ -124,7 +124,7 @@ function Home(props) {
             )}
             <div
                 ref={videoRef}
-                className='h-14 w-full bg-teal-400 pb-14'
+                className=' w-full  pb-14'
             >
 
             </div>
