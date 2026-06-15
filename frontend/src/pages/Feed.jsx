@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getAllVideos } from '../services/videoService.js';
+import Video from '../components/Video.jsx';
 
 function Shorts(props) {
     const [videos, setVideos] = useState([])
@@ -68,7 +69,7 @@ function Shorts(props) {
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
-                    const video = entry.target.querySelector("video")
+                    const video = entry.target
                     
                     if(entry.isIntersecting) {
                         video.play()
@@ -89,6 +90,8 @@ function Shorts(props) {
 
         return () => observer.disconnect()
     }, [videos])
+    
+    
 
     return (
         <div className='h-screen overflow-y-scroll scrollbar-hide snap-y snap-mandatory'>
@@ -96,18 +99,20 @@ function Shorts(props) {
                 videos.map((video, index) => (
                     <div
                         key={video._id}
-                        className='snap-start h-screen bg-black'
+                        className='snap-start h-screen flex justify-center bg-black'
                         
-                    >
-                        <video src={video.videoFile}
-                            className='h-full w-full aspect-9/16'
+                    >   <Video 
+                            src={video.videoFile}
                             ref={
                                 (el) => {
                                     videoRefs.current[index] = el
-                                    index === videos.length - 1? lastvideoRef.current: null 
+                                    if(index === videos.length - 1) lastvideoRef.current = el
                                 } 
                             }
-                        ></video>
+                            
+                            
+                        />
+                        
                     </div>
                 ))
             }

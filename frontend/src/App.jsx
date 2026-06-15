@@ -9,7 +9,7 @@ import { useAuth } from './context/AuthContext.jsx'
 import Layout from './components/layout/Layout.jsx'
 import Profile from './pages/Profile.jsx'
 import PostVideo from './pages/PostVideo.jsx'
-import Video from './pages/Video.jsx'
+import VideoPage from './pages/Video.jsx'
 import { useSetting } from './context/SettingContext.jsx'
 import Feed from './pages/Feed.jsx'
 
@@ -19,8 +19,8 @@ function App() {
   const {user, loading} = useAuth()
   const location = useLocation()
   const {showNav, setShowNav} = useSetting()
-  setShowNav(!location.pathname.startsWith('/home/video/'))
-  setShowNav(!(location.pathname.startsWith("/feed")))
+  setShowNav(!location.pathname.startsWith('/home/video/') && !location.pathname.startsWith("/feed"))
+  
   
   
   
@@ -48,7 +48,7 @@ function App() {
           <Route path='/home' element={<Home/>}/>
           <Route path='/profile/:username' element={<Profile/>}/>
           <Route path='/postVideo' element={<PostVideo/>}/>
-          <Route path='/home/video/:videoId' element={<Video/>}/>
+          <Route path='/home/video/:videoId' element={<VideoPage/>}/>
           <Route path='/feed' element={<Feed/>} />
         </Route>
       </Routes>

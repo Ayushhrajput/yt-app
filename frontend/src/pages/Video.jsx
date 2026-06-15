@@ -3,9 +3,10 @@ import { useParams } from 'react-router-dom';
 import { getVideoById } from '../services/videoService';
 import { useSetting } from '../context/SettingContext';
 import { useTheme } from '../context/ThemeContext';
+import Video from '../components/Video.jsx';
 
 
-function Video(props) {
+function VideoPage(props) {
     const {videoId} = useParams({})
     const [video, setVideo] = useState({})
     const [showDes, setShowDes] = useState(false)
@@ -33,18 +34,13 @@ function Video(props) {
     
     return (
         <div className={`min-h-screen flex justify-center items-center ${darkTheme? "bg-black/90": "bg-white"} `}>
-            <div className='h-screen '>
-                <video  
+            <div className='h-screen flex justify-center bg-black'>
+                
+                <Video 
                     src={video.videoFile}
                     ref={videoRef}
-                    loop
-                    autoPlay
-                    className="h-full w-full  max-w-sm aspect-9/16 bg-black"
-                >
-                    
-                    
-                </video>
-                
+                    autoPlay={true}
+                />
                 <div className=' fixed  bottom-0 pb-14 md:pb-0 px-4 z-10'>
                     <div className='flex items-center text-white gap-2 py-2 '>
                         <div className='w-10 h-10 border border-blue-500 rounded-full'>
@@ -74,10 +70,10 @@ function Video(props) {
                         </div>
                     </div>
                 </div>
-                <button onClick={toggleVideoPlay} className='h-full  aspect-9/16   aspect-9/16 fixed left-1/2 -translate-x-1/2 md:-translate-x-35 bottom-0 '></button>
+                <button onClick={toggleVideoPlay} className='h-full  aspect-9/16  fixed left-1/2 -translate-x-1/2 md:-translate-x-35 bottom-0 '></button>
             </div>
         </div>
     );
 }
 
-export default Video;
+export default VideoPage;

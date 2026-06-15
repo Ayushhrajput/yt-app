@@ -98,7 +98,7 @@ function Profile(props) {
                             />
                         </div>
                     }
-                    <div className={`w-full min-h-40 flex  py-2 ${darkTheme? "text-white border-black/20": "border-white/20"} border-b`}>
+                    <div className={`w-full min-h-40 flex  py-2 ${darkTheme? "text-white ": ""}border-black/20 border-b`}>
                         <div className='flex flex-col w-full md:w-sm  px-4 '> 
                             <div className='font-semibold italic flex flex-col gap-2'>
                                 <h1 className='px-2'>{user.username}</h1>

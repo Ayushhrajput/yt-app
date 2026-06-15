@@ -62,7 +62,7 @@ function PostVideo(props) {
         <div className=' w-full '>
             {
                 !videoFile &&
-                <div className='w-full  flex justify-center items-center'>
+                <div className='w-full h-screen flex justify-center items-center'>
                     <form 
                         className='flex flex-col items-center gap-4'
                         action=""
