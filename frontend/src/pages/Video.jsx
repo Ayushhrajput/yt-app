@@ -33,15 +33,15 @@ function VideoPage(props) {
     
     
     return (
-        <div className={`min-h-screen flex justify-center items-center ${darkTheme? "bg-black/90": "bg-white"} `}>
-            <div className='h-screen flex justify-center bg-black'>
+        <div className={`min-h-screen  ${darkTheme? "bg-black/90": "bg-white"} `}>
+            <div className='h-screen flex justify-center bg-black relative'>
                 
                 <Video 
                     src={video.videoFile}
                     ref={videoRef}
                     autoPlay={true}
                 />
-                <div className=' fixed  bottom-0 pb-14 md:pb-0 px-4 z-10'>
+                <div className=' absolute bottom-0  left-0 px-4 z-10'>
                     <div className='flex items-center text-white gap-2 py-2 '>
                         <div className='w-10 h-10 border border-blue-500 rounded-full'>
                         <img src={video?.owner?.avatar} alt={video.title} className='w-full h-full object-cover rounded-full p-0.5' />
@@ -70,7 +70,7 @@ function VideoPage(props) {
                         </div>
                     </div>
                 </div>
-                <button onClick={toggleVideoPlay} className='h-full  aspect-9/16  fixed left-1/2 -translate-x-1/2 md:-translate-x-35 bottom-0 '></button>
+                <button onClick={toggleVideoPlay} className='h-full  aspect-9/16  absolute left-1/2 -translate-x-1/2  bottom-0 '></button>
             </div>
         </div>
     );

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllVideos } from '../services/videoService.js';
+import { useTheme } from '../context/ThemeContext.jsx';
 
 function Home(props) {
     const [videos, setVideos] = useState([])
@@ -9,6 +10,7 @@ function Home(props) {
     const [hasMore, setHasMore] = useState(true)
     const [fetch, setFetch] = useState(false)
 
+    const {darkTheme} = useTheme()
     const videoRef = useRef(null)
 
     const navigate = useNavigate()
@@ -64,13 +66,13 @@ function Home(props) {
 
 
     return (
-        <div className=' w-full min-h-screen'>
+        <div className=' w-full min-h-screen '>
             {videos.map((video) => 
                 <div
                     key={video._id}
-                    className='flex flex-col border-b border-gray-600'
+                    className={`flex flex-col border-b ${darkTheme? "": "border-gray-200"} relative`}
                 >   
-                    <div className='flex items-center w-full gap-2 py-2 px-4'>
+                    <div className='absolute flex items-center w-full gap-2 py-2 px-4 text-white'>
                         <div className='w-10 h-10 border border-blue-500 rounded-full'>
 
                         <img src={video.owner.avatar} alt={video.title} className='w-full h-full object-cover rounded-full p-0.5' />
@@ -79,18 +81,18 @@ function Home(props) {
                             {video.owner.username}
                         </span>
                     </div>
-                    <div className='w-full flex items-center justify-center'>
+                    <div className='w-full flex items-center justify-center bg-black'>
 
                         <div className='w-full max-w-sm aspect-9/16 overflow-hidden bg-black'>
-                        <img 
-                            className='w-full  h-full object-cover'
-                            src={video.thumbnail} 
-                            alt={video.title} 
-                            onClick={() => {
-                            navigate(`/home/video/${video._id}`)
-                            
-                        }}/>
-                    </div>
+                            <img 
+                                className='w-full  h-full object-cover'
+                                src={video.thumbnail} 
+                                alt={video.title} 
+                                onClick={() => {
+                                navigate(`/home/video/${video._id}`)
+                                
+                            }}/>
+                        </div>
                     </div>
                     <div className='flex  flex-col  w-full gap-2 py-2 px-4'>
                         <div className=' flex'>
@@ -123,7 +125,7 @@ function Home(props) {
             )}
             <div
                 ref={videoRef}
-                className=' w-full  pb-14'
+                className=' w-full  h-14'
             >
 
             </div>

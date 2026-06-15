@@ -9,3 +9,11 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+}

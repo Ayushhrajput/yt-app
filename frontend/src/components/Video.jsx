@@ -1,6 +1,6 @@
 import React, { forwardRef, useRef, useState, useEffect } from 'react';
 
-const  Video =  forwardRef(({src, autoPlay = false}, ref) => {
+const  Video =  forwardRef(({src, className, autoPlay = false}, ref) => {
 
     const videoRef = useRef(null)
 
@@ -28,7 +28,7 @@ const  Video =  forwardRef(({src, autoPlay = false}, ref) => {
     }, [seeking])
     
     return (
-        <div className="relative h-full w-full aspect-9/16 ">
+        <div className={`relative h-full w-full aspect-9/16 ${className}`}>
 
             <video 
             src={src}
@@ -53,7 +53,16 @@ const  Video =  forwardRef(({src, autoPlay = false}, ref) => {
                 type="range" 
                 min="0"
                 max="100"
-                className='absolute bottom-0 left-0 w-full'
+                className='absolute bottom-0 left-0 w-full h-1 appearance-none z-10'
+                style={{
+                    background: `linear-gradient(
+                        to right,
+                        white 0%,
+                        white ${progress}%,
+                        rgba(255, 255, 255, 0.3) ${progress}%,
+                        rgba(255, 255, 255, 0.3) 100%
+                    )`
+                }}
                 value={progress}
                 onChange={(e) => {
                     setProgress(Number(e.target.value))

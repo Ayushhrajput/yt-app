@@ -9,7 +9,7 @@ function BottomBar(props) {
     const {user} = useAuth()
     const {darkTheme} = useTheme()
     const {items, setItems} = useSetting()
-    const [feedPage, setFeedPage] = useState(false)
+    
     
     const navItems = [
         {
@@ -43,14 +43,12 @@ function BottomBar(props) {
         
     }
     
-    useEffect(() => {
-        setFeedPage(location.pathname.startsWith('/feed'))
-    }, [location.pathname])
+    
     
 
     return (
         <nav className="w-full">
-            <div className={`fixed ${feedPage? "bottom-4 h-10": "bottom-1 h-14"} left-1/2 -translate-x-1/2  flex justify-around items-center ${darkTheme? "bg-black/10  text-white border-black/20 ": "bg-white/10 border-black/10"} border-t  backdrop-blur  shadow-lg rounded-full max-w-sm px-2 transition-all duration-200`}>
+            <div className={`fixed bottom-1 h-14 left-1/2 -translate-x-1/2  flex justify-around items-center ${darkTheme? "bg-black/10  text-white border-black/20 ": "bg-white/10 border-black/10"} border-t  backdrop-blur  shadow-lg rounded-full max-w-sm px-2 transition-all duration-200`}>
                 {navItems.map((item) => 
                     
                     <NavLink
@@ -59,7 +57,7 @@ function BottomBar(props) {
                         onClick={() => (
                             handlePathClick(item.path)
                         )}
-                        className={({isActive}) => ` ${feedPage? "py-1 px-2": "py-2 px-4"}  rounded-full  ${isActive? 'bg-white/40  border-white/20  backdrop-blur border': ''}`}
+                        className={({isActive}) => `  py-2 px-4  rounded-full  ${isActive? 'bg-white/40  border-white/20  backdrop-blur border': ''}`}
                     >
                         {item.icon}
                         

@@ -8,12 +8,20 @@ function Shorts(props) {
     const [page, setPage] = useState(1)
     const [hasMore, setHasMore] = useState(true)
     const [fetch, setFetch] = useState(false)
-
+    const [showDes, setShowDes] = useState(false)
+    
     const videoRefs = useRef([])
     const lastvideoRef = useRef(null)
+    const currVideoRef = useRef(null)
 
     
-
+    const toggleVideoPlay = () => {
+        if(currVideoRef.current.paused) {
+            currVideoRef.current.play()
+        } else {
+            currVideoRef.current.pause()
+        }
+    }
 
 
     useEffect(() => {
@@ -99,7 +107,7 @@ function Shorts(props) {
                 videos.map((video, index) => (
                     <div
                         key={video._id}
-                        className='snap-start h-screen flex justify-center bg-black'
+                        className='snap-start h-screen flex justify-center bg-black relative'
                         
                     >   <Video 
                             src={video.videoFile}
@@ -107,13 +115,45 @@ function Shorts(props) {
                                 (el) => {
                                     videoRefs.current[index] = el
                                     if(index === videos.length - 1) lastvideoRef.current = el
+                                    currVideoRef.current = el
                                 } 
                             }
+                            className=""
                             
                             
                         />
-                        
+                        <div className=' absolute bottom-0  left-0 px-4 z-10'>
+                            <div className='flex items-center text-white gap-2 py-2 '>
+                                <div className='w-10 h-10 border border-blue-500 rounded-full'>
+                                <img src={video?.owner?.avatar} alt={video.title} className='w-full h-full object-cover rounded-full p-0.5' />
+                                </div>
+                                <div className=''>{video?.owner?.username}</div>
+                            </div>
+                            <div className='flex flex-col  text-white gap-2 pb-4 '>
+                                <h1 className='font-semibold'>{video?.title}</h1>
+                                
+                                
+                                <div
+                                    className='flex flex-col items-start'
+                                    
+                                >   
+                                {   
+                                    showDes && 
+
+                                    <div className="w-60  wrap-break-word">
+                                        {video?.description}
+                                    
+                                    </div>
+                                }
+                                    <button onClick={() => setShowDes(
+                                        (prev) => !prev
+                                    )} className='text-gray-200 text-sm '>{!showDes? <div>show more</div> : <div>show less</div> }</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button onClick={toggleVideoPlay} className='h-full  aspect-9/16  absolute left-1/2 -translate-x-1/2  bottom-0 '></button>
                     </div>
+                    
                 ))
             }
         </div>

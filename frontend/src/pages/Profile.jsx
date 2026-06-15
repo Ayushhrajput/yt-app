@@ -65,10 +65,10 @@ function Profile(props) {
                     onClick={(e) => {
                         e.stopPropagation()
                     }}
-                    className={`fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 ${darkTheme? " bg-black/10 border-black/10": "bg-white/10 border-white/20 shadow-white/10"} backdrop-blur shadow-xl border text-blue-500 flex flex-col justify-center items-center w-max  px-2 rounded-xl z-10`}
+                    className={`fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 ${darkTheme? " bg-black/10 ": "bg-white/10  shadow-white/10"} border-black/10 backdrop-blur shadow-xl border text-blue-500 flex flex-col justify-center items-center w-max  px-2 rounded-xl z-10`}
                 >
 
-                    <div className={`flex items-center ${darkTheme? "  border-b-black/20": " border-b-white/20"} border-b border-white px-8 py-2 h-12`}>
+                    <div className="flex items-center  border-b-black/10 border-b border-white px-8 py-2 h-12">
                         <label htmlFor='theme' className={`${darkTheme? "": " items-baseline-last "} flex justify-center h-10 w-10`}>
                             {!darkTheme?
                                 <span className={`material-symbols-outlined -translate-y-2  transition duration-200`}>light_mode</span>: 
@@ -89,15 +89,7 @@ function Profile(props) {
                 </div>
             }   
                 <div  className=' w-full flex-1  overflow-y-auto scrollbar-hide  flex flex-col '>
-                    {user.coverImage && 
-                        <div className='w-full min-h-max aspect-4/1 overflow-hidden'>
-                            <img  
-                                className=' object-contain'
-                                src={user.coverImage} 
-                                alt="coverImg" 
-                            />
-                        </div>
-                    }
+                    
                     <div className={`w-full min-h-40 flex  py-2 ${darkTheme? "text-white ": ""}border-black/20 border-b`}>
                         <div className='flex flex-col w-full md:w-sm  px-4 '> 
                             <div className='font-semibold italic flex flex-col gap-2'>

@@ -44,47 +44,49 @@ function Login(props) {
 
     return (
         <div className={`min-h-screen w-full flex justify-center items-center px-4 ${darkTheme? "bg-black/90 text-white": "bg-gray-100"}`}>
-            <div className={`w-full max-w-md h-min shadow-2xl ${darkTheme? "shadow-black/40 bg-black/90": "shadow-gray-200 bg-white"}  rounded-2xl  p-8`}>
-                <h1 className="text-3xl font-bold text-center  mb-2">
+            <div className={`w-full  max-w-sm h-min shadow-2xl ${darkTheme? "shadow-black/40 bg-black/40": "shadow-gray-200 bg-white"}  rounded-2xl  p-8`}>
+                <h1 className="text-3xl font-bold text-center w-max  mb-2">
                     Login
                 </h1>
 
-                <p className=" text-center mb-8">
+                <p className=" text-center w-max mb-4">
                     Login to continue
                 </p>
                 
-                <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-                    <input 
-                        type="text" 
-                        value={formData.email}
-                        name='email'
-                        placeholder='Email'
-                        onChange={handleChange}
-                        className={`w-full  ${darkTheme? "bg-white text-black": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `}
-                    />
-                    <input 
-                        type="text" 
-                        value={formData.password}
-                        name='password'
-                        placeholder='Password'
-                        onChange={handleChange}
-                        className={`w-full  ${darkTheme? "bg-white text-black": "bg-gray-100"}  rounded-xl px-4 py-3 outline-none  `}
-                    />
-                    <button 
-                        className="
-                            w-full
-                            bg-linear-to-tl from-blue-500 to-blue-400
-                            hover:bg-gray-800
-                            text-white
-                            font-semibold
-                            py-3
-                            rounded-xl
-                            transition
-                            duration-200
-                            shadow-lg
-                        "
-                        type="submit"
-                    >Login</button>
+                <form onSubmit={handleSubmit} className=''>
+                    <div className='w-full flex flex-col items-center gap-4'>
+                        <input 
+                            type="text" 
+                            value={formData.email}
+                            name='email'
+                            placeholder='Email'
+                            onChange={handleChange}
+                            className={`max-w-sm w-full ${darkTheme? " border-black/60": "border-black/20"} border-b   py-2 outline-none  `}
+                        />
+                        <input 
+                            type="text" 
+                            value={formData.password}
+                            name='password'
+                            placeholder='Password'
+                            onChange={handleChange}
+                            className={`max-w-sm w-full ${darkTheme? " border-black/60": "border-black/20"} border-b   py-2 outline-none  `}
+                        />
+                        <button 
+                            className="
+                                max-w-sm w-full
+                                bg-linear-to-tl from-blue-500 to-blue-400
+                                hover:bg-gray-800
+                                text-white
+                                font-semibold
+                                py-3
+                                rounded-xl
+                                transition
+                                duration-200
+                                shadow-lg
+                            "
+                            type="submit"
+                        >Login</button>
+                    </div>
                 </form>
                 {
                     error &&
