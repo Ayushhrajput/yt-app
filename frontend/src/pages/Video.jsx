@@ -4,7 +4,7 @@ import { getVideoById } from '../services/videoService';
 import { useSetting } from '../context/SettingContext';
 import { useTheme } from '../context/ThemeContext';
 import Video from '../components/Video.jsx';
-
+import { toggleVideoPlay } from '../utils/togglePlay.js';
 
 function VideoPage(props) {
     const {videoId} = useParams({})
@@ -13,13 +13,7 @@ function VideoPage(props) {
     const {darkTheme} = useTheme()
     const videoRef = useRef(null)
     
-    const toggleVideoPlay = () => {
-        if(videoRef.current.paused) {
-            videoRef.current.play()
-        } else {
-            videoRef.current.pause()
-        }
-    }
+    
     
     useEffect(() => {
         const getVideo = async() => {
@@ -70,7 +64,7 @@ function VideoPage(props) {
                         </div>
                     </div>
                 </div>
-                <button onClick={toggleVideoPlay} className='h-full  aspect-9/16  absolute left-1/2 -translate-x-1/2  bottom-0 '></button>
+                <button onClick={() => toggleVideoPlay(videoRef)} className='h-full  aspect-9/16  absolute left-1/2 -translate-x-1/2  bottom-0 '></button>
             </div>
         </div>
     );

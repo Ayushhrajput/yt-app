@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { publishVideo } from '../services/videoService';
 import { useTheme } from '../context/ThemeContext';
+
 
 function PostVideo(props) {
 
@@ -18,6 +19,8 @@ function PostVideo(props) {
     const [videoPreview, setVideoPreview] = useState("")
     const [postStatus, setPostStatus] = useState(false)
     
+    const videoRef = useRef(null)
+
     const handleChange = (e) => {
         setFromData(
             {
@@ -34,9 +37,9 @@ function PostVideo(props) {
         data.append("thumbnail", thumbnail)
         data.append("videoFile", videoFile)
         data.append("description", formData.description)
-        setPostStatus(true)
         try {
             const response = await publishVideo(data)
+            setPostStatus(true)
             console.log(response)
             setStatus(response.message)
             setError("")
@@ -48,16 +51,15 @@ function PostVideo(props) {
             })
             setPostStatus(false)
             
-            setStatus(e.message)
+            setStatus(response.message)
             
         } catch (e) {
+            setStatus(e.message)
             
-            throw new Error(e)
-        } finally {
             setPostStatus(false)
-        }
+        } 
     }
-    console.log(postStatus)
+    console.log(status)
     return (
         <div className=' w-full '>
             {
@@ -90,6 +92,7 @@ function PostVideo(props) {
                             onClick={(e) => {
                                 e.preventDefault()
                                 !videoFile && setError("Select a video to post")
+                                setStatus("")
                             }}
                             className='text-blue-500' type="submit"
                         >
@@ -109,42 +112,44 @@ function PostVideo(props) {
             {
                 videoFile && (
                     <div 
-                        className={` ${darkTheme? "text-white": ""} w-full   flex flex-col md:flex-row `}
+                        className={` ${darkTheme? "text-white": ""} font-bold w-full  h-screen flex flex-col md:items-center md:flex-row `}
                     >
                             
                             <form 
                                 onSubmit={handleSubmit}
                                 action=""
-                                className="flex flex-col px-4 py-2 justify-around h-max w-full "
+                                className="flex flex-col h-full px-4 py-2   w-full "
                             >   
-                                <div className='flex justify-between '>
-                                    <label htmlFor="title" className='mb-2'>Title</label>
-                                    <span>{formData.title.length}/100</span>
+                                <div className={`flex justify-between items-center gap-2 ${darkTheme? "text-white border-white/20 ": "text-black bg-white/10 border-black/20"} w-full font-normal border-b mb-4 pt-4`}>
+                                    
+                                    <input 
+                                        id='title'
+                                        name='title'
+                                        placeholder='Title'
+                                        value={formData.title}
+                                        className='w-full outline-none '
+                                        onChange={handleChange}
+                                        type="text" 
+                                        maxLength={100}
+                                    />
+                                    <span className='text-gray-400 text-sm'>{formData.title.length}/100</span>
                                 </div>
-                                <input 
-                                    id='title'
-                                    name='title'
-                                    value={formData.title}
-                                    className={`${darkTheme? "text-white border-white/20 ": "text-black bg-white/10 border-black/20"} w-full outline-none border-b mb-4 px-2`}
-                                    onChange={handleChange}
-                                    type="text" 
-                                    maxLength={100}
-                                />
-                                <div className='flex justify-between '>
-                                    <label htmlFor="description" className='mb-2'>Description</label>
-                                    <span>{formData.description.length}/100</span>
+                                <div className={`flex flex-col justify-between items-end gap-2 ${darkTheme? "text-white border-white/20  from-black/10 to-black/40": "text-black  border-black/20 from-gray-100 to-white "} bg-gradient-to-b w-full outline-none border rounded-2xl font-normal h-40 mb-4 px-2 `}>
+                                    
+                                    <textarea 
+                                        id='description'
+                                        name='description'
+                                        placeholder='Description'
+                                        value={formData.description}
+                                        className='w-full h-full outline-none '
+                                        onChange={handleChange}
+                                        type="text" 
+                                        maxLength={100}
+                                    />
+                                    <span className='text-gray-400 text-sm'>{formData.description.length}/100</span>
                                 </div>
-                                <textarea 
-                                    id='description'
-                                    name='description'
-                                    value={formData.description}
-                                    className={`${darkTheme? "text-white border-white/20  from-black/10 to-black/40": "text-black  border-black/20 from-gray-100 to-white "} bg-gradient-to-b w-full outline-none border rounded-lg h-40 mb-4 px-2`}
-                                    onChange={handleChange}
-                                    type="text" 
-                                    maxLength={100}
-                                />
                                 
-                                <div className='flex flex-col  w-full items-center '>
+                                <div className='flex flex-col  w-full  items-center '>
                                     {
                                         !thumbnail &&
                                         <div className='w-full flex flex-col'>
@@ -163,24 +168,27 @@ function PostVideo(props) {
                                         </div>
                                     }
                                     {thumbnail &&
-                                        <div className='w-full flex flex-col'>
+                                        <div className='w-full '>
 
                                             <label htmlFor="thumbnail" className='mb-2'>Thumbnail</label>
-                                            <div className={` flex justify-center `}>
-                                                <div
-                                                    className={`bg-center  bg-contain bg-no-repeat w-40 aspect-9/16 flex justify-center items-center ${darkTheme? "text-white border-white/20 bg-black/20": "text-black bg-white/10 border-black/20"} border rounded-lg`}
-                                                    style={{
-                                                        backgroundImage: `url(${thumbnailPreview})`
-                                                    }}
-                                                >
-                                                    
-                                                    <label 
-                                                        className={`${darkTheme? "text-white border-black/20 ": "text-black  border-black/10"} border w-20  h-20 shadow-lg rounded-full backdrop-blur flex justify-center items-center `}
-                                                        htmlFor="thumbnail"
+                                            <div className={`flex flex-col  w-full ${darkTheme? "text-white border-white/20 bg-black/60": "text-black bg-white/10 border-black/20"} border rounded-2xl overflow-hidden items-center justify-center `}>
+
+                                                <div className={` flex flex-col items-center h-60 w-full`}>
+                                                    <div
+                                                        className={`bg-center  bg-contain bg-no-repeat h-full w-full aspect-9/16 flex justify-center items-center `}
+                                                        style={{
+                                                            backgroundImage: `url(${thumbnailPreview})`
+                                                        }}
                                                     >
-                                                        <i class="fa-solid fa-file-arrow-up text-2xl md:text-4xl"></i>
-                                                    </label>
-                                                    
+                                                        
+                                                        <label 
+                                                            className={`${darkTheme? "text-white border-black/20 ": "text-black  border-black/10"} border w-20  h-20 shadow-lg rounded-full backdrop-blur flex justify-center items-center `}
+                                                            htmlFor="thumbnail"
+                                                        >
+                                                            <i class="fa-solid fa-file-arrow-up text-2xl md:text-4xl"></i>
+                                                        </label>
+                                                        
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -206,7 +214,9 @@ function PostVideo(props) {
                                         
                                         <button
                                             className='text-blue-500 w-max pt-4' type="submit"
-                                            
+                                            onClick={() => (
+                                                setStatus("")
+                                            )}
                                             >
                                             Upload
                                         </button>
@@ -215,26 +225,31 @@ function PostVideo(props) {
                                         <div className='text-blue-500 w-max pt-4'>posting</div>
                                     }
                                 </div>
-                                    
+                                {status && <div className='font-normal'>{status}</div>}
                                 
                             </form>
-                        <div className={`w-full flex flex-col gap-2 px-4 py-2 pb-16 ${darkTheme? "border-white/20": "border-black/20"} md:border-l`}>
+                        <div className="w-full flex flex-col gap-2 px-4 py-2 pb-16" >
                             <div className=''>
                                 Video Preview
                             </div>
-                            <div className=' flex flex-col items-center justify-center '>
-                                <div className=''>
+                            <div className={`flex flex-col  w-full ${darkTheme? "text-white border-white/20 bg-black/60": "text-black bg-white/10 border-black/20"} border rounded-2xl overflow-hidden items-center justify-center `}>
+                                <div 
+                                    onClick={
+                                        () => {
+                                            
+                                        }
+                                    }
+                                    className='flex flex-col  h-60 md:h-full w-full items-center'
+                                >
                                     <video 
-                                        controls
-                                        className={`aspect-9/16 w-40 md:w-60  ${darkTheme? "text-white border-white/20 bg-black/20": "text-black bg-white/10 border-black/20"} border rounded-lg`}
+                                        ref={videoRef}
+                                        className={`aspect-9/16 w-full h-full md:w-60  ${darkTheme? "text-white  bg-black/20": "text-black bg-white/10 "}`}
                                         src={videoPreview}
                                     >
                                     </video>
+                                    
                                 </div>
                             </div>
-                            <span className='w-full '>
-                            {videoFile.name}
-                            </span>
                         </div>
                     </div>
 

@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { getAllVideos } from '../services/videoService.js';
 import Video from '../components/Video.jsx';
+import { toggleVideoPlay } from '../utils/togglePlay.js';
 
 function Shorts(props) {
     const [videos, setVideos] = useState([])
@@ -15,13 +16,7 @@ function Shorts(props) {
     const currVideoRef = useRef(null)
 
     
-    const toggleVideoPlay = () => {
-        if(currVideoRef.current.paused) {
-            currVideoRef.current.play()
-        } else {
-            currVideoRef.current.pause()
-        }
-    }
+    
 
 
     useEffect(() => {
@@ -151,7 +146,7 @@ function Shorts(props) {
                                 </div>
                             </div>
                         </div>
-                        <button onClick={toggleVideoPlay} className='h-full  aspect-9/16  absolute left-1/2 -translate-x-1/2  bottom-0 '></button>
+                        <button onClick={() => toggleVideoPlay(currVideoRef)} className='h-full  aspect-9/16  absolute left-1/2 -translate-x-1/2  bottom-0 '></button>
                     </div>
                     
                 ))

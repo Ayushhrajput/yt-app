@@ -107,7 +107,7 @@ function Login(props) {
                     <p className=''>Don't have an account</p>
                     <Link
                         to="/register"
-                        className='italic hover:underline '
+                        className='italic hover:underline text-gray-600'
                     >
                         Register
                     </Link>

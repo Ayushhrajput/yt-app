@@ -19,7 +19,7 @@ function App() {
   const {user, loading} = useAuth()
   const location = useLocation()
   const {showNav, setShowNav} = useSetting()
-  setShowNav(!location.pathname.startsWith('/home/video/') && !location.pathname.startsWith("/feed"))
+  setShowNav(!location.pathname.startsWith('/home/video/') && !location.pathname.startsWith("/feed") && !location.pathname.startsWith("/postVideo"))
   
   
   

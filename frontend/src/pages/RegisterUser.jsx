@@ -67,9 +67,9 @@ function RegisterUser() {
                         <div className="flex flex-col items-center w-max">
                             <label 
                                 htmlFor="avatar"
-                                className={`w-16 sm:w-25 aspect-square cursor-pointer flex justify-center  items-center ${darkTheme?"bg-black/20 text-white shadow-black/20 border-black/20": "bg-white shadow-white/90 border-white/90"} backdrop-blur shadow-lg border rounded-full overflow-hidden`}
+                                className={`w-16 sm:w-25 aspect-square cursor-pointer flex justify-center  items-center ${darkTheme?"bg-black/20 text-white shadow-black/20 border-black/20": "bg-white shadow-white/90 border-black/10"} backdrop-blur shadow-lg border rounded-full overflow-hidden`}
                             >
-                                {!avatar?<i class="fa-solid fa-file-arrow-up text-2xl sm:text-4xl"></i> : <img src={avatarPreview} className="w-full h-full bg-cover bg-center  bg-no-repeat " />}
+                                {!avatar?<i class="fa-solid fa-file-arrow-up text-2xl sm:text-4xl"></i> : <img src={avatarPreview} className="w-full h-full object-cover  " />}
                             </label>
                             <label className="text-sm font-medium ">
                                 Profile
@@ -149,7 +149,7 @@ function RegisterUser() {
                     <p className=''>Have an account</p>
                     <Link
                         to="/login"
-                        className='italic hover:underline '
+                        className='italic hover:underline text-gray-600'
                     >
                         Login
                     </Link>

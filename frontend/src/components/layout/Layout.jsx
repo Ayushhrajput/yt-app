@@ -11,6 +11,8 @@ function Layout(props) {
     const {darkTheme} = useTheme()
     const {showNav} = useSetting()
     const [showBottombar, setShowBottomBar] = useState(true)
+    const {bottomBar, setBottomBar} = useSetting()
+
 
     const location = useLocation()
 
@@ -30,8 +32,10 @@ function Layout(props) {
 
             if(currScrollY > lastScrollY) {
                 setShowNav(false)
+                setBottomBar(false)
             } else {
                 setShowNav(true)
+                setBottomBar(true)
             }
             lastScrollY = currScrollY
         }
