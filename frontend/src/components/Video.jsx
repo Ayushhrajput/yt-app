@@ -32,7 +32,7 @@ const  Video =  forwardRef(({src, className, autoPlay = false}, ref) => {
 
             <video 
             src={src}
-            className='h-full w-full '
+            className='h-full w-full object-contain'
             ref={
                 (el) => {
                     videoRef.current = el

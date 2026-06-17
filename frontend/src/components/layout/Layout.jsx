@@ -22,7 +22,7 @@ function Layout(props) {
         },
     [location.pathname])
 
-    console.log(showBottombar)
+    
 
     useEffect(() => {
         let lastScrollY = window.scrollY

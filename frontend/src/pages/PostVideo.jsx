@@ -139,15 +139,15 @@ function PostVideo(props) {
                             <form 
                                 onSubmit={handleSubmit}
                                 action=""
-                                className={`flex flex-col gap-2 items-center m-4 px-4 py-2  ${darkTheme? " from-black/20 to-black border-none": "from-gray-100 to-white border-black/10"} border bg-gradient-to-b rounded-2xl max-w-md `}
+                                className={`flex flex-col gap-2 items-center m-4 px-4 py-2  ${darkTheme? " from-black/20 to-black ": "from-gray-100 to-white "}  bg-gradient-to-b rounded-2xl max-w-md `}
                             >   
                                 <div className='flex items-start gap-2'>
-                                    <div className='flex flex-col   items-center '>
+                                    <div className={`flex ${darkTheme? "border-black/20": "border-black/10"} border-b  h-full py-2  items-center gap-2`}>
                                         {
                                             !thumbnail &&
-                                            <div className='w-full flex flex-col'>
+                                            <div className='w-max flex flex-col'>
  
-                                                <div className={`flex items-center justify-center h-40  aspect-9/16  rounded-2xl ${darkTheme? "text-white border-black/20 bg-black/20": "text-black bg-white/10 border-black/10"} border`}>
+                                                <div className={`flex items-center justify-center h-40  aspect-9/16  rounded-2xl ${darkTheme? "text-white border-black/20 bg-black/20": "text-black bg-white/10 border-white"} border `}>
                                                     <label 
                                                         className={`${darkTheme? "text-white  ": "text-black  "}  w-20  h-20  rounded-full backdrop-blur flex justify-center items-center `}
                                                         htmlFor="thumbnail"
@@ -159,9 +159,9 @@ function PostVideo(props) {
                                             </div>
                                         }
                                         {thumbnail &&
-                                            <div className='w-full '>
+                                            <div className=' '>
 
-                                                <div className={`flex flex-col  h-40 w-max ${darkTheme? "text-white border-black/20 bg-black/20": "text-black bg-white/10 border-black/20"} border rounded-2xl overflow-hidden items-center justify-center `}>
+                                                <div className={`flex flex-col  h-40 w-max ${darkTheme? "text-white border-black/20 bg-black/20": "text-black bg-white/10 border-white"} border  rounded-2xl overflow-hidden items-center justify-center `}>
 
                                                     <div className={` flex flex-col items-center h-full w-full `}>
                                                         <div
@@ -201,24 +201,24 @@ function PostVideo(props) {
                                             type="file" 
                                         />
                                         
-                                    </div>
-                                    <div className={`flex  h-25 justify-between items-end  gap-2 ${darkTheme? "text-white border-black/40  ": "text-black  border-black/10"} w-full  font-normal border-b mb-4 pt-4`}>
-                                        
-                                        <textarea 
-                                        id='title'
-                                        name='title'
-                                        placeholder='Caption'
-                                        value={formData.title}
-                                        className='w-full h-full outline-none '
-                                        onChange={handleChange}
-                                        type="text" 
-                                        maxLength={100}
-                                    />
-                                        <span className='text-gray-400 text-sm'>{formData.title.length}/100</span>
+                                        <div className={`flex w-full h-full justify-between items-end  gap-2 ${darkTheme? "text-white   ": "text-black  "} w-full  font-normal  `}>
+                                            
+                                            <textarea 
+                                            id='title'
+                                            name='title'
+                                            placeholder='Caption'
+                                            value={formData.title}
+                                            className='w-full h-full outline-none '
+                                            onChange={handleChange}
+                                            type="text" 
+                                            maxLength={100}
+                                        />
+                                            <span className='text-gray-400 text-sm'>{formData.title.length}/100</span>
+                                        </div>
                                     </div>
                                     
                                 </div>
-                                <div className={`flex flex-col justify-between items-end gap-2 ${darkTheme? "text-white border-black/40  from-black/10 to-black/40": "text-black  border-black/10 from-gray-100 to-white "} bg-gradient-to-b w-full outline-none border rounded-2xl font-normal h-40 px-2 `}>
+                                <div className={`flex flex-col justify-between items-end gap-2 ${darkTheme? "text-white border-black/40  from-black/10 to-black/40": "text-black  border-white from-gray-100 to-white "} shadow-sm bg-gradient-to-b w-full outline-none border rounded-2xl font-normal h-40 px-2 `}>
                                     
                                     <textarea 
                                         id='description'

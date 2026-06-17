@@ -55,6 +55,7 @@ function Profile(props) {
         }
         
     }
+    console.log(channel)
 
     return (
         <div className={` flex flex-col   h-screen `}>
@@ -90,29 +91,40 @@ function Profile(props) {
             }   
                 <div  className=' w-full flex-1  overflow-y-auto scrollbar-hide  flex flex-col '>
                     
-                    <div className={`w-full min-h-40 flex  py-2 ${darkTheme? "text-white ": ""}border-black/20 border-b`}>
-                        <div className='flex flex-col w-full md:w-sm  px-4 '> 
-                            <div className='font-semibold italic flex flex-col gap-2'>
-                                <h1 className='px-2'>{user.username}</h1>
-                                <img 
-                                    className='rounded-full h-20 min-w-20 max-w-20 object-cover '
-                                    src={user.avatar}
-                                    alt="avatar" 
-                                />
-                            </div>
-                            <div className='px-2 py-2'>
+                    <div className={`w-full py-2 flex flex-col gap-2 ${darkTheme? "text-white ": ""}border-black/20 border-b`}>
+                        <div className='font-semibold italic  items-center gap-2'>
+                            <h1 className='px-2'>{user.username}</h1>
+                            
+                        </div>
+                        <div className='flex  w-full md:w-sm  px-4 '> 
+                            <img 
+                                className='rounded-full h-16 w-16  object-cover '
+                                src={user.avatar}
+                                alt="avatar" 
+                            />
+                            <div className='px-2 py-2  flex flex-col justify-center'>
                                 
                                 <h1>{user.fullName}</h1>
-                            </div>
-                        </div>
-                        <div className='flex justify-items-start w-full  gap-4 py-6 px-4 font-semibold'>
-                            <div className='flex flex-col items-center gap-4'>
-                                <p className=''>Subscribers</p>
-                                <span>{channel.subscribersCount}</span>
-                            </div>
-                            <div className='flex flex-col items-center gap-4'>
-                                <p>subscribedTo</p> 
-                                <span>{channel.subscribedToCount}</span>
+                                <div className='flex justify-items-start w-full text-sm  gap-2 '>
+                                    <div className='flex  items-center gap-1'>
+                                        <span>No</span>
+                                        <p>Posts</p> 
+                                    </div>
+                                    {
+                                        channel._id && 
+                                        <div className='flex gap-2'>
+
+                                            <div className='flex  items-center gap-1'>
+                                                <span>{channel.subscribersCount}</span>
+                                                <p className=''>Subscribers</p>
+                                            </div>
+                                            <div className='flex  items-center gap-1'>
+                                                <span>{channel.subscribedToCount}</span>
+                                                <p>subscriptions</p> 
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>

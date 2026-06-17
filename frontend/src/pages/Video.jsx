@@ -27,8 +27,8 @@ function VideoPage(props) {
     
     
     return (
-        <div className={`min-h-screen  ${darkTheme? "bg-black/90": "bg-white"} `}>
-            <div className='h-screen flex justify-center bg-black relative'>
+        <div className="min-h-screen overflow-hidden flex justify-center"  >
+            <div className='h-screen w-max flex justify-center bg-black relative'>
                 
                 <Video 
                     src={video.videoFile}

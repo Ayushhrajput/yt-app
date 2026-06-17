@@ -97,12 +97,12 @@ function Shorts(props) {
     
 
     return (
-        <div className='h-screen overflow-y-scroll scrollbar-hide snap-y snap-mandatory'>
+        <div className='min-h-screen overflow-hidden w-full flex flex-col items-center  overflow-y-scroll scrollbar-hide snap-y snap-mandatory'>
             {
                 videos.map((video, index) => (
                     <div
                         key={video._id}
-                        className='snap-start h-screen flex justify-center bg-black relative'
+                        className='snap-start h-screen  flex justify-center bg-black relative'
                         
                     >   <Video 
                             src={video.videoFile}

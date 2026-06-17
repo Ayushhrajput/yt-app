@@ -83,9 +83,9 @@ function Home(props) {
                                 {video.owner.username}
                             </span>
                         </div>
-                        <div className='w-full flex items-center justify-center bg-black'>
+                        <div className='w-full flex items-center justify-center '>
 
-                            <div className='w-full max-h-screen aspect-9/16 overflow-hidden bg-black'>
+                            <div className='w-max max-h-screen aspect-9/16 overflow-hidden bg-black'>
                                 <img 
                                     className='w-full h-full  object-contain'
                                     src={video.thumbnail} 
