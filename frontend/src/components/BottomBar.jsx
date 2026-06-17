@@ -57,7 +57,7 @@ function BottomBar(props) {
                         onClick={() => (
                             handlePathClick(item.path)
                         )}
-                        className={({isActive}) => ` ${bottomBar? "py-2 px-4": "py-0.5 px-2"}   rounded-full  ${isActive? 'bg-white/40  border-white/20  backdrop-blur border': ''} transition-all duration-200 ease`}
+                        className={({isActive}) => ` ${bottomBar? "py-2 px-4": "py-0.5 px-2"}   rounded-full  ${isActive? 'bg-white/20    backdrop-blur ': ''} transition-all duration-200 ease`}
                     >
                         {item.icon}
                         
