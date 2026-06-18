@@ -17,3 +17,24 @@ input[type="range"]::-webkit-slider-thumb {
   height: 12px;
   cursor: pointer;
 }
+
+.bar {
+  transform: rotate(calc(var(--i)* (360deg /10))) translateY( 10px );
+  animation: animate linear 1s infinite;
+  opacity: 0;
+  animation-delay: calc(var(--i)* 0.1s);
+}
+
+@keyframes animate {
+  0% {
+    opacity: 1
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}

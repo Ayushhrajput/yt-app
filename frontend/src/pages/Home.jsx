@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllVideos } from '../services/videoService.js';
 import { useTheme } from '../context/ThemeContext.jsx';
+import LoaderBar from '../components/Loaders/LoaderBar.jsx';
+import VideoSkeleton from '../components/Loaders/VideoSkeleton.jsx';
+
 
 function Home(props) {
     const [videos, setVideos] = useState([])
@@ -9,7 +12,7 @@ function Home(props) {
     const [page, setPage] = useState(1)
     const [hasMore, setHasMore] = useState(true)
     const [fetch, setFetch] = useState(false)
-
+    
     const {darkTheme} = useTheme()
     const videoRef = useRef(null)
 
@@ -21,7 +24,7 @@ function Home(props) {
             if(fetch) return
            
             setFetch(true)
-
+            
             try {
                 const response = await getAllVideos(
                     {
@@ -68,24 +71,16 @@ function Home(props) {
     return (
         <div className=' w-full min-h-screen '>
             <div className=''>
-
+                
                 {videos.map((video) => 
                     <div
                         key={video._id}
-                        className="flex flex-col w-full h-full   relative"
+                        className="flex flex-col w-full h-full "
                     >   
-                        <div className='absolute flex items-center w-full gap-2 py-2 px-4 text-white'>
-                            <div className='w-10 h-10 border border-blue-500 rounded-full'>
-
-                            <img src={video.owner.avatar} alt={video.title} className='w-full h-full object-cover rounded-full p-0.5' />
-                            </div>
-                            <span>
-                                {video.owner.username}
-                            </span>
-                        </div>
+                        
                         <div className='w-full flex items-center justify-center '>
 
-                            <div className='w-max max-h-screen aspect-9/16 overflow-hidden bg-black'>
+                            <div className='relative w-max max-h-screen aspect-9/16 overflow-hidden bg-black'>
                                 <img 
                                     className='w-full h-full  object-contain'
                                     src={video.thumbnail} 
@@ -94,6 +89,15 @@ function Home(props) {
                                     navigate(`/home/video/${video._id}`)
                                     
                                 }}/>
+                                <div className='absolute top-0 flex items-center w-full gap-2 py-2 px-4 text-white'>
+                                    <div className='w-10 h-10 border border-blue-500 rounded-full'>
+
+                                    <img src={video.owner.avatar} alt={video.title} className='w-full h-full object-cover rounded-full p-0.5' />
+                                    </div>
+                                    <span>
+                                        {video.owner.username}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div className='flex  flex-col  w-full gap-2 py-2 px-4'>
@@ -126,6 +130,15 @@ function Home(props) {
                     </div>
                 )}
             </div>
+            {fetch && (
+                <div>
+                    {[...Array(6)].map((_, index) => (
+                        <div key={index}>
+                            <VideoSkeleton/>
+                        </div>
+                    ))}
+                </div>
+            )}
             <div
                 ref={videoRef}
                 className=' w-full  h-14'

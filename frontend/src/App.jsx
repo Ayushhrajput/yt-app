@@ -12,6 +12,8 @@ import PostVideo from './pages/PostVideo.jsx'
 import VideoPage from './pages/Video.jsx'
 import { useSetting } from './context/SettingContext.jsx'
 import Feed from './pages/Feed.jsx'
+import LoaderBar from './components/Loaders/LoaderBar.jsx'
+import VideoSkeleton from './components/Loaders/VideoSkeleton.jsx'
 
 
 function App() {
@@ -26,7 +28,7 @@ function App() {
   
   if(loading) {
     return (
-      <h1>loading!</h1>
+      <div></div>
     )
   }
 
@@ -50,6 +52,7 @@ function App() {
           <Route path='/postVideo' element={<PostVideo/>}/>
           <Route path='/home/video/:videoId' element={<VideoPage/>}/>
           <Route path='/feed' element={<Feed/>} />
+          
         </Route>
       </Routes>
   )

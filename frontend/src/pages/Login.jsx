@@ -45,7 +45,7 @@ function Login(props) {
     return (
         <div className={`min-h-screen w-full flex justify-center items-center px-4 ${darkTheme? "bg-black/90 text-white": "bg-gray-100"}`}>
             <div className={`w-full  max-w-sm h-min shadow-2xl ${darkTheme? "shadow-black/40 bg-black/40": "shadow-gray-200 bg-white"}  rounded-2xl  p-8`}>
-                <h1 className="text-3xl font-bold text-center w-max  mb-2">
+                <h1 className="text-3xl font-bold text-center w-max  ">
                     Login
                 </h1>
 
@@ -107,7 +107,7 @@ function Login(props) {
                     <p className=''>Don't have an account</p>
                     <Link
                         to="/register"
-                        className='italic hover:underline text-gray-600'
+                        className={`italic hover:underline ${darkTheme? "text-gray-400": "text-gray-600"} `}
                     >
                         Register
                     </Link>

@@ -58,7 +58,7 @@ function Layout(props) {
                     <Outlet/>
                 </main>
             </div>
-            <div className='md:hidden '>
+            <div className='md:hidden z-10'>
                 { showBottombar && <BottomBar/>}
             </div>
         </div>

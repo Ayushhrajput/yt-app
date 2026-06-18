@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { getAllVideos } from '../services/videoService.js';
 import Video from '../components/Video.jsx';
 import { toggleVideoPlay } from '../utils/togglePlay.js';
+import LoaderBar from '../components/Loaders/LoaderBar.jsx';
 
 function Shorts(props) {
     const [videos, setVideos] = useState([])
@@ -101,12 +102,12 @@ function Shorts(props) {
             {
                 videos.map((video, index) => (
                     <div
-                        key={video._id}
-                        className='snap-start h-screen  flex justify-center bg-black relative'
-                        
+                    key={video._id}
+                    className='snap-start h-screen max-w-full  flex justify-center bg-black relative'
+                    
                     >   <Video 
-                            src={video.videoFile}
-                            ref={
+                    src={video.videoFile}
+                    ref={
                                 (el) => {
                                     videoRefs.current[index] = el
                                     if(index === videos.length - 1) lastvideoRef.current = el
@@ -116,7 +117,7 @@ function Shorts(props) {
                             className=""
                             
                             
-                        />
+                            />
                         <div className=' absolute bottom-0  left-0 px-4 z-10'>
                             <div className='flex items-center text-white gap-2 py-2 '>
                                 <div className='w-10 h-10 border border-blue-500 rounded-full'>
@@ -131,10 +132,10 @@ function Shorts(props) {
                                 <div
                                     className='flex flex-col items-start'
                                     
-                                >   
+                                    >   
                                 {   
                                     showDes && 
-
+                                    
                                     <div className="w-60  wrap-break-word">
                                         {video?.description}
                                     
@@ -151,6 +152,11 @@ function Shorts(props) {
                     
                 ))
             }
+            {fetch && (
+                <div className='h-full'>
+                    <LoaderBar className="h-10"/>
+                </div>
+            )}
         </div>
     );
 }

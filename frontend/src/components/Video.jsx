@@ -28,11 +28,11 @@ const  Video =  forwardRef(({src, className, autoPlay = false}, ref) => {
     }, [seeking])
     
     return (
-        <div className={`relative h-full w-full aspect-9/16 ${className}`}>
+        <div className={`relative h-full   aspect-9/16 ${className}`}>
 
             <video 
             src={src}
-            className='h-full w-full object-contain'
+            className='h-full object-contain'
             ref={
                 (el) => {
                     videoRef.current = el

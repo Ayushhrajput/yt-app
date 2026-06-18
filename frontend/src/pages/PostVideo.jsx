@@ -35,14 +35,14 @@ function PostVideo(props) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = new FormData()
-
+        setPostStatus(true)
         data.append("title", formData.title)
         data.append("thumbnail", thumbnail)
         data.append("videoFile", videoFile)
         data.append("description", formData.description)
         try {
             const response = await publishVideo(data)
-            setPostStatus(true)
+            
             
             setStatus(response.message)
             setError("")
@@ -139,7 +139,7 @@ function PostVideo(props) {
                             <form 
                                 onSubmit={handleSubmit}
                                 action=""
-                                className={`flex flex-col gap-2 items-center m-4 px-4 py-2  ${darkTheme? " from-black/20 to-black ": "from-gray-100 to-white "}  bg-gradient-to-b rounded-2xl max-w-md `}
+                                className={`flex flex-col gap-2 items-center m-4 px-4 py-2  ${darkTheme? " from-black/20 to-black ": "from-gray-100 to-gray-100  "}   bg-gradient-to-b rounded-2xl max-w-md `}
                             >   
                                 <div className='flex items-start gap-2'>
                                     <div className={`flex ${darkTheme? "border-black/20": "border-black/10"} border-b  h-full py-2  items-center gap-2`}>
@@ -149,10 +149,10 @@ function PostVideo(props) {
  
                                                 <div className={`flex items-center justify-center h-40  aspect-9/16  rounded-2xl ${darkTheme? "text-white border-black/20 bg-black/20": "text-black bg-white/10 border-white"} border `}>
                                                     <label 
-                                                        className={`${darkTheme? "text-white  ": "text-black  "}  w-20  h-20  rounded-full backdrop-blur flex justify-center items-center `}
+                                                        className={`${darkTheme? "text-white  ": "text-black  "}  w-10 h-10  rounded-full backdrop-blur flex justify-center items-center `}
                                                         htmlFor="thumbnail"
                                                     >
-                                                        <i class="fa-solid fa-file-arrow-up text-2xl "></i>
+                                                        <i class="fa-solid fa-file-arrow-up  "></i>
                                                     </label>
                                                 </div>
                                                 
@@ -172,10 +172,10 @@ function PostVideo(props) {
                                                         >
                                                             
                                                             <label 
-                                                                className={`${darkTheme? "text-white  ": "text-black  "} border-white/20 border w-20  h-20  rounded-full backdrop-blur flex justify-center items-center `}
+                                                                className={`${darkTheme? "text-white  ": "text-black  "} border-white/20 border w-10  h-10  rounded-full backdrop-blur flex justify-center items-center `}
                                                                 htmlFor="thumbnail"
                                                             >
-                                                                <i class="fa-solid fa-file-arrow-up text-2xl "></i>
+                                                                <i class="fa-solid fa-file-arrow-up "></i>
                                                             </label>
                                                             
                                                         </div>
@@ -228,28 +228,27 @@ function PostVideo(props) {
                                         className='w-full h-full outline-none '
                                         onChange={handleChange}
                                         type="text" 
-                                        maxLength={100}
+                                        maxLength={400}
                                     />
-                                    <span className='text-gray-400 text-sm'>{formData.description.length}/100</span>
+                                    <span className='text-gray-400 text-sm'>{formData.description.length}/400</span>
                                 </div>
                                 {status && <div className='font-normal'>{status}</div>}
-                                {!postStatus && 
-                                    <div className='flex-1 flex items-center justify-center w-full '>
+                                
+                                <div className='flex-1 flex items-center justify-center w-full '>
 
-                                    <button
-                                        className='text-blue-500 w-max pt-4 cursor-pointer' type="submit"
-                                        onClick={() => {
-                                            setStatus("")
-                                            
-                                        }}
-                                        >
-                                        Upload
-                                    </button>
-                                    </div>
-                                }
-                                {postStatus && 
-                                    <div className='text-blue-500 w-max pt-4'>posting</div>
-                                }
+                                <button
+                                    className={` w-max py-2 px-4 rounded-2xl ${darkTheme? "bg-white/20": "bg-blue-500 text-white"} cursor-pointer  flex items-center justify-center`} type="submit"
+                                    onClick={() => {
+                                        setStatus("")
+                                        
+                                    }}
+                                    >
+                                        {!postStatus? <div>Upload</div> : <div>Posting</div>}
+                                    
+                                </button>
+                                </div>
+                                
+                                
                                 
                             </form>
                         
