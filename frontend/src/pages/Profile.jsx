@@ -110,7 +110,7 @@ function Profile(props) {
                                 e.stopPropagation()
                                 setEditFeat(true)
 
-                            }} className='text-blue-500 text-sm font-semibold cursor-pointer overflow-hidden'>Edit <i class={`fa-solid fa-arrow-right ${editFeat? "translate-x-full transition-transform": "translate-x-0 transition-none"}  duration-100 `}></i></button>
+                            }} className='text-blue-500 text-sm font-semibold cursor-pointer overflow-hidden'>Edit <i class={`fa-solid fa-caret-down rotate-270 ${editFeat? "translate-x-full transition-transform": "translate-x-0 transition-none"}  duration-100 `}></i></button>
                             
                         </div>
                         <div className='flex  w-full md:w-sm  px-4 '> 

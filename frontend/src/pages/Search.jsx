@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { getAllVideos } from '../services/videoService';
 import { useNavigate } from 'react-router-dom';
+import LoaderBar from '../components/Loaders/LoaderBar.jsx';
 
 function Search(props) {
 
@@ -18,6 +19,8 @@ function Search(props) {
 
     const ref = useRef(null)
 
+    
+
     useEffect(() => {
         if(query.trim() === ""){
             setVideos([])
@@ -31,7 +34,8 @@ function Search(props) {
                 setFetch(true)
                 const response = await getAllVideos({
                     page,
-                    query: query
+                    query: query,
+                    
                 })
                 const newVideos = response.data.videos
                 setVideos(prev => [...prev, ...newVideos])
@@ -72,10 +76,9 @@ function Search(props) {
         setPage(1)
         setHasMore(true)
     }
-    console.log(videos[0])
-
+    
     return (
-        <div className='h-screen'>
+        <div className='min-h-screen'>
             <div className="w-full flex justify-center px-2 py-2">
                 <div className={`w-full max-w-sm flex items-center ${darkTheme? "bg-black/20 border-black/20 shadow-black/40": "bg-white/20 border-black/10 shadow-black/10 "} border  backdrop-blur-2xl shadow-lg rounded-full overflow-hidden`}>
                     <input 
@@ -96,8 +99,10 @@ function Search(props) {
                     </div>
                 </div>
             </div>
+            
             {query.trim() && videos.length === 0 && !fetch && <div className='w-full py-6 text-center'>No results found</div>}
-            <div className='grid grid-cols-3 gap-1 h-full'>
+            
+            <div className='grid grid-cols-3 gap-1 '>
                 {videos.map((video) => (
                     <div key={video._id}>
                         <div 
@@ -114,8 +119,8 @@ function Search(props) {
                     </div>
                 ))}
             </div>
-            
-            <div ref={ref} className='py-4 '></div>
+            {fetch && <LoaderBar className="py-4"/>}
+            <div ref={ref} className=''></div>
         </div>
     );
 }

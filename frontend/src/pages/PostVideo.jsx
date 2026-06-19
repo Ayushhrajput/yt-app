@@ -176,16 +176,16 @@ function PostVideo(props) {
             {
                 canUpload && (
                     <div 
-                        className={` ${darkTheme? "text-white": ""} w-full  h-screen flex justify-center`}
+                        className={` ${darkTheme? "text-white": ""} w-full  h-screen flex justify-center `}
                     >
                             
                             <form 
                                 onSubmit={handleSubmit}
                                 action=""
-                                className={`flex flex-col  w-auto max-w-full aspect-9/16 gap-2 items-center m-4 px-4 py-2  ${darkTheme? " from-black/20 to-black ": "from-gray-100 to-gray-100  "}   bg-gradient-to-b rounded-2xl max-w-md `}
+                                className={`flex flex-col  w-full h-auto max-w-full  gap-2 items-center m-4 px-4 py-2  ${darkTheme? " from-black/20 to-black ": "from-gray-100 to-gray-100  "}   bg-gradient-to-b rounded-2xl max-w-md `}
                             >   
                                 <div className='flex w-full items-start gap-2'>
-                                    <div className={`flex w-full ${darkTheme? `border-black/40 ${titleError? "border-red-500": "border-black/40 "}`: `border-black/10 ${titleError? "border-red-500": "border-white "}`} border-b  h-full py-2  items-center gap-2`}>
+                                    <div className={`flex w-full ${darkTheme? `border-black/40 ${titleError? "border-red-500/60": "border-black/40 "}`: `border-black/10 ${titleError? "border-red-500/60": "border-white "}`} border-b  h-full py-2  items-center gap-2`}>
                             
                                         <div className='w-max '>
 
@@ -253,9 +253,9 @@ function PostVideo(props) {
                                 </div>
                                 <div 
                                     style={desError?
-                                        {boxShadow: "inset 0 60px 60px rgba(255, 0, 0, 0.1)"}
+                                        {boxShadow: "inset 0 60px 60px rgba(255, 0, 0, 0.2)"}
                                      : {}}
-                                    className={`flex flex-col justify-between items-end gap-2 ${darkTheme? `text-white ${desError? "border-red-500 ": "border-black/40 "} from-black/10 to-black/40 `: `text-black ${desError? "border-red-500": "border-white"}  from-gray-100 to-white `} shadow-sm bg-gradient-to-b w-full outline-none border rounded-2xl font-normal h-40 px-2 `}
+                                    className={`flex flex-col justify-between items-end gap-2 ${darkTheme? `text-white ${desError? "border-red-500/40 ": "border-black/40 "} from-black/10 to-black/40 `: `text-black ${desError? "border-red-500/40": "border-white"}  from-gray-100 to-white `} shadow-sm bg-gradient-to-b w-full outline-none border rounded-2xl font-normal h-40 px-2 `}
                                 >
                                     
                                     <textarea 
