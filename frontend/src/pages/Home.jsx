@@ -22,9 +22,7 @@ function Home(props) {
         const fetchAllVideos = async() => {
             
             if(fetch) return
-           
             setFetch(true)
-            
             try {
                 const response = await getAllVideos(
                     {
@@ -80,15 +78,17 @@ function Home(props) {
                         
                         <div className='w-full flex items-center justify-center '>
 
-                            <div className='relative w-max max-h-screen aspect-9/16 overflow-hidden bg-black'>
-                                <img 
-                                    className='w-full h-full  object-contain'
-                                    src={video.thumbnail} 
-                                    alt={video.title} 
-                                    onClick={() => {
-                                    navigate(`/home/video/${video._id}`)
-                                    
-                                }}/>
+                            <div className='relative h-max w-max max-h-screen aspect-9/16 overflow-hidden bg-black'>
+                                <div className={`w-full h-full ${darkTheme? "bg-white/20": "bg-black/20"}`}>
+                                    <img 
+                                        className='w-full h-full  object-contain'
+                                        src={video.thumbnail}
+                                        alt={video.title} 
+                                        onClick={() => {
+                                        navigate(`/home/video/${video._id}`)
+                                        
+                                    }}/>
+                                </div>
                                 <div className='absolute top-0 flex items-center w-full gap-2 py-2 px-4 text-white'>
                                     <div className='w-10 h-10 border border-blue-500 rounded-full'>
 
@@ -100,12 +100,12 @@ function Home(props) {
                                 </div>
                             </div>
                         </div>
-                        <div className='flex  flex-col  w-full gap-2 py-2 px-4'>
-                            <div className=' flex'>
+                        <div className='flex  flex-col  w-full gap-1 py-2 px-4'>
+                            <div className={` flex  ${showDes? "flex-col ": "gap-2"}`}>
                                 <div className='font-semibold'>
                                     {video.owner.username}
                                 </div>
-                                <span className='px-2'>
+                                <span className=' truncate'>
                                     {video.title}
                                 </span>
                                 

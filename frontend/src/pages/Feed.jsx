@@ -98,12 +98,12 @@ function Shorts(props) {
     
 
     return (
-        <div className='min-h-screen overflow-hidden w-full flex flex-col items-center  overflow-y-scroll scrollbar-hide snap-y snap-mandatory'>
+        <div className='h-screen overflow-hidden w-full flex flex-col items-center  overflow-y-scroll scrollbar-hide snap-y snap-mandatory'>
             {
                 videos.map((video, index) => (
                     <div
                     key={video._id}
-                    className='snap-start h-screen max-w-full  flex justify-center bg-black relative'
+                    className='snap-start h-screen min-h-screen max-w-full flex justify-center items-center   bg-black relative'
                     
                     >   <Video 
                     src={video.videoFile}
@@ -114,7 +114,7 @@ function Shorts(props) {
                                     currVideoRef.current = el
                                 } 
                             }
-                            className=""
+                            className="h-full w-auto max-w-full object-contain"
                             
                             
                             />
@@ -136,9 +136,8 @@ function Shorts(props) {
                                 {   
                                     showDes && 
                                     
-                                    <div className="w-60  wrap-break-word">
+                                    <div className="w-full max-w-80  wrap-break-word">
                                         {video?.description}
-                                    
                                     </div>
                                 }
                                     <button onClick={() => setShowDes(

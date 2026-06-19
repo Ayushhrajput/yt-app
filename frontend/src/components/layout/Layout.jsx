@@ -4,21 +4,21 @@ import BottomBar from '../BottomBar';
 import Navbar from '../Navbar.jsx';
 import Sidebar from '../Sidebar.jsx';
 import { useTheme } from '../../context/ThemeContext.jsx'; 
-import { useSetting } from '../../context/SettingContext.jsx';
+import { useFeatures } from '../../context/FeaturesContext.jsx';
 
 function Layout(props) {
     const [showNavbar, setShowNav] = useState(true)
     const {darkTheme} = useTheme()
-    const {showNav} = useSetting()
+    const {showNav} = useFeatures()
     const [showBottombar, setShowBottomBar] = useState(true)
-    const {bottomBar, setBottomBar} = useSetting()
+    const {bottomBar, setBottomBar} = useFeatures()
 
 
     const location = useLocation()
 
     useEffect(
         () => {
-            setShowBottomBar(!location.pathname.startsWith('/feed') && !location.pathname.startsWith('/home/video'))
+            setShowBottomBar(!location.pathname.startsWith('/feed') && !location.pathname.startsWith('/home/video')  && !location.pathname.startsWith('/search/video'))
         },
     [location.pathname])
 

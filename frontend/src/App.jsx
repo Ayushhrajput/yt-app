@@ -10,18 +10,19 @@ import Layout from './components/layout/Layout.jsx'
 import Profile from './pages/Profile.jsx'
 import PostVideo from './pages/PostVideo.jsx'
 import VideoPage from './pages/Video.jsx'
-import { useSetting } from './context/SettingContext.jsx'
+import { useFeatures } from './context/FeaturesContext.jsx'
 import Feed from './pages/Feed.jsx'
 import LoaderBar from './components/Loaders/LoaderBar.jsx'
 import VideoSkeleton from './components/Loaders/VideoSkeleton.jsx'
+import Search from './pages/Search.jsx'
 
 
 function App() {
   
   const {user, loading} = useAuth()
   const location = useLocation()
-  const {showNav, setShowNav} = useSetting()
-  setShowNav(!location.pathname.startsWith('/home/video/') && !location.pathname.startsWith("/feed") && !location.pathname.startsWith("/postVideo"))
+  const {showNav, setShowNav} = useFeatures()
+  setShowNav(!location.pathname.startsWith('/home/video/') && !location.pathname.startsWith("/feed") && !location.pathname.startsWith("/postVideo") && !location.pathname.startsWith('/search/video'))
   
   
   
@@ -52,7 +53,8 @@ function App() {
           <Route path='/postVideo' element={<PostVideo/>}/>
           <Route path='/home/video/:videoId' element={<VideoPage/>}/>
           <Route path='/feed' element={<Feed/>} />
-          
+          <Route path='/search' element={<Search/>} />
+          <Route path='/search/video/:videoId' element={<VideoPage/>} />
         </Route>
       </Routes>
   )

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
-import { useSetting } from '../context/SettingContext';
+import { useFeatures } from '../context/FeaturesContext';
 import { useAuth } from '../context/AuthContext';
 
 
 function Sidebar({className}) {
     const {darkTheme} = useTheme()
     const {user} = useAuth()
-    const {items, setItems} = useSetting()
+    const {items, setItems} = useFeatures()
     const [showSideBar, setShowSideBar] = useState(false)
     const navItems = [
         {

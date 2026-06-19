@@ -3,22 +3,34 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import {getUserChannel, logout, getWatchHistory} from "../services/authservice.js"
 import { useTheme } from '../context/ThemeContext.jsx';
-import { useSetting } from '../context/SettingContext.jsx';
+import { useFeatures } from '../context/FeaturesContext.jsx';
 
 function Profile(props) {
     const {user, setUser} = useAuth()
     const {darkTheme, setDarkTheme} = useTheme()
+    const {setting} = useFeatures()
     const navigate = useNavigate()
-    const {setting} = useSetting()
     
+    const [editFeat, setEditFeat] = useState(false)
     const [channel, setChannel] = useState({})
+
+    useEffect(() => {
+        const handleEditFeat = () => {
+            setEditFeat(false)
+        }
+
+        window.addEventListener('click', handleEditFeat)
+
+        return () => {window.removeEventListener('click', handleEditFeat)}
+    }, [])
+    
 
     useEffect(
         () => {
             const fetchWatchHistory = async () => {
                 try {
                     const response = await getWatchHistory()
-                    console.log(response)
+                    
                 } catch (e) {
                     throw new Error(e.message)
                 }
@@ -55,7 +67,7 @@ function Profile(props) {
         }
         
     }
-    console.log(channel)
+    
 
     return (
         <div className={` flex flex-col   h-screen `}>
@@ -92,8 +104,13 @@ function Profile(props) {
                 <div  className=' w-full flex-1  overflow-y-auto scrollbar-hide  flex flex-col '>
                     
                     <div className={`w-full py-2 flex flex-col gap-2 ${darkTheme? "text-white ": ""}border-black/20 border-b`}>
-                        <div className='font-semibold italic  items-center gap-2'>
-                            <h1 className='px-2'>{user.username}</h1>
+                        <div className='flex justify-between items-center gap-2 px-4'>
+                            <h1 className='font-semibold italic '>{user.username}</h1>
+                            <button onClick={(e) => {
+                                e.stopPropagation()
+                                setEditFeat(true)
+
+                            }} className='text-blue-500 text-sm font-semibold cursor-pointer overflow-hidden'>Edit <i class={`fa-solid fa-arrow-right ${editFeat? "translate-x-full transition-transform": "translate-x-0 transition-none"}  duration-100 `}></i></button>
                             
                         </div>
                         <div className='flex  w-full md:w-sm  px-4 '> 

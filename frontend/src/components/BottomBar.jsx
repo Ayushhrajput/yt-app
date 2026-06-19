@@ -1,14 +1,14 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
-import { useSetting } from '../context/SettingContext';
+import { useFeatures } from '../context/FeaturesContext';
 import { useAuth } from '../context/AuthContext';
 
 
 function BottomBar(props) {
     const {user} = useAuth()
     const {darkTheme} = useTheme()
-    const {items, setItems, bottomBar} = useSetting()
+    const {items, setItems, bottomBar} = useFeatures()
     
     
     const navItems = [

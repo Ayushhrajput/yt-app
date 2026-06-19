@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
-import { useSetting } from '../context/SettingContext';
+import { useFeatures } from '../context/FeaturesContext.jsx';
 
 function Navbar({className}) {
     const {darkTheme} = useTheme()
-    const {items} = useSetting()
-    const {setting, setSetting} = useSetting()
+    const {items} = useFeatures()
+    const {setting, setSetting} = useFeatures()
     const handleSetting = () => {
         setSetting(
             true

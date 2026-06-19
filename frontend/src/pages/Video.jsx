@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getVideoById } from '../services/videoService';
-import { useSetting } from '../context/SettingContext';
 import { useTheme } from '../context/ThemeContext';
 import Video from '../components/Video.jsx';
 import { toggleVideoPlay } from '../utils/togglePlay.js';
@@ -28,12 +27,13 @@ function VideoPage(props) {
     
     return (
         <div className="h-screen   overflow-hidden flex justify-center"  >
-            <div className='h-full max-w-full  bg-black relative'>
+            <div className='h-full min-h-full max-w-full  bg-black relative'>
                 
                 <Video 
                     src={video.videoFile}
                     ref={videoRef}
                     autoPlay={true}
+                    className="object-contain h-full  w-auto max-w-full"
                 />
                 <div className=' absolute bottom-0  left-0 px-4 z-10'>
                     <div className='flex items-center text-white gap-2 py-2 '>
@@ -43,7 +43,7 @@ function VideoPage(props) {
                         <div className=''>{video?.owner?.username}</div>
                     </div>
                     <div className='flex flex-col  text-white gap-2 pb-4 '>
-                        <h1 className='font-semibold'>{video?.title}</h1>
+                        <h1 className='font-semibold w-full '>{video?.title}</h1>
                         
                         
                         <div
@@ -53,8 +53,9 @@ function VideoPage(props) {
                         {   
                             showDes && 
 
-                            <div className="w-60  wrap-break-word">
+                            <div className=" w-full max-w-80  bg-teal-400  wrap-break-word">
                                 {video?.description}
+                                
                             
                             </div>
                         }
