@@ -22,7 +22,7 @@ function App() {
   const {user, loading} = useAuth()
   const location = useLocation()
   const {showNav, setShowNav} = useFeatures()
-  setShowNav(!location.pathname.startsWith('/home/video/') && !location.pathname.startsWith("/feed") && !location.pathname.startsWith("/postVideo") && !location.pathname.startsWith('/search/video') && !location.pathname.startsWith('/search'))
+  setShowNav(!location.pathname.startsWith('/home/video/') && !location.pathname.startsWith("/feed") && !location.pathname.startsWith("/postVideo") && !location.pathname.startsWith('/video') && !location.pathname.startsWith('/search'))
   
   
   
@@ -54,7 +54,8 @@ function App() {
           <Route path='/home/video/:videoId' element={<VideoPage/>}/>
           <Route path='/feed' element={<Feed/>} />
           <Route path='/search' element={<Search/>} />
-          <Route path='/search/video/:videoId' element={<VideoPage/>} />
+          <Route path='/video/:videoId' element={<VideoPage/>} />
+          
         </Route>
       </Routes>
   )

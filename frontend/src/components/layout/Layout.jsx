@@ -18,7 +18,7 @@ function Layout(props) {
 
     useEffect(
         () => {
-            setShowBottomBar(!location.pathname.startsWith('/feed') && !location.pathname.startsWith('/home/video')  && !location.pathname.startsWith('/search/video'))
+            setShowBottomBar(!location.pathname.startsWith('/feed') && !location.pathname.startsWith('/home/video')  && !location.pathname.startsWith('/video'))
         },
     [location.pathname])
 

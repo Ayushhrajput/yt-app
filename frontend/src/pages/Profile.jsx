@@ -1,18 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import {getUserChannel, logout, getWatchHistory} from "../services/authservice.js"
 import { useTheme } from '../context/ThemeContext.jsx';
 import { useFeatures } from '../context/FeaturesContext.jsx';
+import { getAllVideos } from '../services/videoService.js';
 
 function Profile(props) {
     const {user, setUser} = useAuth()
     const {darkTheme, setDarkTheme} = useTheme()
     const {setting} = useFeatures()
     const navigate = useNavigate()
+
+    const ref = useRef(null)
     
     const [editFeat, setEditFeat] = useState(false)
     const [channel, setChannel] = useState({})
+    const [page, setPage] = useState(1)
+    const [videos, setVideos] = useState([])
+    const [hasMore, setHasMore] = useState(true)
+    const [isFetching, setIsFetching] = useState(false)
 
     useEffect(() => {
         const handleEditFeat = () => {
@@ -25,19 +32,49 @@ function Profile(props) {
     }, [])
     
 
-    useEffect(
-        () => {
-            const fetchWatchHistory = async () => {
-                try {
-                    const response = await getWatchHistory()
-                    
-                } catch (e) {
-                    throw new Error(e.message)
-                }
+    useEffect(() => {
+        if(isFetching) return
+        
+        
+        
+        const fetchVideos = async () => {
+            try {
+                setIsFetching(true)
+                const response = await getAllVideos({
+                    page: page,
+                    userId: user._id
+                })
+                
+                const newVideos = response.data.videos 
+    
+                if(newVideos.length < 10) setHasMore(false)
+                setVideos(prev => [...prev, ...newVideos])
+            } catch (e) {
+                console.error(e)
+            } finally {
+                setIsFetching(false)
             }
-            fetchWatchHistory()
-        }, []
-    )
+        }
+        
+        fetchVideos()
+    }, [page])
+    console.log(videos)
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            entries => {
+                if(entries[0].isIntersecting && hasMore && !isFetching) {
+                    setPage(prev => prev + 1)
+                }   
+            }, {
+                threshold: 0.7
+            }
+        )
+        if(ref.current) observer.observe(ref.current)
+
+        return () => observer.disconnect()
+    }, [hasMore, isFetching, page])
+
     useEffect(
         () =>  {
             const getUserChannelInfo = async () => {
@@ -68,7 +105,8 @@ function Profile(props) {
         
     }
     
-
+    console.log(videos)
+    console.log(videos?.[0]?.thumbnail)
     return (
         <div className={` flex flex-col   h-screen `}>
             
@@ -147,14 +185,32 @@ function Profile(props) {
                     </div>
                     <div className=' w-full'>
 
-                        <div className='sticky  top-0   '>
-                            <div className={`flex mx-4 max-w-sm  gap-2  py-2`}>
-                                
+                        <div className='sticky  top-0  '>
+                            <div className={`flex mx-4 max-w-sm text-blue-500  py-2 cursor-pointer`}>
+                                Your Videos
                             </div>
                         </div>
-                        <div className='grid grid-cols-3  '>
-                         
+                        <div className='grid grid-cols-3  gap-0.5'>
+                            {videos.map((video) => (
+                                <div key={video._id}>
+                                    <div
+                                        className='relative w-full min-h-40  max-w-full aspect-9/16 bg-black '
+                                    >   
+                                        <img 
+                                            className='h-full w-full object-contain'
+                                            src={video?.thumbnail} alt="" 
+                                            onClick={() => navigate(`/video/${video._id}`)}
+                                        />
+                                        <div className='absolute bottom-0 right-0 px-1'>
+                                            <div className='text-white/60 text-sm'>
+                                                {video.views} views
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
+                        <div ref={ref} className='w-full  '></div>
                     </div>
                         
                 </div>

@@ -102,19 +102,24 @@ function Search(props) {
             
             {query.trim() && videos.length === 0 && !fetch && <div className='w-full py-6 text-center'>No results found</div>}
             
-            <div className='grid grid-cols-3 gap-1 '>
+            <div className='grid grid-cols-3 gap-0.5 '>
                 {videos.map((video) => (
                     <div key={video._id}>
                         <div 
                             onClick={() => {
-                                navigate(`/search/video/${video._id}`)
+                                navigate(`/video/${video._id}`)
                             }}
-                            className='min-h-40  max-w-full w-full aspect-9/16 bg-black'
+                            className='relative w-full min-h-40  max-w-full  aspect-9/16 bg-black'
                         >
                         <img 
                             className='w-full h-full object-contain'
                             src={video.thumbnail} alt=""
                         />
+                        <div className='absolute bottom-0 right-0 px-1'>
+                            <div className='text-white/60 text-sm'>
+                                {video.views} views
+                            </div>
+                        </div>
                         </div>
                     </div>
                 ))}

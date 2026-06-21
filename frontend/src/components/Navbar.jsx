@@ -36,9 +36,7 @@ function Navbar({className}) {
                             handleSetting()
                         }
                         }>
-                        <span class="material-symbols-outlined">
-                        more_vert
-                        </span>
+                        <i class={`fa-solid fa-caret-down ${setting? "rotate-180": ""}`}></i>
                     </div>
                     }   
                 </div>
