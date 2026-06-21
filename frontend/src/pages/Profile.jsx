@@ -5,6 +5,7 @@ import {getUserChannel, logout, getWatchHistory} from "../services/authservice.j
 import { useTheme } from '../context/ThemeContext.jsx';
 import { useFeatures } from '../context/FeaturesContext.jsx';
 import { getAllVideos } from '../services/videoService.js';
+import LoaderBar from '../components/Loaders/LoaderBar.jsx';
 
 function Profile(props) {
     const {user, setUser} = useAuth()
@@ -14,6 +15,7 @@ function Profile(props) {
 
     const ref = useRef(null)
     
+    const [totalPosts, setTotalPosts] = useState(0)
     const [editFeat, setEditFeat] = useState(false)
     const [channel, setChannel] = useState({})
     const [page, setPage] = useState(1)
@@ -23,7 +25,7 @@ function Profile(props) {
 
     useEffect(() => {
         const handleEditFeat = () => {
-            setEditFeat(false)
+        setEditFeat(false)
         }
 
         window.addEventListener('click', handleEditFeat)
@@ -44,6 +46,8 @@ function Profile(props) {
                     page: page,
                     userId: user._id
                 })
+
+                setTotalPosts(response.data.pagination.totalVideos)
                 
                 const newVideos = response.data.videos 
     
@@ -58,7 +62,7 @@ function Profile(props) {
         
         fetchVideos()
     }, [page])
-    console.log(videos)
+    
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -91,6 +95,7 @@ function Profile(props) {
     [user])
     
     
+    
 
     const handleLogout = async () => {
         try {
@@ -105,8 +110,7 @@ function Profile(props) {
         
     }
     
-    console.log(videos)
-    console.log(videos?.[0]?.thumbnail)
+    
     return (
         <div className={` flex flex-col   h-screen `}>
             
@@ -162,7 +166,7 @@ function Profile(props) {
                                 <h1>{user.fullName}</h1>
                                 <div className='flex justify-items-start w-full text-sm  gap-2 '>
                                     <div className='flex  items-center gap-1'>
-                                        <span>No</span>
+                                        <span>{totalPosts}</span>
                                         <p>Posts</p> 
                                     </div>
                                     {
@@ -190,6 +194,11 @@ function Profile(props) {
                                 Your Videos
                             </div>
                         </div>
+                        {
+                            isFetching &&
+                            <LoaderBar className="py-4"/>
+                        }
+
                         <div className='grid grid-cols-3  gap-0.5'>
                             {videos.map((video) => (
                                 <div key={video._id}>
@@ -210,6 +219,11 @@ function Profile(props) {
                                 </div>
                             ))}
                         </div>
+                        {
+                            !videos.length && !isFetching &&  (
+                                <div className='px-4 py-2'>No Videos</div>
+                            )
+                        }
                         <div ref={ref} className='w-full  '></div>
                     </div>
                         
