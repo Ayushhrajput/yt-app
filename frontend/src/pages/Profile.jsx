@@ -10,7 +10,7 @@ import LoaderBar from '../components/Loaders/LoaderBar.jsx';
 function Profile(props) {
     const {user, setUser} = useAuth()
     const {darkTheme, setDarkTheme} = useTheme()
-    const {setting} = useFeatures()
+    const {toast} = useFeatures()
     const navigate = useNavigate()
 
     const ref = useRef(null)
@@ -22,7 +22,7 @@ function Profile(props) {
     const [videos, setVideos] = useState([])
     const [hasMore, setHasMore] = useState(true)
     const [isFetching, setIsFetching] = useState(false)
-
+    
     useEffect(() => {
         const handleEditFeat = () => {
         setEditFeat(false)
@@ -112,18 +112,19 @@ function Profile(props) {
     
     
     return (
-        <div className={` flex flex-col   h-screen `}>
+        <div className={`w-full flex flex-col   h-screen `}>
             
             {
-                setting &&
+                toast &&
                 <div 
                     onClick={(e) => {
                         e.stopPropagation()
                     }}
-                    className={`fixed top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 ${darkTheme? " bg-black/10 ": "bg-white/10  shadow-white/10"} border-black/10 backdrop-blur shadow-xl border text-blue-500 flex flex-col justify-center items-center w-max  px-2 rounded-xl z-10`}
+                    className={` fixed bottom-0 left-1/2 -translate-x-1/2 ${darkTheme? " bg-black/10 shadow-white/20 border-black/10": "bg-white/10  shadow-black/20 border-white/10"}  backdrop-blur shadow-inner  border text-blue-500 flex flex-col justify-center items-center w-full py-20  px-2  rounded-t-2xl  z-20`}
                 >
+                    <div className='absolute top-1/12 w-1/4 p-1 bg-white  shadow-inner shadow-black/10 rounded-full '></div>
 
-                    <div className="flex items-center  border-b-black/10 border-b border-white px-8 py-2 h-12">
+                    <div className="flex items-center   px-8 py-2 h-12">
                         <label htmlFor='theme' className={`${darkTheme? "": " items-baseline-last "} flex justify-center h-10 w-10`}>
                             {!darkTheme?
                                 <span className={`material-symbols-outlined -translate-y-2  transition duration-200`}>light_mode</span>: 

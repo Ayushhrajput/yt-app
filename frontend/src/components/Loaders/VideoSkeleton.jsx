@@ -17,7 +17,7 @@ function VideoSkeleton(props) {
                                 <div className='absolute top-0 flex items-center w-full gap-2 py-2 px-4 text-white'>
                                     
                                     <div className={`h-10 min-w-10  rounded-full ${darkTheme? "bg-white/20": "bg-black/20"} `}></div>
-                                    <span className={`h-4 w-1/2  ${darkTheme? "bg-white/20": "bg-black/20"} rounded-sm`}></span>
+                                    <span className={`h-4 w-1/2  ${darkTheme? "bg-white/20": "bg-black/20"} rounded-lg`}></span>
                                 </div>
                             </div>
                         </div>

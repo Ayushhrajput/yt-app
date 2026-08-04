@@ -4,12 +4,12 @@ const FeaturesContext = createContext()
 
 export const FeaturesProvider = ({children}) => {
 
-    const [setting, setSetting] = useState(false)
+    const [toast , setToast] = useState(false)
     const [items, setItems] = useState(false)
     const [showNav, setShowNav] = useState(true)
     const [bottomBar, setBottomBar] = useState(true)
     return (
-        <FeaturesContext.Provider value={{setting, setSetting, items, setItems, showNav, setShowNav, bottomBar, setBottomBar}}>
+        <FeaturesContext.Provider value={{toast , setToast, items, setItems, showNav, setShowNav, bottomBar, setBottomBar}}>
             {children}
         </FeaturesContext.Provider>
     )

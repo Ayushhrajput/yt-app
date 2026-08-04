@@ -5,15 +5,15 @@ import { useFeatures } from '../context/FeaturesContext.jsx';
 function Navbar({className}) {
     const {darkTheme} = useTheme()
     const {items} = useFeatures()
-    const {setting, setSetting} = useFeatures()
-    const handleSetting = () => {
-        setSetting(
+    const {toast, setToast} = useFeatures()
+    const handletoast = () => {
+        setToast(
             true
         )
     }
     useEffect(() => {
         const handleWindowClick = () => {
-            setSetting(false)
+            setToast(false)
         }
         window.addEventListener("click", handleWindowClick)
         
@@ -33,10 +33,10 @@ function Navbar({className}) {
                         (e) => {
                             
                             e.stopPropagation()
-                            handleSetting()
+                            handletoast()
                         }
                         }>
-                        <i class={`fa-solid fa-caret-down ${setting? "rotate-180": ""}`}></i>
+                        <i class={`fa-solid fa-caret-down ${toast? "rotate-180": ""}`}></i>
                     </div>
                     }   
                 </div>
