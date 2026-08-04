@@ -120,9 +120,9 @@ function Profile(props) {
                     onClick={(e) => {
                         e.stopPropagation()
                     }}
-                    className={`md:w-max md:px-40  fixed bottom-0 left-1/2 -translate-x-1/2 ${darkTheme? " bg-black/10 shadow-white/20 border-black/10 ": "bg-white/10  shadow-black/20 border-white/10"}  backdrop-blur shadow-inner  border text-blue-500 flex flex-col justify-center items-center w-full py-20  px-2  rounded-t-2xl  z-20`}
+                    className={`md:w-max md:px-40  fixed bottom-0 left-1/2 -translate-x-1/2 animate-[toast_0.4s_ease] ${darkTheme? " bg-black/10 shadow-white/20 border-black/10 ": "bg-white/10  shadow-black/20 border-white/10"}  backdrop-blur shadow-inner  border text-blue-500 flex flex-col justify-center items-center w-full py-20  px-2  rounded-t-2xl  z-20`}
                 >
-                    <div className='absolute top-1/12 w-1/4 p-1 bg-white  shadow-inner shadow-black/10 rounded-full '></div>
+                    <div className={`absolute top-1/12 w-1/4 p-1  ${darkTheme? "bg-white": "bg-black/90"} shadow-inner shadow-black/10 rounded-full `}></div>
 
                     <div className="flex items-center   px-8 py-2 h-12">
                         <label htmlFor='theme' className={`${darkTheme? "": " items-baseline-last "} flex justify-center h-10 w-10`}>
