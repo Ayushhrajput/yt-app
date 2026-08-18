@@ -17,13 +17,13 @@ function PostVideo(props) {
     const [videoFile, setVideoFile] = useState(null)
     const [thumbnail, setThumbnail] = useState(null)
     const [status, setStatus] = useState("")
-    const [desError, setDesError] = useState(false)
-    const [titleError, setTitleError] = useState(false)
 
     const [thumbnailPreview, setThumbnailPreview] = useState("")
     const [videoPreview, setVideoPreview] = useState("")
     const [postStatus, setPostStatus] = useState(false)
     
+    const [showError, setShowError] = useState(false)
+
     const videoRef = useRef(null)
 
     const handleChange = (e) => {
@@ -37,17 +37,12 @@ function PostVideo(props) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = new FormData()
-        if(formData.description === "") {
-            setDesError(true)
-            
-        }
-        if(formData.title === "") {
-            setTitleError(true)
-            
-        }
-        if([formData.description, formData.title].some((data) => (
+        
+        if([formData.title, formData.description].some((data) => (
             data === ""
         ))) {
+            setPostStatus(false)
+            setShowError(true)
             return
         }
         if(postStatus) return
@@ -61,9 +56,7 @@ function PostVideo(props) {
             const response = await publishVideo(data)
             
             
-            
-            setDesError(false)
-            setTitleError(false)
+        
             setVideoFile(null)
             setCanUpload(false)
             setThumbnail(null)
@@ -108,7 +101,8 @@ function PostVideo(props) {
             })
         })
     }
-    console.log(thumbnailPreview)
+    
+
     
     return (
         <div className=' w-full '>
@@ -178,18 +172,24 @@ function PostVideo(props) {
                     <div 
                         className={` ${darkTheme? "text-white": ""} w-full  h-screen flex justify-center `}
                     >
-                            
+                            {showError && 
+                                <div className='absolute top-6 px-4 py-2 flex gap-4 w-max text-white bg-black rounded-full'> 
+                                    <div className=' '>All fields are required</div>
+                                    <button className='' onClick={() => setShowError(false)}><i class="fa-solid fa-xmark"></i></button>
+                                </div>
+                                
+                            }
                             <form 
                                 onSubmit={handleSubmit}
                                 action=""
-                                className={`flex flex-col  w-full h-auto max-w-full  gap-2 items-center m-4 px-4 py-2  ${darkTheme? " from-black/20 to-black ": "from-gray-100 to-gray-100  "}   bg-gradient-to-b rounded-2xl max-w-md `}
+                                className={`flex flex-col  w-full h-auto max-w-full  gap-2 items-center m-4 px-4 py-2  ${darkTheme? " from-black/20 to-black ": "shadow-[inset_0px_8px_16px_rgba(0,0,0,0.1)]"}    rounded-2xl max-w-md `}
                             >   
                                 <div className='flex w-full items-start gap-2'>
-                                    <div className={`flex w-full ${darkTheme? `border-black/40 ${titleError? "border-red-500/60": "border-black/40 "}`: `border-black/10 ${titleError? "border-red-500/60": "border-white "}`} border-b  h-full py-2  items-center gap-2`}>
+                                    <div className={`flex w-full ${darkTheme? `border-black/40 `: `border-black/10 `} border-b  h-full py-2  items-center gap-2`}>
                             
                                         <div className='w-max '>
 
-                                            <div className={`flex flex-col  h-40 w-max ${darkTheme? "text-white border-black/20 bg-black/20": "text-black bg-white/10 border-white"} border  rounded-2xl overflow-hidden items-center justify-center `}>
+                                            <div className={`flex flex-col  h-40 w-max ${darkTheme? "text-white border-black/20 bg-black/20": "text-black bg-white/10 border-gray-100"} border  rounded-2xl overflow-hidden items-center justify-center `}>
 
                                                 <div className={` flex flex-col items-center h-full w-full `}>
                                                     <div
@@ -240,7 +240,7 @@ function PostVideo(props) {
                                             onChange={
                                                 (e) => {
                                                     handleChange(e)
-                                                    setTitleError(false)
+                                                    
                                                 }
                                             }
                                             type="text" 
@@ -252,10 +252,7 @@ function PostVideo(props) {
                                     
                                 </div>
                                 <div 
-                                    style={desError?
-                                        {boxShadow: "inset 0 60px 60px rgba(255, 0, 0, 0.2)"}
-                                     : {}}
-                                    className={`flex flex-col justify-between items-end gap-2 ${darkTheme? `text-white ${desError? "border-red-500/40 ": "border-black/40 "} from-black/10 to-black/40 `: `text-black ${desError? "border-red-500/40": "border-white"}  from-gray-100 to-white `} shadow-sm bg-gradient-to-b w-full outline-none border rounded-2xl font-normal h-40 px-2 `}
+                                    className={`flex flex-col justify-between items-end gap-2 ${darkTheme? `text-white  from-black/10 to-black/40 `: `text-black   bg-gray-100 `}  bg-gradient-to-b w-full outline-none  rounded-2xl font-normal h-40 px-2 `}
                                 >
                                     
                                     <textarea 
@@ -267,7 +264,7 @@ function PostVideo(props) {
                                         onChange={
                                             (e) => {
                                                 handleChange(e)
-                                                setDesError(false)
+                                                
                                             }
                                         }
                                         type="text" 
@@ -280,15 +277,13 @@ function PostVideo(props) {
                                 <div className='flex-1 flex items-center justify-center w-full '>
 
                                     <button
-                                        className={` w-max overflow-hidden rounded-full flex items-center justify-center  ${darkTheme? "bg-white/20": "bg-blue-500 text-white"} cursor-pointer  `} 
+                                        className={` w-max px-4 overflow-hidden rounded-full flex items-center justify-center  ${darkTheme? "bg-white/20": "bg-blue-500 text-white"} cursor-pointer  `} 
                                         type="submit"
                                         onClick={() => {
                                             
-                                            setDesError(false)
-                                            setTitleError(false)
                                         }}
                                         > 
-                                            <div className='relative  h-10 w-20 '>
+                                            <div className='relative  h-10 w-20'>
 
                                             <div className={`absolute py-2 inset-0 ${postStatus? " -translate-y-full ": "translate-y-0"} transition-all duration-100`} >Upload</div> 
 
