@@ -48,11 +48,3 @@ input[type="range"]::-webkit-slider-thumb {
     transform: translateY(0);
   }
 }
-@keyframes errorStatus {
-  0% {
-    transform: translateX(40deg) translateY(10deg);
-  }
-  100% {
-    transform: none;
-  }
-}

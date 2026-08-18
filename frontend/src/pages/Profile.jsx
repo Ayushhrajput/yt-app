@@ -14,6 +14,21 @@ function Profile(props) {
     const navigate = useNavigate()
 
     const ref = useRef(null)
+
+    const videoRef = useRef(null)
+    const [isSticky, setIsSticky] = useState(false)
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if(!videoRef.current) return
+            const { top } = videoRef.current.getBoundingClientRect()
+            setIsSticky(top <= 0)
+        }
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+        
+    }, [])
+    
     
     const [totalPosts, setTotalPosts] = useState(0)
     const [editFeat, setEditFeat] = useState(false)
@@ -120,7 +135,7 @@ function Profile(props) {
                     onClick={(e) => {
                         e.stopPropagation()
                     }}
-                    className={`md:w-max md:px-40  fixed bottom-0 left-1/2 -translate-x-1/2 animate-[toast_0.4s_ease] ${darkTheme? " bg-black/10 shadow-white/20 border-black/10 ": "bg-white/10  shadow-black/20 border-white/10"}  backdrop-blur shadow-inner  border text-blue-500 flex flex-col justify-center items-center w-full py-20  px-2  rounded-t-2xl  z-20`}
+                    className={`md:w-max md:px-40  fixed bottom-0 left-1/2 -translate-x-1/2 animate-[toast_0.4s_ease] ${darkTheme? " bg-black/10  border-black/10 ": "bg-white/10   border-white/10"}  backdrop-blur shadow-[inset_0px_6px_12px_rgba(0,0,0,0.1)]  border text-blue-500 flex flex-col justify-center items-center w-full py-20  px-2  rounded-t-2xl  z-20`}
                 >
                     <div className={`absolute top-1/12 w-1/4 p-1  ${darkTheme? "bg-white": "bg-black/90"} shadow-inner shadow-black/10 rounded-full `}></div>
 
@@ -188,9 +203,9 @@ function Profile(props) {
                             </div>
                         </div>
                     </div>
-                    <div className=' w-full'>
+                    <div className=' w-full flex flex-col justify-center items-center'>
 
-                        <div className='sticky  top-0  '>
+                        <div ref={videoRef} className={`sticky  top-0  w-full max-w-lg ${isSticky? "bg-gradient-to-b from-black/70 to-black/10": "bg-transparent"} z-1`}>
                             <div className={`flex mx-4 max-w-sm text-blue-500  py-2 cursor-pointer`}>
                                 Your Videos
                             </div>
@@ -200,9 +215,9 @@ function Profile(props) {
                             <LoaderBar className="py-4"/>
                         }
 
-                        <div className='grid grid-cols-3  gap-0.5'>
+                        <div className='grid grid-cols-3  gap-0.5 max-w-lg'>
                             {videos.map((video) => (
-                                <div key={video._id}>
+                                <div key={video._id} className=''>
                                     <div
                                         className='relative w-full min-h-40  max-w-full aspect-9/16 bg-black '
                                     >   

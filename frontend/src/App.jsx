@@ -21,9 +21,10 @@ function App() {
   
   const {user, loading} = useAuth()
   const location = useLocation()
-  const {showNav, setShowNav} = useFeatures()
+  const {showNav, setShowNav, setItems} = useFeatures()
   setShowNav(!location.pathname.startsWith('/home/video/') && !location.pathname.startsWith("/feed") && !location.pathname.startsWith("/postVideo") && !location.pathname.startsWith('/video') && !location.pathname.startsWith('/search'))
   
+  setItems(location.pathname.startsWith('/profile/'))
   
   
   

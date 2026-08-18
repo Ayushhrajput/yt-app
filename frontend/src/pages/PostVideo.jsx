@@ -173,7 +173,7 @@ function PostVideo(props) {
                         className={` ${darkTheme? "text-white": ""} w-full  h-screen flex justify-center `}
                     >
                             {showError && 
-                                <div className='absolute top-6 px-4 py-2 flex gap-4 w-max text-white bg-black rounded-full'> 
+                                <div className='absolute top-1/2 px-4 py-2 flex gap-4 w-max text-white bg-black rounded-full '> 
                                     <div className=' '>All fields are required</div>
                                     <button className='' onClick={() => setShowError(false)}><i class="fa-solid fa-xmark"></i></button>
                                 </div>
@@ -182,7 +182,7 @@ function PostVideo(props) {
                             <form 
                                 onSubmit={handleSubmit}
                                 action=""
-                                className={`flex flex-col  w-full h-auto max-w-full  gap-2 items-center m-4 px-4 py-2  ${darkTheme? " from-black/20 to-black ": "shadow-[inset_0px_8px_16px_rgba(0,0,0,0.1)]"}    rounded-2xl max-w-md `}
+                                className={`flex flex-col  w-full h-auto max-w-full  gap-2 items-center m-4 px-4 py-2  ${darkTheme? " shadow-[inset_0px_8px_16px_rgba(255,255,255,0.1)]": "shadow-[inset_0px_8px_16px_rgba(0,0,0,0.1)]"}    rounded-2xl max-w-md `}
                             >   
                                 <div className='flex w-full items-start gap-2'>
                                     <div className={`flex w-full ${darkTheme? `border-black/40 `: `border-black/10 `} border-b  h-full py-2  items-center gap-2`}>
@@ -277,13 +277,13 @@ function PostVideo(props) {
                                 <div className='flex-1 flex items-center justify-center w-full '>
 
                                     <button
-                                        className={` w-max px-4 overflow-hidden rounded-full flex items-center justify-center  ${darkTheme? "bg-white/20": "bg-blue-500 text-white"} cursor-pointer  `} 
+                                        className={` w-max  overflow-hidden  flex items-center justify-center   text-blue-500 border-b cursor-pointer  `} 
                                         type="submit"
                                         onClick={() => {
                                             
                                         }}
                                         > 
-                                            <div className='relative  h-10 w-20'>
+                                            <div className='relative  h-10 w-15'>
 
                                             <div className={`absolute py-2 inset-0 ${postStatus? " -translate-y-full ": "translate-y-0"} transition-all duration-100`} >Upload</div> 
 

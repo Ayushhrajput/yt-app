@@ -11,7 +11,7 @@ function VideoSkeleton(props) {
             
                 <div className='w-full flex  flex-col items-center '>
                     <div className={`w-full  h-screen flex justify-center ${darkTheme? "bg-black":"bg-white"} `}>
-                        <div className='h-full w-full max-w-full  max-h-screen  aspect-9/16'>
+                        <div className='h-full w-max max-w-max  max-h-screen  aspect-9/16'>
 
                             <div className={`${darkTheme? "bg-white/20": "bg-black/20"}    h-full object-contain  relative`}>
                                 <div className='absolute top-0 flex items-center w-full gap-2 py-2 px-4 text-white'>
