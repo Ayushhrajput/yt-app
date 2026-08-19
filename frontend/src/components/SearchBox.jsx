@@ -3,9 +3,11 @@ import { useTheme } from '../context/ThemeContext';
 import { getAllVideos } from '../services/videoService';
 import { useNavigate } from 'react-router-dom';
 import LoaderBar from '../components/Loaders/LoaderBar.jsx';
+import { useVideo } from '../context/VideoContext.jsx';
 
 const SearchBox = forwardRef(({user, className}) => {
     const {darkTheme} = useTheme()
+    const {setHasVideos} = useVideo()
 
     const navigate = useNavigate()
 
@@ -15,6 +17,8 @@ const SearchBox = forwardRef(({user, className}) => {
     const [fetch, setFetch] = useState(false)
     const [hasMore, setHasMore] = useState(true)
     const [searchInput, setSearchInput] = useState("")
+
+    
 
     const ref = useRef(null)
 
@@ -43,6 +47,8 @@ const SearchBox = forwardRef(({user, className}) => {
                 if(newVideos.length < 10) {
                     setHasMore(false)
                 }
+                
+                 
             } catch (e) {
                 console.error(e)
             } finally {
@@ -51,7 +57,16 @@ const SearchBox = forwardRef(({user, className}) => {
         }
         fetchVideos()
         
+        
+        
+        
     }, [page, query])
+    
+    if(videos.length) {
+        setHasVideos(true)
+    } else {
+        setHasVideos(false)
+    }
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -78,9 +93,9 @@ const SearchBox = forwardRef(({user, className}) => {
         setHasMore(true)
     }
     return (
-        <div className={` ${className} flex flex-col items-center`}>
-            <div className="w-full flex justify-center px-2 py-2">
-                <div className={`w-full max-w-sm flex items-center ${darkTheme? "bg-black/60 border-white/20 border-t": "bg-white/60 border-black/10  border"}     backdrop-blur-2xl  rounded-full overflow-hidden`}>
+        <div className={` ${className} w-full flex flex-col items-center `}>
+            <div className="w-full flex gap-2 justify-center px-4 py-2">
+                <div className={`w-full  max-w-sm flex items-center ${darkTheme? "bg-black/60 border-white/20 border-t": "bg-white/60 border-black/10  border"}     backdrop-blur-2xl  rounded-full overflow-hidden`}>
                     <input 
                         type="text"
                         value={searchInput}
@@ -90,13 +105,21 @@ const SearchBox = forwardRef(({user, className}) => {
                                 handleSearch()
                             }
                         }}
-                        className='flex-1 outline-none  h-full py-2 px-4' 
+                        className='flex-1 outline-none  h-full py-2 px-4 placeholder-gray-400' 
                         placeholder='Search'/>
                     <div 
                         onClick={() => (handleSearch())}
                         className={`  px-2`}>
                         <i class="fa-solid fa-magnifying-glass "></i>
                     </div>
+                </div>
+                <div
+                    onClick={
+                        () => navigate('/postvideo')
+                    }
+                    className={`h-10 w-10 min-w-10  flex justify-center items-center rounded-full ${darkTheme? "border-white/20 bg-black/60 border-t": "border border-black/10 bg-white/60"}  backdrop-blur-2xl  cursor-pointer`}
+                >
+                    <i class="fa-solid fa-plus"></i>
                 </div>
             </div>
             
@@ -112,7 +135,7 @@ const SearchBox = forwardRef(({user, className}) => {
                             className='relative w-full min-h-40  max-w-full  aspect-9/16 bg-black'
                         >
                         <img 
-                            className='w-full h-full object-contain'
+                            className='w-full h-full object-cover'
                             src={video.thumbnail} alt=""
                         />
                         <div className='absolute bottom-0 right-0 px-1'>

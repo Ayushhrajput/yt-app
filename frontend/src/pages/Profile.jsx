@@ -7,11 +7,14 @@ import { useFeatures } from '../context/FeaturesContext.jsx';
 import { getAllVideos } from '../services/videoService.js';
 import LoaderBar from '../components/Loaders/LoaderBar.jsx';
 import SearchBox from '../components/SearchBox.jsx';
+import { useVideo } from '../context/VideoContext.jsx';
 
 function Profile(props) {
     const {user, setUser} = useAuth()
     const {darkTheme, setDarkTheme} = useTheme()
     const {toast} = useFeatures()
+    const {hasVideos} = useVideo()
+
     const navigate = useNavigate()
 
     const ref = useRef(null)
@@ -29,6 +32,7 @@ function Profile(props) {
         return () => window.removeEventListener('scroll', handleScroll)
         
     }, [])
+    
     
     
     const [totalPosts, setTotalPosts] = useState(0)
@@ -205,49 +209,60 @@ function Profile(props) {
                         </div>
                     </div>
                     
-                    <div className=' w-full flex flex-col justify-center items-center'>
+                    <div className=' w-full flex flex-col  items-center'>
                         
-                        <div ref={videoRef} className={`sticky  top-0 py-2  w-full  ${isSticky?  ` ${darkTheme? "from-black/70 to-transparent": "from-white to-transparent "} bg-gradient-to-b `: "bg-transparent"} z-1`}>
-                            <div className={`flex mx-4   w-max  px-2  ${darkTheme? "border-white/20 bg-black/60": "border-black/10 bg-white/60"} border-t backdrop-blur-2xl  shadow shadow-black/10  rounded-full cursor-pointer`}>
+                        
+                        <div ref={videoRef} className={`sticky  top-0 py-2  w-full  ${isSticky?  ` ${darkTheme? "from-black/70 to-transparent": "from-white to-transparent "} bg-linear-to-b `: "bg-transparent"} z-1`}>
+                            <div className={` mx-4   w-max  px-2  ${darkTheme? "border-white/20 bg-black/60 border-t": "border border-black/10 bg-white/60"}  backdrop-blur-2xl    rounded-full cursor-pointer`}>
                                 Your Videos
                             </div>
-                            {
-                                videos.length != 0 && (
-                                    <div className=''>
+                            
+                            <div className='w-full  '>
 
-                                        <SearchBox user={user._id}/>
-                                    </div>
-                                )
-                            }
+                                    {
+                                        videos.length != 0 && (
+                                            <div className=''>
+
+                                                <SearchBox user={user._id} />
+                                            </div>
+                                        )
+                                    }
+                                    
+                            </div>
                         </div>
-                        
                         
                         
                         {
                             isFetching &&
                             <LoaderBar className="py-4"/>
                         }
-                        
-                        <div className='grid grid-cols-3  gap-0.5 max-w-lg'>
-                            {videos.map((video) => (
-                                <div key={video._id} className=''>
-                                    <div
-                                        className='relative w-full min-h-40  max-w-full aspect-9/16 bg-black '
-                                    >   
-                                        <img 
-                                            className='h-full w-full object-cover'
-                                            src={video?.thumbnail} alt="" 
-                                            onClick={() => navigate(`/video/${video._id}`)}
-                                        />
-                                        <div className='absolute bottom-0 right-0 px-1'>
-                                            <div className='text-white/60 text-sm'>
-                                                {video.views} views
+
+                        {
+                            !hasVideos && (
+                                <div className='grid grid-cols-3  gap-0.5 max-w-lg'>
+                                    {videos.map((video) => (
+                                        <div key={video._id} className=''>
+                                            <div
+                                                className='relative w-full min-h-40  max-w-full aspect-9/16 bg-black '
+                                            >   
+                                                <img 
+                                                    className='h-full w-full object-cover'
+                                                    src={video?.thumbnail} alt="" 
+                                                    onClick={() => navigate(`/video/${video._id}`)}
+                                                />
+                                                <div className='absolute bottom-0 right-0 w-full bg-linear-to-b from-transparent to-black/60 flex justify-end px-1 '>
+                                                    <div className='text-white text-sm'>
+                                                        {video.views} views
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
+                            )
+                        }
+                        
+                        
                         
                         {
                             !videos.length && !isFetching &&  (

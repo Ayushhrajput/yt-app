@@ -6,15 +6,21 @@ import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext.jsx'
 import { ThemeProvider } from './context/ThemeContext.jsx'
 import { FeaturesProvider } from './context/FeaturesContext.jsx'
+import { VideoProvider } from './context/VideoContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
         <ThemeProvider>
-          <FeaturesProvider>
-            <App />   
-          </FeaturesProvider>
+          
+            <FeaturesProvider>
+              <VideoProvider>
+
+                <App />   
+              </VideoProvider>
+            </FeaturesProvider>
+          
         </ThemeProvider>
       </AuthProvider>
     </BrowserRouter>

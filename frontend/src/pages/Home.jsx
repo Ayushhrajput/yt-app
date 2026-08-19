@@ -81,7 +81,7 @@ function Home(props) {
                             <div className='relative h-max w-max max-h-screen aspect-9/16 overflow-hidden bg-black'>
                                 <div className={`w-full h-full ${darkTheme? "bg-white/20": "bg-black/20"}`}>
                                     <img 
-                                        className='w-full h-full  object-contain'
+                                        className='w-full h-full  object-cover'
                                         src={video.thumbnail}
                                         alt={video.title} 
                                         onClick={() => {

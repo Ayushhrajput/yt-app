@@ -193,7 +193,7 @@ function PostVideo(props) {
 
                                                 <div className={` flex flex-col items-center h-full w-full `}>
                                                     <div
-                                                        className="bg-center  bg-contain bg-no-repeat h-full w-full aspect-9/16 flex justify-center items-center "
+                                                        className="bg-center  bg-cover bg-no-repeat h-full w-full aspect-9/16 flex justify-center items-center "
                                                         style={{
                                                             backgroundImage: `url(${thumbnailPreview})`
                                                         }}
