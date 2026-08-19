@@ -6,6 +6,7 @@ import { useTheme } from '../context/ThemeContext.jsx';
 import { useFeatures } from '../context/FeaturesContext.jsx';
 import { getAllVideos } from '../services/videoService.js';
 import LoaderBar from '../components/Loaders/LoaderBar.jsx';
+import SearchBox from '../components/SearchBox.jsx';
 
 function Profile(props) {
     const {user, setUser} = useAuth()
@@ -31,13 +32,13 @@ function Profile(props) {
     
     
     const [totalPosts, setTotalPosts] = useState(0)
-    const [editFeat, setEditFeat] = useState(false)
     const [channel, setChannel] = useState({})
     const [page, setPage] = useState(1)
     const [videos, setVideos] = useState([])
     const [hasMore, setHasMore] = useState(true)
     const [isFetching, setIsFetching] = useState(false)
     
+    const [editFeat, setEditFeat] = useState(false)
     useEffect(() => {
         const handleEditFeat = () => {
         setEditFeat(false)
@@ -135,7 +136,7 @@ function Profile(props) {
                     onClick={(e) => {
                         e.stopPropagation()
                     }}
-                    className={`md:w-max md:px-40  fixed bottom-0 left-1/2 -translate-x-1/2 animate-[toast_0.4s_ease] ${darkTheme? " bg-black/40  border-white/10 ": "bg-white   border-black/10"}  backdrop-blur-2xl   border-t text-blue-500 flex flex-col justify-center items-center w-full py-20  px-2  rounded-t-2xl  z-20`}
+                    className={`md:w-max md:px-40  fixed bottom-0 left-1/2 -translate-x-1/2 animate-[toast_0.4s_ease] ${darkTheme? " bg-black/40  border-white/10 ": "bg-white   border-black/10"}  backdrop-blur-2xl   border-t text-blue-500 flex flex-col justify-center items-center w-full py-20  px-2  rounded-t-3xl  z-20`}
                 >
                     <div className={`absolute top-1/12 w-1/4 p-1  ${darkTheme? "bg-white": "bg-black/60"}  rounded-full `}></div>
 
@@ -168,7 +169,7 @@ function Profile(props) {
                                 e.stopPropagation()
                                 setEditFeat(true)
 
-                            }} className='text-blue-500 text-sm font-semibold cursor-pointer overflow-hidden'>Edit <i class={`fa-solid fa-caret-down rotate-270 ${editFeat? "translate-x-full transition-transform": "translate-x-0 transition-none"}  duration-100 `}></i></button>
+                            }} className=' cursor-pointer overflow-hidden'>Edit </button>
                             
                         </div>
                         <div className='flex  w-full md:w-sm  px-4 '> 
@@ -203,18 +204,30 @@ function Profile(props) {
                             </div>
                         </div>
                     </div>
+                    
                     <div className=' w-full flex flex-col justify-center items-center'>
-
-                        <div ref={videoRef} className={`sticky  top-0 py-2  w-full  ${isSticky? "bg-gradient-to-b from-black/70 to-black/10": "bg-transparent"} z-1`}>
-                            <div className={`flex mx-4  text-blue-500 w-max  px-2  ${darkTheme? "border-white/10": "border-black/10"} border-t backdrop-blur-2xl  shadow shadow-black/10  rounded-full cursor-pointer`}>
+                        
+                        <div ref={videoRef} className={`sticky  top-0 py-2  w-full  ${isSticky?  ` ${darkTheme? "from-black/70 to-transparent": "from-white to-transparent "} bg-gradient-to-b `: "bg-transparent"} z-1`}>
+                            <div className={`flex mx-4   w-max  px-2  ${darkTheme? "border-white/20 bg-black/60": "border-black/10 bg-white/60"} border-t backdrop-blur-2xl  shadow shadow-black/10  rounded-full cursor-pointer`}>
                                 Your Videos
                             </div>
+                            {
+                                videos.length != 0 && (
+                                    <div className=''>
+
+                                        <SearchBox user={user._id}/>
+                                    </div>
+                                )
+                            }
                         </div>
+                        
+                        
+                        
                         {
                             isFetching &&
                             <LoaderBar className="py-4"/>
                         }
-
+                        
                         <div className='grid grid-cols-3  gap-0.5 max-w-lg'>
                             {videos.map((video) => (
                                 <div key={video._id} className=''>
@@ -222,7 +235,7 @@ function Profile(props) {
                                         className='relative w-full min-h-40  max-w-full aspect-9/16 bg-black '
                                     >   
                                         <img 
-                                            className='h-full w-full object-contain'
+                                            className='h-full w-full object-cover'
                                             src={video?.thumbnail} alt="" 
                                             onClick={() => navigate(`/video/${video._id}`)}
                                         />
@@ -235,11 +248,17 @@ function Profile(props) {
                                 </div>
                             ))}
                         </div>
+                        
                         {
                             !videos.length && !isFetching &&  (
-                                <div className='px-4 py-2'>No Videos</div>
+                                <div>
+                                    
+                                    <div className='px-4 py-2'>No Videos</div>
+                                </div>
                             )
                         }
+                        
+                        
                         <div ref={ref} className='w-full  '></div>
                     </div>
                         

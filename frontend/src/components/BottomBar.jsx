@@ -49,7 +49,7 @@ function BottomBar(props) {
 
     return (
         <nav className="w-full">
-            <div className={`fixed bottom-1 ${bottomBar? "h-14": "h-10"} left-1/2 -translate-x-1/2  flex justify-around items-center ${darkTheme? "bg-black/10  text-white border-white/10 ": "bg-white/10 border-black/10 "} border-t   backdrop-blur  rounded-full  max-w-sm px-2 transition-all duration-200`}>
+            <div className={`fixed bottom-1 ${bottomBar? "h-14": "h-10"} left-1/2 -translate-x-1/2  flex justify-around items-center ${darkTheme? "bg-black/10  text-white border-white/10 ": "bg-white/10 border-black/10 "} border-t shadow  backdrop-blur  rounded-full  max-w-sm px-2 transition-all duration-200`}>
                 {navItems.map((item) => 
                     
                     <NavLink
@@ -58,7 +58,7 @@ function BottomBar(props) {
                         onClick={() => (
                             handlePathClick(item.path)
                         )}
-                        className={({isActive}) => ` ${bottomBar? "py-2 px-4": "py-0.5 px-2"}   rounded-full ${isActive? `bg-white/20    backdrop-blur shadow-inner  `: ''} transition-all duration-200 ease`}
+                        className={({isActive}) => ` ${bottomBar? "py-2 px-4": "py-0.5 px-2"}   rounded-full ${isActive? `bg-white/20    backdrop-blur   border-t border-black/10 shadow`: ''} transition-all duration-200 ease`}
                     >
                         {item.icon}
                         

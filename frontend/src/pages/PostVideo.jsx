@@ -114,7 +114,7 @@ function PostVideo(props) {
                         action=""
                     >  
                         <label 
-                            className={`${darkTheme? "text-white border-white/10 bg-black/10": "text-black bg-white/10 border-black/10"} border-t shadow-[inset_0px_6px_12px_rgba(0,0,0,0.1)] w-20 md:w-25 md:h-25 h-20  rounded-full backdrop-blur flex justify-center items-center `}
+                            className={`${darkTheme? "text-white border-white/10 bg-black/10": "text-black bg-white/10 border-black/10"} border-t shadow w-20 md:w-25 md:h-25 h-20  rounded-full backdrop-blur flex justify-center items-center `}
                             htmlFor="videoFile"
                         >
                             <i class="fa-solid fa-file-arrow-up text-2xl md:text-4xl"></i>
@@ -182,7 +182,7 @@ function PostVideo(props) {
                             <form 
                                 onSubmit={handleSubmit}
                                 action=""
-                                className={`flex flex-col  w-full h-auto max-w-full  gap-2 items-center m-4 px-4 py-2  ${darkTheme? " border-white/10 shadow-[inset_0px_8px_16px_rgba(0,0,0,0.2)]": "shadow-[inset_0px_8px_16px_rgba(0,0,0,0.1)]"} border-t    rounded-2xl max-w-md `}
+                                className={`flex flex-col  w-full h-auto max-w-full  gap-2 items-center m-4 px-4 py-2  ${darkTheme? " border-white/10 shadow-[inset_0px_4px_12px_rgba(255,255,255,0.1)]": "border-black/10  shadow-[inset_0px_8px_16px_rgba(0,0,0,0.1)]"} border-t    rounded-2xl max-w-md `}
                             >   
                                 <div className='flex w-full items-start gap-2'>
                                     <div className={`flex w-full ${darkTheme? `border-black/40 `: `border-black/10 `} border-b  h-full py-2  items-center gap-2`}>

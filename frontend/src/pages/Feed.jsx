@@ -120,7 +120,7 @@ function Shorts(props) {
                             />
                         <div className=' absolute bottom-0  left-0 px-4 z-10'>
                             <div className='flex items-center text-white gap-2 py-2 '>
-                                <div className='w-10 h-10 border border-blue-500 rounded-full'>
+                                <div className='w-10 h-10  rounded-full'>
                                 <img src={video?.owner?.avatar} alt={video.title} className='w-full h-full object-cover rounded-full p-0.5' />
                                 </div>
                                 <div className=''>{video?.owner?.username}</div>
