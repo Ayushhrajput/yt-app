@@ -226,7 +226,24 @@ function Profile(props) {
                                                 <SearchBox user={user._id} />
                                             </div>
                                         )
+                                        
                                     }
+                                    {
+                                        videos.length == 0 && (
+                                            <div className='w-full flex justify-center'>
+                                                <div
+                                                    onClick={
+                                                        () => navigate('/postvideo')
+                                                    }
+                                                    className={`h-10 w-10 min-w-10  flex justify-center items-center rounded-full ${darkTheme? "border-white/20 bg-black/60 border-t": "border border-black/10 bg-white/60"}  backdrop-blur-2xl  cursor-pointer`}
+                                                >
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </div>
+                                            </div>
+
+                                        )
+                                    }
+                                    
                                     
                             </div>
                         </div>
