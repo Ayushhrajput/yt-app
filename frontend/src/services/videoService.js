@@ -55,8 +55,20 @@ const getAllVideos = async ({
         )
         return response.data
 }
+
+const deleteVideo = async (videoId) => {
+    try {
+        const response = await api.delete(
+            `/api/v1/videos/${videoId}`
+        )
+        return response.data
+    } catch (e) {
+        throw new Error(e.response.data.message || e.message || "something went wrong!")
+    }
+}
 export {
     publishVideo,
     getVideoById,
-    getAllVideos
+    getAllVideos,
+    deleteVideo
 }

@@ -140,11 +140,7 @@ const SearchBox = forwardRef(({user, className}) => {
                             className='w-full h-full object-cover'
                             src={video.thumbnail} alt=""
                         />
-                        <div className='absolute bottom-0 right-0 px-1'>
-                            <div className='text-white/60 text-sm'>
-                                {video.views} views
-                            </div>
-                        </div>
+                        
                         </div>
                     </div>
                 ))}

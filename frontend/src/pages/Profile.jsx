@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {getUserChannel, logout, getWatchHistory} from "../services/authservice.js"
 import { useTheme } from '../context/ThemeContext.jsx';
 import { useFeatures } from '../context/FeaturesContext.jsx';
-import { getAllVideos } from '../services/videoService.js';
+import { deleteVideo, getAllVideos } from '../services/videoService.js';
 import LoaderBar from '../components/Loaders/LoaderBar.jsx';
 import SearchBox from '../components/SearchBox.jsx';
 import { useVideo } from '../context/VideoContext.jsx';
@@ -21,6 +21,8 @@ function Profile(props) {
 
     const videoRef = useRef(null)
     const [isSticky, setIsSticky] = useState(false)
+    const [showDelete, setShowDelete] = useState(false)
+    
 
     useEffect(() => {
         const handleScroll = () => {
@@ -32,6 +34,26 @@ function Profile(props) {
         return () => window.removeEventListener('scroll', handleScroll)
         
     }, [])
+    
+    const [videoId, setVideoId] = useState(null)
+
+    
+    const handleDelete = async (videoId) => {
+        try {
+            
+
+            await deleteVideo(videoId)
+
+            setVideos((prev) => prev.filter((video) => video._id !== videoId))
+            setTotalPosts((prev) => prev - 1)
+            setShowDelete(false)
+            setVideoId(null)
+        } catch (e) {
+            console.error(e)
+        } finally {
+            
+        }
+    }
     
     
     
@@ -46,6 +68,7 @@ function Profile(props) {
     useEffect(() => {
         const handleEditFeat = () => {
         setEditFeat(false)
+        setShowDelete(false)
         }
 
         window.addEventListener('click', handleEditFeat)
@@ -56,8 +79,6 @@ function Profile(props) {
 
     useEffect(() => {
         if(isFetching) return
-        
-        
         
         const fetchVideos = async () => {
             try {
@@ -129,6 +150,8 @@ function Profile(props) {
         }
         
     }
+
+    
     
     
     return (
@@ -267,10 +290,20 @@ function Profile(props) {
                                                     src={video?.thumbnail} alt="" 
                                                     onClick={() => navigate(`/video/${video._id}`)}
                                                 />
-                                                <div className='absolute bottom-0 right-0 w-full bg-linear-to-b from-transparent to-black/60 flex justify-end px-1 '>
-                                                    <div className='text-white text-sm'>
-                                                        {video.views} views
-                                                    </div>
+                                                <div 
+
+                                                    onClick={(e) => {
+                                                        e.stopPropagation()
+                                                        setVideoId(video._id)
+                                                        setShowDelete(true)
+                                                        
+
+                                                        
+                                                    }
+                                                    }
+                                                    className='absolute bottom-0 right-0 w-full py-2 text-white flex justify-end bg-linear-to-b from-transparent to-black/60 cursor-pointer'
+                                                >
+                                                    <i class="fa-solid fa-ellipsis-vertical"></i>
                                                 </div>
                                             </div>
                                         </div>
@@ -293,6 +326,36 @@ function Profile(props) {
                         
                         <div ref={ref} className='w-full  '></div>
                     </div>
+                    {
+                        showDelete && 
+                        (
+
+                            <div className='px-10  w-full  absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-1 '>
+
+                                <div
+                                    
+                                    className={`max-w-sm w-full  h-max   ${darkTheme? "border-white/10 bg-white/40": " bg-black/40 border-black/10"}  border-t  rounded-2xl overflow-hidden`}
+                                >
+                                    
+                                    <div className={`w-full py-2 flex justify-center ${darkTheme? "bg-black/90": "bg-white"} backdrop-blur-2xl`}>
+                                        <button
+                                            
+                                            onClick={() => {
+                                                
+                                                handleDelete(videoId)
+                                            }}
+                                            className='w-full cursor-pointer'
+                                        >
+                                            Delete
+                                            
+                                        </button>
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    }
                         
                 </div>
             
