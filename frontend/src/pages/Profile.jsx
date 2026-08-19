@@ -135,9 +135,9 @@ function Profile(props) {
                     onClick={(e) => {
                         e.stopPropagation()
                     }}
-                    className={`md:w-max md:px-40  fixed bottom-0 left-1/2 -translate-x-1/2 animate-[toast_0.4s_ease] ${darkTheme? " bg-black/10  border-black/10 ": "bg-white/10   border-white/10"}  backdrop-blur shadow-[inset_0px_6px_12px_rgba(0,0,0,0.1)]  border text-blue-500 flex flex-col justify-center items-center w-full py-20  px-2  rounded-t-2xl  z-20`}
+                    className={`md:w-max md:px-40  fixed bottom-0 left-1/2 -translate-x-1/2 animate-[toast_0.4s_ease] ${darkTheme? " bg-black/40  border-white/10 ": "bg-white   border-black/10"}  backdrop-blur-2xl   border-t text-blue-500 flex flex-col justify-center items-center w-full py-20  px-2  rounded-t-2xl  z-20`}
                 >
-                    <div className={`absolute top-1/12 w-1/4 p-1  ${darkTheme? "bg-white": "bg-black/90"} shadow-inner shadow-black/10 rounded-full `}></div>
+                    <div className={`absolute top-1/12 w-1/4 p-1  ${darkTheme? "bg-white": "bg-black/60"}  rounded-full `}></div>
 
                     <div className="flex items-center   px-8 py-2 h-12">
                         <label htmlFor='theme' className={`${darkTheme? "": " items-baseline-last "} flex justify-center h-10 w-10`}>
@@ -162,7 +162,7 @@ function Profile(props) {
                 <div  className=' w-full flex-1  overflow-y-auto scrollbar-hide  flex flex-col '>
                     
                     <div className={`w-full py-2 flex flex-col gap-2 ${darkTheme? "text-white ": ""}border-black/20 border-b`}>
-                        <div className='flex justify-between items-center gap-2 px-4'>
+                        <div className='flex justify-between items-center px-4'>
                             <h1 className='font-semibold italic '>{user.username}</h1>
                             <button onClick={(e) => {
                                 e.stopPropagation()
@@ -205,8 +205,8 @@ function Profile(props) {
                     </div>
                     <div className=' w-full flex flex-col justify-center items-center'>
 
-                        <div ref={videoRef} className={`sticky  top-0  w-full max-w-lg ${isSticky? "bg-gradient-to-b from-black/70 to-black/10": "bg-transparent"} z-1`}>
-                            <div className={`flex mx-4 max-w-sm text-blue-500  py-2 cursor-pointer`}>
+                        <div ref={videoRef} className={`sticky  top-0 py-2  w-full  ${isSticky? "bg-gradient-to-b from-black/70 to-black/10": "bg-transparent"} z-1`}>
+                            <div className={`flex mx-4  text-blue-500 w-max  px-2  ${darkTheme? "border-white/10": "border-black/10"} border-t backdrop-blur-2xl  shadow shadow-black/10  rounded-full cursor-pointer`}>
                                 Your Videos
                             </div>
                         </div>

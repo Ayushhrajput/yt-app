@@ -36,7 +36,7 @@ function Navbar({className}) {
                             handletoast()
                         }
                         }>
-                        <i class={`fa-solid fa-caret-down ${toast? "rotate-180": ""}`}></i>
+                        <i class="fa-solid fa-ellipsis"></i>
                     </div>
                     }   
                 </div>

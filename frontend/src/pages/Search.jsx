@@ -80,7 +80,7 @@ function Search(props) {
     return (
         <div className='min-h-screen'>
             <div className="w-full flex justify-center px-2 py-2">
-                <div className={`w-full max-w-sm flex items-center ${darkTheme? "bg-black/20 border-black/20 shadow-black/40": "bg-white/20 border-black/10 shadow-black/10 "} border  backdrop-blur-2xl shadow-lg rounded-full overflow-hidden`}>
+                <div className={`w-full max-w-sm flex items-center ${darkTheme? "bg-black/20 border-white/10 s": "bg-white/20 border-black/10  "} border-t shadow-[inset_0px_4px_12px_rgba(0,0,0,0.1)]  backdrop-blur-2xl  rounded-full overflow-hidden`}>
                     <input 
                         type="text"
                         value={searchInput}
@@ -94,7 +94,7 @@ function Search(props) {
                         placeholder='Search'/>
                     <div 
                         onClick={() => (handleSearch())}
-                        className={` text-2xl border-l-2 ${darkTheme? "border-white/10 ": "border-black/10"}  px-2`}>
+                        className={`  px-2`}>
                         <i class="fa-solid fa-magnifying-glass "></i>
                     </div>
                 </div>
