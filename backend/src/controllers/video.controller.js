@@ -9,18 +9,20 @@ import { upload } from "../middlewares/multer.middleware.js";
 const publishAVideo = asyncHandler( async (req, res) => {
     const {title, description} = req.body
 
+    console.log(req.body)
+    console.log(req.files)
     if(
         [title, description].some(
-        (field) => field?.trim() === ""
+        (field) => !field?.trim()
         )
     ) {
         throw new ApiError(400, "All fields are required")
     }
 
-    const videoFileLocalPath = req.files?.videoFile?.[0].path
+    const videoFileLocalPath = req.files?.videoFile?.[0]?.path
     if(!videoFileLocalPath) throw new ApiError(400, "videoFile is required")
 
-    const thumbnailLocalPath = req.files?.thumbnail?.[0].path
+    const thumbnailLocalPath = req.files?.thumbnail?.[0]?.path
     if(!thumbnailLocalPath) throw new ApiError(400, "thumbnail is required")
 
     const videoFile = await uploadOnCloudinary(videoFileLocalPath)

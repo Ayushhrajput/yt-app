@@ -49,7 +49,7 @@ function PostVideo(props) {
         }
         if(postStatus) return
         setPostStatus(true)
-
+        console.log("status -", status)
         data.append("title", formData.title)
         data.append("thumbnail", thumbnail)
         data.append("videoFile", videoFile)
@@ -72,12 +72,13 @@ function PostVideo(props) {
             
         } catch (e) {
             setStatus(e.message)
-            
+            console.log("error -", status)
             console.log(e.message)
             
             setPostStatus(false)
         } finally {
             setPostStatus(false)
+            console.log("e -", status)
             
         }
     }
@@ -180,6 +181,7 @@ function PostVideo(props) {
                             {showError && 
                                 <div className='absolute top-1/2 px-4 py-2 flex gap-4 w-max text-white bg-black rounded-full '> 
                                     <div className=' '>All fields are required</div>
+                                    
                                     <button className='' onClick={() => setShowError(false)}><i class="fa-solid fa-xmark"></i></button>
                                 </div>
                                 
@@ -284,9 +286,7 @@ function PostVideo(props) {
                                     <button
                                         className={` w-max  overflow-hidden  flex items-center justify-center   text-blue-500 border-b cursor-pointer  `} 
                                         type="submit"
-                                        onClick={() => {
-                                            
-                                        }}
+                                        
                                         > 
                                             <div className='relative  h-10 w-15'>
 
