@@ -95,7 +95,7 @@ const SearchBox = forwardRef(({user, className}) => {
     return (
         <div className={` ${className} w-full flex flex-col items-center `}>
             <div className="w-full flex gap-2 justify-center px-4 py-2">
-                <div className={`w-full  max-w-sm flex  items-center ${darkTheme? "bg-black/60 border-white/20 border-t": "bg-white/60 border-black/10  border"}     backdrop-blur-2xl  rounded-full overflow-hidden`}>
+                <div className={`w-full  max-w-sm flex  items-center ${darkTheme? "bg-black/20 border-white/20 border-t": "bg-white/20 border-black/10  border"}     backdrop-blur-2xl  rounded-full overflow-hidden`}>
                     <input 
                         type="text"
                         value={searchInput}
@@ -118,7 +118,7 @@ const SearchBox = forwardRef(({user, className}) => {
                         onClick={
                             () => navigate('/postvideo')
                         }
-                        className={`h-10 w-10 min-w-10  flex justify-center items-center rounded-full ${darkTheme? "border-white/20 bg-black/60 border-t": "border border-black/10 bg-white/60"}  backdrop-blur-2xl  cursor-pointer`}
+                        className={`h-10 w-10 min-w-10  flex justify-center items-center rounded-full ${darkTheme? "border-white/20 bg-black/20 border-t": "border border-black/10 bg-white/20"}  backdrop-blur-2xl  cursor-pointer`}
                     >
                         <i class="fa-solid fa-plus"></i>
                     </div>
@@ -144,6 +144,7 @@ const SearchBox = forwardRef(({user, className}) => {
                         </div>
                     </div>
                 ))}
+                
             </div>
             {fetch && <LoaderBar className="py-4"/>}
             <div ref={ref} className=''></div>

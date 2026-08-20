@@ -236,7 +236,7 @@ function Profile(props) {
                         
                         
                         <div ref={videoRef} className={`sticky  top-0 py-2  w-full  ${isSticky?  ` ${darkTheme? "from-black/70 to-transparent": "from-white to-transparent "} bg-linear-to-b `: "bg-transparent"} z-1`}>
-                            <div className={` mx-4   w-max  px-2  ${darkTheme? "border-white/20 bg-black/60 border-t": "border border-black/10 bg-white/60"}  backdrop-blur-2xl    rounded-full cursor-pointer`}>
+                            <div className={` mx-4   w-max  px-2  ${darkTheme? "border-white/20 bg-black/20 border-t": "border border-black/10 bg-white/20"}  backdrop-blur-2xl    rounded-full cursor-pointer`}>
                                 Your Videos
                             </div>
                             
@@ -334,10 +334,10 @@ function Profile(props) {
 
                                 <div
                                     
-                                    className={`max-w-sm w-full  h-max   ${darkTheme? "border-white/10 bg-white/40": " bg-black/40 border-black/10"}  border-t  rounded-2xl overflow-hidden`}
+                                    className={`max-w-sm w-full  h-max   ${darkTheme? "border-white/20 bg-black/20": " bg-white border-black/10"}  border-t  rounded-xl overflow-hidden`}
                                 >
                                     
-                                    <div className={`w-full py-2 flex justify-center ${darkTheme? "bg-black/90": "bg-white"} backdrop-blur-2xl`}>
+                                    <div className={`w-full py-2 flex justify-center ${darkTheme? "bg-black/10": "bg-white/10"} backdrop-blur-2xl`}>
                                         <button
                                             
                                             onClick={() => {
