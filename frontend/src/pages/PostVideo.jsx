@@ -4,6 +4,7 @@ import { useTheme } from '../context/ThemeContext';
 import { toggleVideoPlay } from '../utils/togglePlay.js';
 
 
+
 function PostVideo(props) {
 
     const {darkTheme} = useTheme()
@@ -49,9 +50,9 @@ function PostVideo(props) {
         }
         if(postStatus) return
         setPostStatus(true)
-        console.log("status -", status)
+
         data.append("title", formData.title)
-        console.log("thumbnail", thumbnail)
+        
         data.append("thumbnail", thumbnail)
         data.append("videoFile", videoFile)
         data.append("description", formData.description)
@@ -72,9 +73,9 @@ function PostVideo(props) {
             setStatus(response.message)
             
         } catch (e) {
-            setStatus(e.message)
-            console.log("error -", status)
-            console.log(e.message)
+            console.log(e)
+            setStatus(e)
+            
             
             setPostStatus(false)
         } finally {
@@ -133,7 +134,7 @@ function PostVideo(props) {
                 !videoFile &&
                 <div className='w-full h-screen flex justify-center items-center'>
                     <form 
-                        className='flex flex-col items-center gap-4'
+                        className='flex flex-col items-center gap-1'
                         action=""
                     >  
                         <label 
@@ -158,12 +159,14 @@ function PostVideo(props) {
                             type="file" 
                             className='hidden'
                         />
-                        {status && <div className={`w-max absolute top-1/4 left-1/2 -translate-x-1/2 ${darkTheme? "bg-black/20 border-t border-white/10": "bg-white border border-black/10"}  flex gap-2 rounded-full px-4 py-2`}>
+                        {status && <div className={`w-max `}>
                         
-                        <div>
+                        <div >
+
+                            
                             {status}
                         </div>
-                        <button className='' onClick={() => setStatus("")}><i class="fa-solid fa-xmark"></i></button>
+                        
                         </div> }
                     </form>
                     
@@ -202,21 +205,14 @@ function PostVideo(props) {
                     <div 
                         className={` ${darkTheme? "text-white": ""} w-full  h-screen flex justify-center `}
                     >
-                            {showError && 
-                                <div className='absolute top-1/2 px-4 py-2 flex gap-4 w-max text-white bg-black rounded-full '> 
-                                    <div className=' '>All fields are required</div>
-                                    
-                                    <button className='' onClick={() => setShowError(false)}><i class="fa-solid fa-xmark"></i></button>
-                                </div>
-                                
-                            }
+                            
                             <form 
                                 onSubmit={handleSubmit}
                                 action=""
-                                className={`flex flex-col  w-full h-auto max-w-full  gap-2 items-center m-4 px-4 py-2  ${darkTheme? " border-white/10 bg-black/20 border-t": "border-black/10  border"}     rounded-2xl max-w-md `}
+                                className={`flex flex-col  w-full h-auto max-w-full  gap-2  m-4 px-4 py-2  ${darkTheme? " border-white/10 bg-black/20 border-t": "border-black/10  border"}     rounded-2xl max-w-md `}
                             >   
-                                <div className='flex w-full items-start gap-2'>
-                                    <div className={`flex w-full ${darkTheme? `border-black/40 `: `border-black/10 `} border-b  h-full py-2  items-center gap-2`}>
+                                <div className='flex w-full  items-start gap-2'>
+                                    <div className={`flex w-full ${darkTheme? `border-black/40 `: `border-black/10 `} border-b  h-full py-2   gap-2`}>
                             
                                         <div className='w-max '>
 
@@ -273,7 +269,7 @@ function PostVideo(props) {
                                             onChange={
                                                 (e) => {
                                                     handleChange(e)
-                                                    
+                                                    setShowError(false)
                                                 }
                                             }
                                             type="text" 
@@ -297,7 +293,7 @@ function PostVideo(props) {
                                         onChange={
                                             (e) => {
                                                 handleChange(e)
-                                                
+                                                setShowError(false)
                                             }
                                         }
                                         type="text" 
@@ -306,7 +302,14 @@ function PostVideo(props) {
                                     <span className='text-gray-400 text-sm'>{formData.description.length}/400</span>
                                 </div>
                                 
-                                
+                                {showError && 
+                                    <div className=' px-4 py-2 flex gap-2 w-max '> 
+                                        <div className=' '>All fields are required</div>
+                                        
+                                        
+                                    </div>
+                                    
+                                }
                                 <div className='flex-1 flex items-center justify-center w-full '>
 
                                     <button
