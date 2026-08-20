@@ -354,12 +354,15 @@ function Profile(props) {
                                     className={`max-w-sm w-full  py-2 h-max   ${darkTheme? "border-white/20 border-t bg-black/10 backdrop-blur-2xl": " bg-white border  border-black/10"}    rounded-xl overflow-hidden`}
                                 >
                                     
-                                    <div className={`w-full py-2 flex justify-center ${darkTheme? "": "bg-white/10"} `}>
+                                    <div 
+                                        onClick={(e) => e.stopPropagation()}
+                                        className={`w-full py-2 flex justify-center ${darkTheme? "": "bg-white/10"} `}
+                                    >
                                         <button
                                             
                                             
-                                            onClick={(e) => {
-                                                e.stopPropagation()
+                                            onClick={() => {
+                                                
                                                 handleDelete(videoId)
 
                                             }}

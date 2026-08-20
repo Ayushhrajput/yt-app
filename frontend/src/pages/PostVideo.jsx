@@ -51,6 +51,7 @@ function PostVideo(props) {
         setPostStatus(true)
         console.log("status -", status)
         data.append("title", formData.title)
+        console.log("thumbnail", thumbnail)
         data.append("thumbnail", thumbnail)
         data.append("videoFile", videoFile)
         data.append("description", formData.description)
@@ -102,7 +103,23 @@ function PostVideo(props) {
                 const ctx = canvas.getContext('2d')
                 ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
 
-                resolve(canvas.toDataURL('image/jpeg'))
+                canvas.toBlob(blob => {
+                    if(!blob) {
+                        reject(new Error("failed to generate thumbnail"))
+
+                    }
+                    const thumbnailFile = new File(
+                        [blob],
+                        "thumbnail.jpg",
+                        {
+                            type: "image/jpeg"
+                        }
+                    )
+                    resolve(thumbnailFile)
+
+                    URL.revokeObjectURL(video.src)
+                })
+                
                 
             })
         })
@@ -134,13 +151,20 @@ function PostVideo(props) {
                                 setVideoPreview(URL.createObjectURL(file))
 
                                 const thumbnailUrl = await generateThumbnail(file)
-                                setThumbnailPreview(thumbnailUrl)
+                                setThumbnailPreview(URL.createObjectURL(thumbnailUrl))
+                                setThumbnail(thumbnailUrl)
                             }
                             }
                             type="file" 
                             className='hidden'
                         />
-                        {status && <div className={`w-max absolute top-1/4 left-1/2 -translate-x-1/2 ${darkTheme? "bg-white": "bg-blue-500/40"}  rounded-full px-4 py-2`}>{status}</div> }
+                        {status && <div className={`w-max absolute top-1/4 left-1/2 -translate-x-1/2 ${darkTheme? "bg-black/20 border-t border-white/10": "bg-white border border-black/10"}  flex gap-2 rounded-full px-4 py-2`}>
+                        
+                        <div>
+                            {status}
+                        </div>
+                        <button className='' onClick={() => setStatus("")}><i class="fa-solid fa-xmark"></i></button>
+                        </div> }
                     </form>
                     
                 </div>
@@ -223,9 +247,11 @@ function PostVideo(props) {
                                             id='thumbnail'
                                             className='hidden'
                                             accept='image/*'
+                                            onClick={() => console.log("input clicked")}
                                             onChange={(e) => {
                                                 const file = e.target.files[0]
 
+                                                console.log("file", file)
                                                 setThumbnail(file)
                                                 if(file) {
 
