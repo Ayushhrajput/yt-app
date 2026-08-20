@@ -288,7 +288,7 @@ function Profile(props) {
 
                         {
                             !hasVideos &&(
-                                <div className='grid grid-cols-3  gap-0.5 max-w-lg'>
+                                <div className="grid grid-cols-3  gap-0.5 max-w-lg text-white ">
                                     {videos.map((video) => (
                                         <div key={video._id} className=''>
                                             <div
@@ -312,11 +312,11 @@ function Profile(props) {
                                                         
                                                     }
                                                     }
-                                                    className='absolute top-0 right-0 w-full py-2  flex justify-end cursor-pointer'
+                                                    className='absolute top-0 right-0 w-full py-2 bg-linear-to-b from-black/40 to-transparent flex justify-end cursor-pointer'
                                                 >
                                                     <i class="fa-solid fa-ellipsis-vertical"></i>
                                                 </div>
-                                                <div className='absolute bottom-0 right-0 px-2 w-full flex justify-end '>
+                                                <div className='absolute bottom-0 right-0 px-2 w-full bg-linear-to-b from-transparent to-black/40 flex justify-end '>
                                                     {video.views} views
                                                 </div>
                                             </div>
@@ -346,15 +346,15 @@ function Profile(props) {
 
                             <div
                                 
-                                className='px-10  w-full flex justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-1 '
+                                className=' px-10 w-full flex justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-1 '
                             >
 
                                 <div
                                     
-                                    className={`max-w-sm w-full  h-max   ${darkTheme? "border-white/20 bg-black/20": " bg-white border-black/10"}  border  rounded-xl overflow-hidden`}
+                                    className={`max-w-sm w-full  py-2 h-max   ${darkTheme? "border-white/20 border-t bg-black/10 backdrop-blur-2xl": " bg-white border  border-black/10"}    rounded-xl overflow-hidden`}
                                 >
                                     
-                                    <div className={`w-full py-2 flex justify-center ${darkTheme? "bg-black/10": "bg-white/10"} backdrop-blur-2xl`}>
+                                    <div className={`w-full py-2 flex justify-center ${darkTheme? "": "bg-white/10"} `}>
                                         <button
                                             
                                             

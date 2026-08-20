@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { publishVideo } from '../services/videoService';
 import { useTheme } from '../context/ThemeContext';
 import { toggleVideoPlay } from '../utils/togglePlay.js';
-import { response } from 'express';
+
 
 function PostVideo(props) {
 
@@ -187,7 +187,7 @@ function PostVideo(props) {
                             <form 
                                 onSubmit={handleSubmit}
                                 action=""
-                                className={`flex flex-col  w-full h-auto max-w-full  gap-2 items-center m-4 px-4 py-2  ${darkTheme? " border-white/10 shadow-[inset_0px_4px_12px_rgba(255,255,255,0.1)]": "border-black/10  shadow-[inset_0px_8px_16px_rgba(0,0,0,0.1)]"} border-t    rounded-2xl max-w-md `}
+                                className={`flex flex-col  w-full h-auto max-w-full  gap-2 items-center m-4 px-4 py-2  ${darkTheme? " border-white/10 bg-black/20 border-t": "border-black/10  border"}     rounded-2xl max-w-md `}
                             >   
                                 <div className='flex w-full items-start gap-2'>
                                     <div className={`flex w-full ${darkTheme? `border-black/40 `: `border-black/10 `} border-b  h-full py-2  items-center gap-2`}>
