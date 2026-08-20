@@ -2,12 +2,13 @@ import React, { useRef, useState } from 'react';
 import { publishVideo } from '../services/videoService';
 import { useTheme } from '../context/ThemeContext';
 import { toggleVideoPlay } from '../utils/togglePlay.js';
+import { response } from 'express';
 
 function PostVideo(props) {
 
     const {darkTheme} = useTheme()
     
-    const [formData, setFromData] = useState({
+    const [formData, setFormData] = useState({
         title: "",
         description: ""
     })
@@ -27,13 +28,14 @@ function PostVideo(props) {
     const videoRef = useRef(null)
 
     const handleChange = (e) => {
-        setFromData(
+        setFormData(
             {
                 ...formData,
                 [e.target.name]: e.target.value
             }
         )
     }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = new FormData()
@@ -60,7 +62,7 @@ function PostVideo(props) {
             setVideoFile(null)
             setCanUpload(false)
             setThumbnail(null)
-            setFromData({
+            setFormData({
                 title: "",
                 description: ""
             })
@@ -71,12 +73,15 @@ function PostVideo(props) {
         } catch (e) {
             setStatus(e.message)
             
+            console.log(e.message)
+            
             setPostStatus(false)
         } finally {
             setPostStatus(false)
             
         }
     }
+
 
     const generateThumbnail = (file) => {
         return new Promise((resolve) => {

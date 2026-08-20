@@ -18,6 +18,7 @@ function Profile(props) {
     const navigate = useNavigate()
 
     const ref = useRef(null)
+    
 
     const videoRef = useRef(null)
     const [isSticky, setIsSticky] = useState(false)
@@ -54,6 +55,8 @@ function Profile(props) {
             
         }
     }
+
+
     
     
     
@@ -65,18 +68,24 @@ function Profile(props) {
     const [isFetching, setIsFetching] = useState(false)
     
     const [editFeat, setEditFeat] = useState(false)
+
+
     useEffect(() => {
+        
         const handleEditFeat = () => {
-        setEditFeat(false)
-        setShowDelete(false)
+            
+            setEditFeat(false)
+            setShowDelete(false)
+        
         }
 
         window.addEventListener('click', handleEditFeat)
 
-        return () => {window.removeEventListener('click', handleEditFeat)}
+        return () => window.removeEventListener('click', handleEditFeat)
+        
     }, [])
     
-
+    
     useEffect(() => {
         if(isFetching) return
         
@@ -140,7 +149,7 @@ function Profile(props) {
 
     const handleLogout = async () => {
         try {
-            const response = await logout()
+            await logout()
 
             setUser(null)
             navigate("/login")
@@ -258,7 +267,7 @@ function Profile(props) {
                                                     onClick={
                                                         () => navigate('/postvideo')
                                                     }
-                                                    className={`h-10 w-10 min-w-10  flex justify-center items-center rounded-full ${darkTheme? "border-white/20 bg-black/60 border-t": "border border-black/10 bg-white/60"}  backdrop-blur-2xl  cursor-pointer`}
+                                                    className={`h-10 w-10 min-w-10  flex justify-center items-center rounded-full ${darkTheme? "border-white/20 bg-black/20 border-t": "border border-black/10 bg-white/20"}  backdrop-blur-2xl  cursor-pointer`}
                                                 >
                                                     <i class="fa-solid fa-plus"></i>
                                                 </div>
@@ -278,7 +287,7 @@ function Profile(props) {
                         }
 
                         {
-                            !hasVideos && (
+                            !hasVideos &&(
                                 <div className='grid grid-cols-3  gap-0.5 max-w-lg'>
                                     {videos.map((video) => (
                                         <div key={video._id} className=''>
@@ -292,6 +301,8 @@ function Profile(props) {
                                                 />
                                                 <div 
 
+                                                    
+
                                                     onClick={(e) => {
                                                         e.stopPropagation()
                                                         setVideoId(video._id)
@@ -301,9 +312,12 @@ function Profile(props) {
                                                         
                                                     }
                                                     }
-                                                    className='absolute bottom-0 right-0 w-full py-2 text-white flex justify-end bg-linear-to-b from-transparent to-black/60 cursor-pointer'
+                                                    className='absolute top-0 right-0 w-full py-2  flex justify-end cursor-pointer'
                                                 >
                                                     <i class="fa-solid fa-ellipsis-vertical"></i>
+                                                </div>
+                                                <div className='absolute bottom-0 right-0 px-2 w-full flex justify-end '>
+                                                    {video.views} views
                                                 </div>
                                             </div>
                                         </div>
@@ -330,19 +344,24 @@ function Profile(props) {
                         showDelete && 
                         (
 
-                            <div className='px-10  w-full  absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-1 '>
+                            <div
+                                
+                                className='px-10  w-full flex justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-1 '
+                            >
 
                                 <div
                                     
-                                    className={`max-w-sm w-full  h-max   ${darkTheme? "border-white/20 bg-black/20": " bg-white border-black/10"}  border-t  rounded-xl overflow-hidden`}
+                                    className={`max-w-sm w-full  h-max   ${darkTheme? "border-white/20 bg-black/20": " bg-white border-black/10"}  border  rounded-xl overflow-hidden`}
                                 >
                                     
                                     <div className={`w-full py-2 flex justify-center ${darkTheme? "bg-black/10": "bg-white/10"} backdrop-blur-2xl`}>
                                         <button
                                             
-                                            onClick={() => {
-                                                
+                                            
+                                            onClick={(e) => {
+                                                e.stopPropagation()
                                                 handleDelete(videoId)
+
                                             }}
                                             className='w-full cursor-pointer'
                                         >

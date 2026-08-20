@@ -37,6 +37,7 @@ const SearchBox = forwardRef(({user, className}) => {
         const fetchVideos = async () => {
             try {
                 setFetch(true)
+                
                 const response = await getAllVideos({
                     page,
                     query: query,
@@ -53,6 +54,7 @@ const SearchBox = forwardRef(({user, className}) => {
                 console.error(e)
             } finally {
                 setFetch(false)
+                
             }
         }
         fetchVideos()
@@ -85,6 +87,8 @@ const SearchBox = forwardRef(({user, className}) => {
         return () => observer.disconnect()
         
     }, [hasMore, fetch, page])
+
+    
     
     const handleSearch = () => {
         setVideos([])
@@ -92,6 +96,8 @@ const SearchBox = forwardRef(({user, className}) => {
         setPage(1)
         setHasMore(true)
     }
+
+    
     return (
         <div className={` ${className} w-full flex flex-col items-center `}>
             <div className="w-full flex gap-2 justify-center px-4 py-2">
@@ -108,7 +114,11 @@ const SearchBox = forwardRef(({user, className}) => {
                         className='flex-1 w-full  outline-none  h-full py-2 px-2 placeholder-gray-400' 
                         placeholder='Search'/>
                     <div 
-                        onClick={() => (handleSearch())}
+                        onClick={() => {
+                            handleSearch()
+                            
+
+                        }}
                         className={`   px-2`}>
                         <i class="fa-solid fa-magnifying-glass "></i>
                     </div>
@@ -136,12 +146,16 @@ const SearchBox = forwardRef(({user, className}) => {
                             }}
                             className='relative w-full min-h-40  max-w-full  aspect-9/16 bg-black'
                         >
-                        <img 
-                            className='w-full h-full object-cover'
-                            src={video.thumbnail} alt=""
-                        />
+                            <img 
+                                className='w-full h-full object-cover'
+                                src={video.thumbnail} alt=""
+                            />
+                            <div className='absolute bottom-0 right-0 px-2 w-full flex justify-end '>
+                                {video.views} views
+                            </div>
                         
                         </div>
+                        
                     </div>
                 ))}
                 
