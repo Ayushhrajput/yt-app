@@ -351,7 +351,7 @@ function Profile(props) {
 
                                 <div
                                     
-                                    className={`max-w-sm w-full  py-2 h-max   ${darkTheme? "border-white/20 border-t bg-black/10 backdrop-blur-2xl": " bg-white border  border-black/10"}    rounded-xl overflow-hidden`}
+                                    className={`max-w-sm w-full  py-2 h-max   ${darkTheme? "border-white/20 border-t bg-black/10 backdrop-blur-2xl ": " bg-white border  border-black/10"}    rounded-xl overflow-hidden`}
                                 >
                                     
                                     <div 

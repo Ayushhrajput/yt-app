@@ -67,8 +67,8 @@ function Home(props) {
 
 
     return (
-        <div className=' w-full min-h-screen '>
-            <div className=''>
+        <div className=' w-full  aspect-9/16  '>
+            <div className=' w-full  '>
                 
                 {videos.map((video) => 
                     <div
