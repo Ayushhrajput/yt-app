@@ -1,7 +1,8 @@
 import ApiError from "../utils/apiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { User } from "../models/user.model.js";
-import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import { Video } from "../models/video.model.js"
+import { uploadOnCloudinary, deleteFromCloudinary } from "../utils/cloudinary.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import ApiResponse from "../utils/apiResponse.js";
 import jwt from "jsonwebtoken"
@@ -369,6 +370,70 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
         )
     )
 })
+const deleteAccount = asyncHandler(async (req, res) => {
+    const userId = req.user._id;
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+        throw new ApiError(404, "User not found");
+    }
+
+    
+    const videos = await Video.find({ owner: userId });
+
+    
+    for (const video of videos) {
+        if (video.videoFile?.public_id) {
+            await deleteFromCloudinary(
+                video.videoFile.public_id,
+                "video"
+            );
+}       if (video.thumbnail?.public_id) {
+            await deleteFromCloudinary(
+                video.thumbnail.public_id,
+                "image"
+            );
+}
+
+        
+    }
+
+    
+    await Video.deleteMany({ owner: userId });
+
+    
+    if (user.avatar?.public_id) {
+        await deleteFromCloudinary(user.avatar.public_id);
+    }
+
+    
+    await User.findByIdAndDelete(userId);
+
+    
+    res.clearCookie("accessToken", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none"
+    });
+
+    res.clearCookie("refreshToken", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none"
+    });
+
+    return res
+        .status(200)
+        .json(
+            new ApiResponse(
+                200,
+                {},
+                "Account and all associated data deleted successfully"
+            )
+        );
+});
+
 
 const getWatchHistory = asyncHandler(async (req, res) => {
     const user = await User.aggregate([
@@ -463,6 +528,7 @@ export {registerUser,
     updateUserAvatar,
     updateUsercoverImage,
     getUserChannelProfile,
+    deleteAccount,
     getWatchHistory,
     addToWatchHistory
 }

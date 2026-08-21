@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllVideos } from '../services/videoService.js';
 import { useTheme } from '../context/ThemeContext.jsx';
-import LoaderBar from '../components/Loaders/LoaderBar.jsx';
 import VideoSkeleton from '../components/Loaders/VideoSkeleton.jsx';
 
 
@@ -67,8 +66,8 @@ function Home(props) {
 
 
     return (
-        <div className=' w-full  aspect-9/16  '>
-            <div className=' w-full  '>
+        <div className=' w-full    aspect-9/16  '>
+            <div className=' w-full min-h-max'>
                 
                 {videos.map((video) => 
                     <div

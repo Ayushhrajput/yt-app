@@ -127,6 +127,18 @@ const getWatchHistory = async () => {
         throw new Error(e.response?.data?.message || e.message || "something went wrong")
     }
 }
+
+const deleteAccount = async () => {
+    try {
+        const response = await api.delete(
+            "/api/v1/users/delete-account"
+        );
+        return response.data
+    } catch (e) {
+        throw new Error(e.response?.data?.message || e.message || "something went wrong")
+    }
+}
+
 export {
     registerUser,
     loginUser,
@@ -134,5 +146,6 @@ export {
     getCurrUser,
     refreshToken,
     getUserChannel,
-    getWatchHistory
+    getWatchHistory,
+    deleteAccount
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import {getUserChannel, logout, getWatchHistory} from "../services/authservice.js"
+import {getUserChannel, logout, getWatchHistory, deleteAccount} from "../services/authservice.js"
 import { useTheme } from '../context/ThemeContext.jsx';
 import { useFeatures } from '../context/FeaturesContext.jsx';
 import { deleteVideo, getAllVideos } from '../services/videoService.js';
@@ -159,7 +159,19 @@ function Profile(props) {
         }
         
     }
+    const handleDeleteAccount = async () => {
+    try {
+        await deleteAccount()
 
+        setUser(null)
+        navigate("/");
+
+    } catch (e) {
+        console.log("error")
+        throw new Error(e.message)
+        
+    }
+};
     
     
     
@@ -172,27 +184,33 @@ function Profile(props) {
                     onClick={(e) => {
                         e.stopPropagation()
                     }}
-                    className={`md:w-max md:px-40  fixed bottom-0 left-1/2 -translate-x-1/2 animate-[toast_0.4s_ease] ${darkTheme? " bg-black/40  border-white/10 ": "bg-white   border-black/10"}  backdrop-blur-2xl   border-t text-blue-500 flex flex-col justify-center items-center w-full py-20  px-2  rounded-t-3xl  z-20`}
+                    className={`max-w-sm  fixed bottom-0 left-1/2 -translate-x-1/2 animate-[toast_0.4s_ease] ${darkTheme? " bg-black/40  border-white/10 ": "bg-white   border-black/10"}  backdrop-blur-2xl   border flex flex-col justify-center items-center w-full pt-4 pb-2  px-2  rounded-t-3xl  z-20`}
                 >
-                    <div className={`absolute top-1/12 w-1/4 p-1  ${darkTheme? "bg-white": "bg-black/60"}  rounded-full `}></div>
+                    <div className={`absolute top-2 w-1/6 p-0.5  ${darkTheme? "bg-white": "bg-black/60"}  rounded-full `}></div>
 
-                    <div className="flex items-center   px-8 py-2 h-12">
+                    <div className={`flex items-center  justify-center  w-full border-b ${darkTheme? "border-white/10": "border-black/20"}  px-8 py-2 h-12`}>
                         <label htmlFor='theme' className={`${darkTheme? "": " items-baseline-last "} flex justify-center h-10 w-10`}>
                             {!darkTheme?
-                                <span className={`material-symbols-outlined -translate-y-2  transition duration-200`}>light_mode</span>: 
-                                <span className={`material-symbols-outlined translate-y-2  transition duration-200`}>dark_mode</span>}
-                                
-                        </label>
-                        <label htmlFor="theme">Change Theme</label>
-                        <input id='theme' className='hidden' type="checkbox" onChange={() => (
-                            !darkTheme?setDarkTheme(true): setDarkTheme(false)
-                        )}/>
+                                    <span className={`material-symbols-outlined -translate-y-2  transition duration-200`}>light_mode</span>: 
+                                    <span className={`material-symbols-outlined translate-y-2  transition duration-200`}>dark_mode</span>}
+                                    
+                            </label>
+                            <label htmlFor="theme">Change Theme</label>
+                            <input id='theme' className='hidden' type="checkbox" onChange={() => (
+                                !darkTheme?setDarkTheme(true): setDarkTheme(false)
+                            )}/>
                     </div>
                     <button
                         onClick={handleLogout}
-                        className=' py-2 h-12'
+                        className={`w-full border-b py-2 h-12 ${darkTheme? "border-white/10": "border-black/20"}`}
                     >
                         Logout
+                    </button>
+                    <button 
+                        onClick={handleDeleteAccount}
+                        className="w-full  py-2 h-12 "
+                    >
+                        Delete Account
                     </button>
                 </div>
             }   
