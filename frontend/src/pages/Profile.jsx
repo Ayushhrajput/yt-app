@@ -22,7 +22,7 @@ function Profile(props) {
 
     const videoRef = useRef(null)
     const [isSticky, setIsSticky] = useState(false)
-    const [showDelete, setShowDelete] = useState(false)
+    const [vidFeat, setVidFeat] = useState(false)
     
 
     useEffect(() => {
@@ -47,7 +47,7 @@ function Profile(props) {
 
             setVideos((prev) => prev.filter((video) => video._id !== videoId))
             setTotalPosts((prev) => prev - 1)
-            setShowDelete(false)
+            setVidFeat(false)
             setVideoId(null)
         } catch (e) {
             console.error(e)
@@ -75,7 +75,7 @@ function Profile(props) {
         const handleEditFeat = () => {
             
             setEditFeat(false)
-            setShowDelete(false)
+            setVidFeat(false)
         
         }
 
@@ -324,7 +324,7 @@ function Profile(props) {
                                                     onClick={(e) => {
                                                         e.stopPropagation()
                                                         setVideoId(video._id)
-                                                        setShowDelete(true)
+                                                        setVidFeat(true)
                                                         
 
                                                         
@@ -359,7 +359,7 @@ function Profile(props) {
                         <div ref={ref} className='w-full  '></div>
                     </div>
                     {
-                        showDelete && 
+                        vidFeat && 
                         (
 
                             <div
@@ -369,13 +369,29 @@ function Profile(props) {
 
                                 <div
                                     
-                                    className={`max-w-sm w-full  py-2 h-max   ${darkTheme? "border-white/20 border-t bg-black/10 backdrop-blur-2xl ": " bg-white border  border-black/10"}    rounded-xl overflow-hidden`}
+                                    className={`max-w-sm w-full ${darkTheme? "border-white/20 border bg-neutral-900 backdrop-blur-2xl ": " bg-white border  border-black/10"} px-4  h-max      rounded-xl overflow-hidden`}
                                 >
                                     
                                     <div 
                                         onClick={(e) => e.stopPropagation()}
-                                        className={`w-full py-2 flex justify-center ${darkTheme? "": "bg-white/10"} `}
+                                        className={`w-full ${darkTheme? " bg-neutral-200 backdrop-blur-2xl ": " bg-gray-200 "} flex flex-col justify-center gap-y-px`}
                                     >
+                                        <button
+                                            onClick={() => {
+
+                                            }}
+                                            className={`w-full   py-2 cursor-pointer  ${darkTheme? " bg-neutral-900": " bg-white"}`}
+                                        >
+                                            Edit Video
+                                        </button>
+                                        <button
+                                            onClick={() => {
+
+                                            }}
+                                            className={`w-full b py-2 cursor-pointer  ${darkTheme? " bg-neutral-900": " bg-white"}`}
+                                        >
+                                            Toggle Post
+                                        </button>
                                         <button
                                             
                                             
@@ -384,11 +400,12 @@ function Profile(props) {
                                                 handleDelete(videoId)
 
                                             }}
-                                            className='w-full cursor-pointer'
+                                            className={`w-full py-2 cursor-pointer ${darkTheme? " bg-neutral-900": " bg-white"}`}
                                         >
                                             Delete
                                             
                                         </button>
+
 
                                         
                                     </div>
