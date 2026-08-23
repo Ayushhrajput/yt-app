@@ -369,7 +369,7 @@ function Profile(props) {
 
                                 <div
                                     
-                                    className={`max-w-sm w-full py-2 ${darkTheme? "border-white/20 border bg-neutral-900 backdrop-blur-2xl ": " bg-white border  border-black/10"} px-2  h-max      rounded-xl overflow-hidden`}
+                                    className={`max-w-sm w-full py-2 ${darkTheme? " bg-neutral-700 backdrop-blur-2xl ": " bg-white border  border-black/10"} px-2  h-max      rounded-xl overflow-hidden`}
                                 >
                                     
                                     <div 
@@ -382,7 +382,7 @@ function Profile(props) {
                                             onClick={() => {
                                                 
                                             }}
-                                            className={`w-full px-4  py-2 flex  justify-center gap-x-4 cursor-pointer disabled:cursor-not-allowed disabled:text-gray-400 ${darkTheme? " bg-neutral-900": " bg-white"}`}
+                                            className={`w-full px-4  py-2 flex  justify-center gap-x-4 cursor-pointer disabled:cursor-not-allowed disabled:text-gray-400 ${darkTheme? " bg-neutral-700": " bg-white"}`}
                                         > <div>
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </div>
@@ -393,7 +393,7 @@ function Profile(props) {
                                             onClick={() => {
 
                                             }}
-                                            className={`w-full  py-2 px-4 flex justify-center gap-x-4  cursor-pointer disabled:cursor-not-allowed disabled:text-gray-400 ${darkTheme? " bg-neutral-900": " bg-white"}`}
+                                            className={`w-full  py-2 px-4 flex justify-center gap-x-4  cursor-pointer disabled:cursor-not-allowed disabled:text-gray-400 ${darkTheme? " bg-neutral-700": " bg-white"}`}
                                         >
                                             <div>
                                                 <i class="fa-solid fa-eye-slash"></i>
@@ -408,7 +408,7 @@ function Profile(props) {
                                                 handleDelete(videoId)
 
                                             }}
-                                            className={`w-full py-2 px-4 flex justify-center gap-x-4 cursor-pointer ${darkTheme? " bg-neutral-900": " bg-white"}`}
+                                            className={`w-full py-2 px-4 flex justify-center gap-x-4 cursor-pointer ${darkTheme? " bg-neutral-700": " bg-white"}`}
                                         >
                                             <div>
                                                 <i class="fa-solid fa-trash"></i>
