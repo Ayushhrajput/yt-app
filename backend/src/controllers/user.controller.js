@@ -240,6 +240,27 @@ const updateAccountDetails  = asyncHandler(async (req, res) => {
     )
 })
 
+const updateFullName = asyncHandler(async (req, res) => {
+    const {fullName} = req.body
+
+    if(!fullName) {
+        throw new ApiError(400, "Fullname is required!")
+    }
+
+    const user = User.findByIdAndUpdate(req.user._id, {
+        $set: {
+            fullName
+        }
+    }, {
+        new: true
+    }).select("-password")
+
+    return res.status(200).
+        json(
+            new ApiResponse(200, user, "user updated successfully")
+        )
+})
+
 const updateUserAvatar = asyncHandler(async (req, res) => {
     const avatarLocalPath = req.file?.path;
     
@@ -348,7 +369,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
         }, {
             $project: {
                 username: 1,
-                fullname: 1,
+                fullName: 1,
                 subscribers: 1,
                 subscribedTo: 1,
                 subscribersCount: 1,
@@ -525,6 +546,7 @@ export {registerUser,
     changeCurrentPassword,
     getUser,
     updateAccountDetails,
+    updateFullName,
     updateUserAvatar,
     updateUsercoverImage,
     getUserChannelProfile,
