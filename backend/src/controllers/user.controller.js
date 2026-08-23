@@ -247,7 +247,7 @@ const updateFullName = asyncHandler(async (req, res) => {
         throw new ApiError(400, "Fullname is required!")
     }
 
-    const user = User.findByIdAndUpdate(req.user._id, {
+    const user = await   User.findByIdAndUpdate(req.user._id, {
         $set: {
             fullName
         }
@@ -255,6 +255,9 @@ const updateFullName = asyncHandler(async (req, res) => {
         new: true
     }).select("-password -refreshToken")
 
+    if(!user) {
+        throw new ApiError(400, "user not found")
+    }
     return res.status(200).
         json(
             new ApiResponse(200, user, "user updated successfully")

@@ -18,18 +18,19 @@ function EditUserInfo(props) {
 
     const [fullnamePreview, setFullnamePreview] = useState(user.fullName)
     
+    
+    
 
     useEffect(() => {
         setProfilePreview(user.avatar)
     }, [user.avatar])
+
+
     const handleSubmit = async (e) => {
       e.preventDefault()
 
-      
-
       if(updateStatus) return
       try {
-        
         
         setUpdateStatus(true)
 
@@ -41,9 +42,12 @@ function EditUserInfo(props) {
         }
         
         if(!(fullnamePreview === user.fullName)) {
+            console.log("error - e")
             
-            
-            const response = await changeFullName(fullnamePreview)
+            const response = await changeFullName(
+                fullnamePreview
+            )
+            console.log("e")
             updatedUser = response.data
             
             
