@@ -369,12 +369,12 @@ function Profile(props) {
 
                                 <div
                                     
-                                    className={`max-w-sm w-full ${darkTheme? "border-white/20 border bg-neutral-900 backdrop-blur-2xl ": " bg-white border  border-black/10"} px-4  h-max      rounded-xl overflow-hidden`}
+                                    className={`max-w-sm w-full py-2 ${darkTheme? "border-white/20 border bg-neutral-900 backdrop-blur-2xl ": " bg-white border  border-black/10"} px-4  h-max      rounded-xl overflow-hidden`}
                                 >
                                     
                                     <div 
                                         onClick={(e) => e.stopPropagation()}
-                                        className={`w-full ${darkTheme? " bg-neutral-200 backdrop-blur-2xl ": " bg-gray-200 "} flex flex-col justify-center gap-y-px`}
+                                        className={`w-full  ${darkTheme? " bg-neutral-600 backdrop-blur-2xl ": " bg-gray-200 "} flex flex-col justify-center gap-y-px`}
                                     >
                                         <button
                                             onClick={() => {
