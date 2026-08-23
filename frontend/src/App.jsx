@@ -15,6 +15,7 @@ import Feed from './pages/Feed.jsx'
 import LoaderBar from './components/Loaders/LoaderBar.jsx'
 import VideoSkeleton from './components/Loaders/VideoSkeleton.jsx'
 import Search from './pages/Search.jsx'
+import EditUserInfo from './pages/EditUserInfo.jsx'
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
           <Route path='/feed' element={<Feed/>} />
           <Route path='/search' element={<Search/>} />
           <Route path='/video/:videoId' element={<VideoPage/>} />
+          <Route path='/profile/:username/editUserInfo' element={<EditUserInfo/>} />
           
         </Route>
       </Routes>

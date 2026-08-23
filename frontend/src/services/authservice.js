@@ -115,6 +115,21 @@ const getUserChannel = async (username) => {
         throw new Error(e.response?.data?.message || e.message || "something went wrong")
     }
 }
+
+const updateProfile = async (avatar) => {
+    try {
+        const formData = new FormData()
+        formData.append("avatar", avatar)
+
+        const response = await api.patch(
+            '/api/v1/users/avatar',
+            formData
+        )
+        return response.data
+    } catch (e) {
+        throw new Error(e.response?.data?.message || e.message || "something went wrong")
+    }
+}
 const getWatchHistory = async () => {
     
     try {
@@ -146,6 +161,7 @@ export {
     getCurrUser,
     refreshToken,
     getUserChannel,
+    updateProfile,
     getWatchHistory,
     deleteAccount
 }

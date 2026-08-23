@@ -67,14 +67,14 @@ function Profile(props) {
     const [hasMore, setHasMore] = useState(true)
     const [isFetching, setIsFetching] = useState(false)
     
-    const [editFeat, setEditFeat] = useState(false)
+    
 
 
     useEffect(() => {
         
         const handleEditFeat = () => {
             
-            setEditFeat(false)
+            
             setVidFeat(false)
         
         }
@@ -221,7 +221,7 @@ function Profile(props) {
                             <h1 className='font-semibold italic '>{user.username}</h1>
                             <button onClick={(e) => {
                                 e.stopPropagation()
-                                setEditFeat(true)
+                                navigate("/profile/:username/editUserInfo")
 
                             }} className=' cursor-pointer overflow-hidden'><i class="fa-solid fa-pen-to-square"></i></button>
                             
@@ -378,25 +378,27 @@ function Profile(props) {
                                     >
                                         
                                         <button
+                                            disabled
                                             onClick={() => {
-
+                                                
                                             }}
-                                            className={`w-full px-4  py-2 flex  justify-center gap-x-4 cursor-pointer  ${darkTheme? " bg-neutral-900": " bg-white"}`}
+                                            className={`w-full px-4  py-2 flex  justify-center gap-x-4 cursor-pointer disabled:cursor-not-allowed disabled:text-gray-400 ${darkTheme? " bg-neutral-900": " bg-white"}`}
                                         > <div>
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </div>
                                             Edit Video
                                         </button>
                                         <button
+                                            disabled
                                             onClick={() => {
 
                                             }}
-                                            className={`w-full  py-2 px-4 flex justify-center gap-x-4 cursor-pointer  ${darkTheme? " bg-neutral-900": " bg-white"}`}
+                                            className={`w-full  py-2 px-4 flex justify-center gap-x-4  cursor-pointer disabled:cursor-not-allowed disabled:text-gray-400 ${darkTheme? " bg-neutral-900": " bg-white"}`}
                                         >
                                             <div>
-                                                <i class="fa-solid fa-toggle-on"></i>
+                                                <i class="fa-solid fa-eye-slash"></i>
                                             </div>
-                                            Toggle Post
+                                            Hide Post
                                         </button>
                                         <button
                                             
