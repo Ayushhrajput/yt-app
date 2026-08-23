@@ -28,9 +28,9 @@ function EditUserInfo(props) {
         
         setUpdateStatus(true)
         if(profile) {
-            await updateProfile(profile)
+            const response = await updateProfile(profile)
+            setUser(response.data)
             navigate('/profile/:username')
-            setUser(user)
             
         }
         
@@ -59,9 +59,12 @@ function EditUserInfo(props) {
                         className='w-25 h-auto aspect-1/1 object-cover rounded-full'
                         src={profilePreview} alt="" 
                     />
-                    <div className={`  w-10 h-auto aspect-square  flex items-center justify-center gap-2 ${darkTheme? "bg-white/10 rounded-full": ""} cursor-pointer`}>
+                    <div >
                         
-                        <label htmlFor="profile">
+                        <label 
+                            className={`  w-10 h-auto aspect-square  flex items-center justify-center gap-2 ${darkTheme? "bg-white/10 rounded-full": ""} cursor-pointer`}
+                            htmlFor="profile"
+                        >
                             <div className='flex flex-col items-center'>
                                 
                                 <div className=''>
