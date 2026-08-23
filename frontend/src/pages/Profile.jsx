@@ -184,7 +184,7 @@ function Profile(props) {
                     onClick={(e) => {
                         e.stopPropagation()
                     }}
-                    className={`max-w-sm  fixed bottom-0 left-1/2 -translate-x-1/2 animate-[toast_0.4s_ease] ${darkTheme? " bg-black/40  border-white/10 ": "bg-white   border-black/10"}  backdrop-blur-2xl   border flex flex-col justify-center items-center w-full pt-4 pb-2  px-2  rounded-t-3xl  z-20`}
+                    className={`max-w-sm  fixed bottom-0 left-1/2 -translate-x-1/2 animate-[toast_0.4s_ease] ${darkTheme? " bg-black/40  ": "bg-white   border-black/10 border"}  backdrop-blur-2xl    flex flex-col justify-center items-center w-full pt-4 pb-2  px-2  rounded-t-3xl  z-20`}
                 >
                     <div className={`absolute top-2 w-1/6 p-0.5  ${darkTheme? "bg-white": "bg-black/60"}  rounded-full `}></div>
 

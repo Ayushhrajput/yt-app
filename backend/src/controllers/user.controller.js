@@ -243,7 +243,7 @@ const updateAccountDetails  = asyncHandler(async (req, res) => {
 const updateFullName = asyncHandler(async (req, res) => {
     const {fullName} = req.body
 
-    if(!fullName) {
+    if(!fullName?.trim()) {
         throw new ApiError(400, "Fullname is required!")
     }
 
@@ -253,7 +253,7 @@ const updateFullName = asyncHandler(async (req, res) => {
         }
     }, {
         new: true
-    }).select("-password")
+    }).select("-password -refreshToken")
 
     return res.status(200).
         json(

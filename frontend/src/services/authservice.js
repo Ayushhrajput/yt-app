@@ -130,6 +130,17 @@ const updateProfile = async (avatar) => {
         throw new Error(e.response?.data?.message || e.message || "something went wrong")
     }
 }
+const changeFullName = async (fullname) => {
+    try {
+        const response = await api.patch(
+            '/api/v1/users/update-fullname',
+            { fullName: fullname }
+        )
+        return response.data
+    } catch (e) {
+        throw new Error(e.response?.data?.message || e.message || "something went wrong")
+    }
+}
 const getWatchHistory = async () => {
     
     try {
@@ -162,6 +173,7 @@ export {
     refreshToken,
     getUserChannel,
     updateProfile,
+    changeFullName,
     getWatchHistory,
     deleteAccount
 }
