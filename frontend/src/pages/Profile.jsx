@@ -223,7 +223,7 @@ function Profile(props) {
                                 e.stopPropagation()
                                 setEditFeat(true)
 
-                            }} className=' cursor-pointer overflow-hidden'>Edit </button>
+                            }} className=' cursor-pointer overflow-hidden'><i class="fa-solid fa-pen-to-square"></i></button>
                             
                         </div>
                         <div className='flex  w-full md:w-sm  px-4 '> 
