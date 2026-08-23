@@ -369,27 +369,33 @@ function Profile(props) {
 
                                 <div
                                     
-                                    className={`max-w-sm w-full py-2 ${darkTheme? "border-white/20 border bg-neutral-900 backdrop-blur-2xl ": " bg-white border  border-black/10"} px-4  h-max      rounded-xl overflow-hidden`}
+                                    className={`max-w-sm w-full py-2 ${darkTheme? "border-white/20 border bg-neutral-900 backdrop-blur-2xl ": " bg-white border  border-black/10"} px-2  h-max      rounded-xl overflow-hidden`}
                                 >
                                     
                                     <div 
                                         onClick={(e) => e.stopPropagation()}
                                         className={`w-full  ${darkTheme? " bg-neutral-600 backdrop-blur-2xl ": " bg-gray-200 "} flex flex-col justify-center gap-y-px`}
                                     >
+                                        
                                         <button
                                             onClick={() => {
 
                                             }}
-                                            className={`w-full   py-2 cursor-pointer  ${darkTheme? " bg-neutral-900": " bg-white"}`}
-                                        >
+                                            className={`w-full px-4  py-2 flex  justify-center gap-x-4 cursor-pointer  ${darkTheme? " bg-neutral-900": " bg-white"}`}
+                                        > <div>
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </div>
                                             Edit Video
                                         </button>
                                         <button
                                             onClick={() => {
 
                                             }}
-                                            className={`w-full b py-2 cursor-pointer  ${darkTheme? " bg-neutral-900": " bg-white"}`}
+                                            className={`w-full  py-2 px-4 flex justify-center gap-x-4 cursor-pointer  ${darkTheme? " bg-neutral-900": " bg-white"}`}
                                         >
+                                            <div>
+                                                <i class="fa-solid fa-toggle-on"></i>
+                                            </div>
                                             Toggle Post
                                         </button>
                                         <button
@@ -400,8 +406,11 @@ function Profile(props) {
                                                 handleDelete(videoId)
 
                                             }}
-                                            className={`w-full py-2 cursor-pointer ${darkTheme? " bg-neutral-900": " bg-white"}`}
+                                            className={`w-full py-2 px-4 flex justify-center gap-x-4 cursor-pointer ${darkTheme? " bg-neutral-900": " bg-white"}`}
                                         >
+                                            <div>
+                                                <i class="fa-solid fa-trash"></i>
+                                            </div>
                                             Delete
                                             
                                         </button>
